@@ -5,7 +5,7 @@
  */
 package controlador;
 
-import EJB.CategoriaFacadeLocal;
+import EJB.IngredientsFacadeLocal;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -13,7 +13,7 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import jdk.nashorn.internal.ir.TryNode;
-import modelo.Categoria;
+import modelo.Ingredients;
 
 /**
  *
@@ -22,29 +22,29 @@ import modelo.Categoria;
 @Named
 @ViewScoped
 
-public class CategoriaController implements Serializable {
+public class IngredientsController implements Serializable {
 
-    private List<Categoria> listaDeCategorias;
-    private Categoria cat;
+    private List<Ingredients> listaDeCategorias;
+    private Ingredients cat;
 
     @EJB
-    private CategoriaFacadeLocal categoriaEJB;
+    private IngredientsFacadeLocal categoriaEJB;
 
     @PostConstruct
     public void inicio() {
         try {
             listaDeCategorias = categoriaEJB.findAll();
-            cat = new Categoria();
+            cat = new Ingredients();
         } catch (Exception e) {
         }
 
     }
 
-    public Categoria getCat() {
+    public Ingredients getCat() {
         return cat;
     }
 
-    public void setCat(Categoria cat) {
+    public void setCat(Ingredients cat) {
         this.cat = cat;
     }
 
@@ -59,8 +59,8 @@ public class CategoriaController implements Serializable {
     public void eliminarCategoria() {
         try {
             System.out.println("DROTIUM");
-            for(Categoria c:listaDeCategorias){
-                if (c.getIdCategoria()==cat.getIdCategoria()) {
+            for(Ingredients c:listaDeCategorias){
+                if (c.getIdIngredients()==cat.getIdIngredients()) {
                     cat=c;
                     break;
                 }
@@ -70,12 +70,14 @@ public class CategoriaController implements Serializable {
             System.out.println("Error al eliminar la cetegoria" + e.getMessage());
         }
     }
+    
+    /*
       public void modificarCategoria() {
         try {
-            String newName= cat.getName();
+            String newName= cat.getIngredientName();
             System.out.println("DROTIUMv2");
-            for(Categoria c:listaDeCategorias){
-                if (c.getIdCategoria()==cat.getIdCategoria()) {
+            for(Ingredients c:listaDeCategorias){
+                if (c.getIdIngredients()==cat.getIdIngredients()) {
                     cat=c;
                     cat.setName(newName);
                     break;
@@ -86,12 +88,13 @@ public class CategoriaController implements Serializable {
             System.out.println("Error al eliminar la cetegoria" + e.getMessage());
         }
     }
+*/
 
-    public List<Categoria> getListaDeCategorias() {
+    public List<Ingredients> getListaDeCategorias() {
         return listaDeCategorias;
     }
 
-    public void setListaDeCategorias(List<Categoria> listaDeCategorias) {
+    public void setListaDeCategorias(List<Ingredients> listaDeCategorias) {
         this.listaDeCategorias = listaDeCategorias;
     }
 

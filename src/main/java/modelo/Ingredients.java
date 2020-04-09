@@ -2,6 +2,7 @@ package modelo;
 
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,50 +21,43 @@ import javax.persistence.Table;
  * @author xiann
  */
 @Entity
-@Table(name="Categorias")
-public class Categoria implements Serializable{
+@Table(name="ingredients")
+public class Ingredients implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int IdCategoria;
-    @Column(name="nombre")
-    private String name;
-    @Column(name="estado")
-    private boolean estado=true;
+    private int Id;
+    @Column(name="name")
+    private String ingredientName;
+    
+    
+    
+    
+    
+    
+    
 
-    public int getIdCategoria() {
-        return IdCategoria;
+    public int getIdIngredients() {
+        return Id;
     }
 
-    public void setIdCategoria(int IdCategoria) {
-        this.IdCategoria = IdCategoria;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
-    public String getName() {
-        return name;
+    public String getIngredientName() {
+        return ingredientName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 29 * hash + this.IdCategoria;
+        hash = 59 * hash + this.Id;
+        hash = 59 * hash + Objects.hashCode(this.ingredientName);
         return hash;
-    }
-
-    @Override
-    public String toString() {
-        return "Categoria{" + "IdCategoria=" + IdCategoria + ", name=" + name + ", estado=" + estado + '}';
     }
 
     @Override
@@ -77,12 +71,15 @@ public class Categoria implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Categoria other = (Categoria) obj;
-        if (this.IdCategoria != other.IdCategoria) {
-            return false;
-        }
+        final Ingredients other = (Ingredients) obj;
         return true;
     }
+    
+    
+   
+    
+    
+    
     
     
 }
