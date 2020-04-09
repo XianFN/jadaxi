@@ -51,9 +51,10 @@ public class IngredientsController implements Serializable {
 
     public void insertIngredient() {
         try {
+            System.out.println("DROTIUMJ");
             ingredientsEJB.create(ingredient);
         } catch (Exception e) {
-            System.out.println("Error al insertar el ingredient" + e.getMessage());
+            System.out.println("Error al insertar el ingrediente" + e.getMessage());
         }
     }
 

@@ -29,5 +29,5 @@ public interface IngredientsFacadeLocal {
     List<Ingredients> findRange(int[] range);
 
     int count();
-    
+
 }

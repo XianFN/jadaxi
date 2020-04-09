@@ -27,7 +27,7 @@ public class Ingredients implements Serializable{
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int Id;
+    private int id;
     @Column(name="name")
     private String name;
     
@@ -39,12 +39,10 @@ public class Ingredients implements Serializable{
     
 
     public int getIdIngredients() {
-        return Id;
+        return id;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
-    }
+    
 
     public String getName() {
         return name;
@@ -57,7 +55,7 @@ public class Ingredients implements Serializable{
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 59 * hash + this.Id;
+        hash = 59 * hash + this.id;
         hash = 59 * hash + Objects.hashCode(this.name);
         return hash;
     }
