@@ -23,11 +23,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ingredients")
 public class Ingredients implements Serializable{
+    
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int Id;
     @Column(name="name")
-    private String ingredientName;
+    private String name;
     
     
     
@@ -44,19 +46,19 @@ public class Ingredients implements Serializable{
         this.Id = Id;
     }
 
-    public String getIngredientName() {
-        return ingredientName;
+    public String getName() {
+        return name;
     }
 
-    public void setIngredientName(String ingredientName) {
-        this.ingredientName = ingredientName;
+    public void setName(String ingredientName) {
+        this.name = ingredientName;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 59 * hash + this.Id;
-        hash = 59 * hash + Objects.hashCode(this.ingredientName);
+        hash = 59 * hash + Objects.hashCode(this.name);
         return hash;
     }
 

@@ -24,51 +24,68 @@ import modelo.Ingredients;
 
 public class IngredientsController implements Serializable {
 
-    private List<Ingredients> listaDeCategorias;
-    private Ingredients cat;
+    private List<Ingredients> ingredientsList;
+    private Ingredients ingredient;
 
     @EJB
-    private IngredientsFacadeLocal categoriaEJB;
+    private IngredientsFacadeLocal ingredientsEJB;
 
     @PostConstruct
     public void inicio() {
         try {
-            listaDeCategorias = categoriaEJB.findAll();
-            cat = new Ingredients();
+            ingredientsList = ingredientsEJB.findAll();
+            ingredient = new Ingredients();
         } catch (Exception e) {
         }
 
     }
 
-    public Ingredients getCat() {
-        return cat;
+    public Ingredients getIngredient() {
+        return ingredient;
     }
 
-    public void setCat(Ingredients cat) {
-        this.cat = cat;
+    public void setIngredient(Ingredients ingredient) {
+        this.ingredient = ingredient;
     }
 
-    public void insertarCategoria() {
+
+    public void insertIngredient() {
         try {
-            categoriaEJB.create(cat);
+            ingredientsEJB.create(ingredient);
         } catch (Exception e) {
-            System.out.println("Error al insertar la cetegoria" + e.getMessage());
+            System.out.println("Error al insertar el ingredient" + e.getMessage());
         }
     }
 
     public void eliminarCategoria() {
         try {
             System.out.println("DROTIUM");
-            for(Ingredients c:listaDeCategorias){
-                if (c.getIdIngredients()==cat.getIdIngredients()) {
-                    cat=c;
+            for(Ingredients c:ingredientsList){
+                if (c.getIdIngredients()==ingredient.getIdIngredients()) {
+                    ingredient=c;
                     break;
                 }
             }
-            categoriaEJB.remove(cat);
+            ingredientsEJB.remove(ingredient);
         } catch (Exception e) {
-            System.out.println("Error al eliminar la cetegoria" + e.getMessage());
+            System.out.println("Error al eliminar  el ingredient" + e.getMessage());
         }
+    }
+
+    public List<Ingredients> getIngredientsList() {
+        return ingredientsList;
+    }
+
+    public void setIngredientsList(List<Ingredients> ingredientsList) {
+        this.ingredientsList = ingredientsList;
+    }
+
+    public IngredientsFacadeLocal getIngredientsEJB() {
+        return ingredientsEJB;
+    }
+
+    public void setIngredientsEJB(IngredientsFacadeLocal ingredientsEJB) {
+        this.ingredientsEJB = ingredientsEJB;
     }
     
     /*
@@ -90,12 +107,5 @@ public class IngredientsController implements Serializable {
     }
 */
 
-    public List<Ingredients> getListaDeCategorias() {
-        return listaDeCategorias;
-    }
-
-    public void setListaDeCategorias(List<Ingredients> listaDeCategorias) {
-        this.listaDeCategorias = listaDeCategorias;
-    }
 
 }
