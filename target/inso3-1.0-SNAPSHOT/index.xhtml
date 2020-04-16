@@ -20,20 +20,26 @@
             </div>
             <div class="loginBox" align="left">
 
-                
-                    <br> <h:outputText class="white" value="     Usuario " />
-                        <p:inputText value="#{ingredientsController.ingredient.name}" /></br>
 
-                    <p></p>
-                    <h:outputText class="white" value="Contraseña " />
+                <br> <h:outputText class="white" value="     Usuario " />
+                    <p:inputText value="#{ingredientsController.ingredient.name}" /></br>
 
-                    <p:password id="nonFeedback" value="#{passwordView.password1}" />
+                <p></p>
+                <h:outputText class="white" value="Contraseña " />
 
-               
+                <p:password id="nonFeedback" value="#{passwordView.password1}" />
+
+                <p></p>
+
+
+
+                <p:commandButton value="Login" actionListener="#{ingredientsController.insertIngredient()}" />
+
+                <h:link class="titleRegister" outcome="privado/register" value="Registrar"/>
+
 
             </div>
         </h:form>
-
 
     </h:body>   
 </html>

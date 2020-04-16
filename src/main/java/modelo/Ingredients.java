@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author xiann
+ * @author jadaxi
  */
 @Entity
 @Table(name="ingredients")
