@@ -48,7 +48,6 @@ public class IngredientsController implements Serializable {
         this.ingredient = ingredient;
     }
 
-
     public void insertIngredient() {
         try {
             System.out.println("DROTIUMJ");
@@ -61,9 +60,9 @@ public class IngredientsController implements Serializable {
     public void eliminarCategoria() {
         try {
             System.out.println("DROTIUM");
-            for(Ingredients c:ingredientsList){
-                if (c.getIdIngredients()==ingredient.getIdIngredients()) {
-                    ingredient=c;
+            for (Ingredients c : ingredientsList) {
+                if (c.getIdIngredients() == ingredient.getIdIngredients()) {
+                    ingredient = c;
                     break;
                 }
             }
@@ -88,7 +87,7 @@ public class IngredientsController implements Serializable {
     public void setIngredientsEJB(IngredientsFacadeLocal ingredientsEJB) {
         this.ingredientsEJB = ingredientsEJB;
     }
-    
+
     /*
       public void modificarCategoria() {
         try {
@@ -106,7 +105,5 @@ public class IngredientsController implements Serializable {
             System.out.println("Error al eliminar la cetegoria" + e.getMessage());
         }
     }
-*/
-
-
+     */
 }
