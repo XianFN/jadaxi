@@ -174,12 +174,4 @@ public class User implements Serializable {
     public String toString() {
         return "User{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", surname2=" + surname2 + ", birthDate=" + birthDate + ", userName=" + userName + ", password=" + password + ", email=" + email + ", lv=" + lv + ", xp=" + xp + '}';
     }
-
-    
-
-    
-    
-    
-    
-
 }

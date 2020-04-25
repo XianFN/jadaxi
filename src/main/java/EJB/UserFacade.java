@@ -29,4 +29,10 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
         super(User.class);
     }
     
+    public User verificarUser(){
+        
+        
+        return null;
+    }
+    
 }
