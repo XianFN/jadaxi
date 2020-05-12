@@ -19,6 +19,8 @@ import javax.persistence.Table;
 /**
  *
  * @author jadaxi
+ * 
+ * Clase modelo de la tabla Ingredients de la BBDD
  */
 @Entity
 @Table(name="ingredients")

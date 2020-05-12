@@ -18,7 +18,9 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author Javier
+ * @author jadaxi
+ * 
+ * Clase modelo de la tabla User de la BBDD
  */
 @Entity
 @Table(name = "users")

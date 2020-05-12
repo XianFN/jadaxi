@@ -16,6 +16,7 @@ import modelo.User;
 /**
  *
  * @author Javier
+ * TODO posible desmantelacion
  */
 @Named
 @ViewScoped

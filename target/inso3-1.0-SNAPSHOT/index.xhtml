@@ -22,21 +22,19 @@
 
 
                 <br> <h:outputText class="white" value="     Usuario " />
-                    <p:inputText value="#{ingredientsController.ingredient.name}" /></br>
+                    <p:inputText value="#{indexControler.user.userName}" /></br>
 
                 <p></p>
                 <h:outputText class="white" value="Contraseña " />
 
-                <p:password id="nonFeedback" value="#{passwordView.password1}" />
+                <p:password id="nonFeedback" value="#{indexControler.user.password}" />
 
                 <p></p>
 
+                <p:commandButton value="Login" action="#{indexControler.login()}"/>
 
+                <h:link class="titleRegister" outcome="private/newTemplateClient" value="Registrar"/>
 
-                <p:commandButton value="Login" actionListener="#{ingredientsController.insertIngredient()}" />
-
-                <h:link class="titleRegister" outcome="privado/register" value="Registrar"/>
-                <h:link class="titleRegister" outcome="privado/newIngredient" value="asd"/>
 
 
             </div>

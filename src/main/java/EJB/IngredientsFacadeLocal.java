@@ -11,7 +11,7 @@ import modelo.Ingredients;
 
 /**
  *
- * @author Javier
+ * @author jadaxi
  */
 @Local
 public interface IngredientsFacadeLocal {
