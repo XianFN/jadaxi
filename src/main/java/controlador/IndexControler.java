@@ -53,7 +53,7 @@ public class IndexControler implements Serializable {
 
         User us = null;
         //TODO ?faces-redirect=true
-        String navegacion = "private/newIngredient.xhtml?faces-redirect=true"; //?faces-redirect=true se encarga de mostrarnos en el navegador a que pagina vamos, es ideal para desarrollos pero es conveniente quitarlo cuando salga al publico
+        String navegacion = "private/mainPage.xhtml?faces-redirect=true"; //?faces-redirect=true se encarga de mostrarnos en el navegador a que pagina vamos, es ideal para desarrollos pero es conveniente quitarlo cuando salga al publico
         try {
             us = userEJB.getUserURL(user);
             //Ponemos el usuari como variable global para toda la aplicaion

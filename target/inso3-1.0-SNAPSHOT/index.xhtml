@@ -2,43 +2,133 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <link rel="stylesheet" href="resources/css/style.css"/>
+
+
+
         <title>Login</title>
     </h:head>
-    <h:body style="background-image: url(resources/images/fondoLogin2.jpg)">
-        <h:form>
-            <p:panelGrid columns="1"> 
-                <!-- <h:link outcome="privado/newIngredient" value="Nuevo ingrediente"/>
-                  <h:link outcome="privado/modificarCategoria" value="Modificar Categoria"/>
-                   <h:link outcome="privado/eliminarCategoria" value="Eliminar Categoria"/>-->
-            </p:panelGrid>
-
-            <div class="title">
-                <img src ="resources/images/fotoefectos.com_.jpg"/>
-            </div>
-            <div class="loginBox" align="left">
 
 
-                <br> <h:outputText class="white" value="     Usuario " />
-                    <p:inputText value="#{indexControler.user.userName}" /></br>
+    <h:body>
 
-                <p></p>
-                <h:outputText class="white" value="Contraseña " />
+        <ui:composition template="template/nonSecureTemplate.xhtml">
+            <ui:define name="content">
+                <!-- rgb(61, 110, 56)-->
+                <style>
 
-                <p:password id="nonFeedback" value="#{indexControler.user.password}" />
+                    .loginBox{
 
-                <p></p>
+                        width: 500px;
+                        height:350px;
 
-                <p:commandButton value="Login" action="#{indexControler.login()}"/>
-
-                <h:link class="titleRegister" outcome="private/newTemplateClient" value="Registrar"/>
+                        background-color:rgb(61, 110, 56); 
+                        margin: 0;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        -ms-transform: translate(-50%, -50%);
+                        transform: translate(-50%, -50%);
+                        border-style: inset;
+                        border-width: 10px;
+                        border-color: 	rgb(86, 87, 56) rgb(162, 204, 161) ;
 
 
 
-            </div>
-        </h:form>
+
+                    }
+
+
+
+                    .input{
+
+                        width: 220px;
+                        margin-top: 20px;
+                        background-color: rgba(0, 0, 56, 0.3);
+                        color: black;
+
+                    }
+
+                    .ui-inputgroup{
+                        margin-left: 120px;  
+                        margin-top: 20px;
+                        color: white
+                    }
+
+                    .register{
+
+                        color: white;
+                        margin-left: 140px; 
+                        margin-top: 60px;
+
+
+                    }
+
+                    ::placeholder {
+                        color: white;
+                        
+                    }
+
+
+
+
+
+
+                </style>
+
+
+                <h:form>
+
+
+
+                    <div class="loginBox">
+                        <h:panelGrid class="grid" columns="2">
+
+
+
+
+                            <div class="ui-inputgroup" style="margin-top: 50px">
+                                <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                                <p:inputText class="input" placeholder="Username" value="#{indexControler.user.userName}" style="margin-top: 50px" />      
+                            </div>
+
+
+
+
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                                <p:password class="input"  placeholder="Contraseña" value="#{indexControler.user.password}" />      
+                            </div>
+
+                            <p:commandButton class = "input" value="Login" action="#{indexControler.login()}" />
+
+
+
+
+
+
+                        </h:panelGrid>
+
+
+                        <div class="register">
+                            ¿Aun no tienes una cuenta?
+                            <!-- TODO ?faces-redirect=true  -->
+                            <h:link class="titleRegister" outcome="register?faces-redirect=true" value="Registrate"/>
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
 
     </h:body>   
 </html>
