@@ -66,7 +66,7 @@ public class MainPageControler implements Serializable {
             try {
                 bImage2 = ImageIO.read(bis);
                 File outputfile = new File("saved.png");
-                //ImageIO.write(bImage2, "jpg", new File("img/" + i + ".jpg"));
+                ImageIO.write(bImage2, "jpg", new File("img/" + i + ".jpg"));
 
             } catch (IOException ex) {
                 Logger.getLogger(MainPageControler.class.getName()).log(Level.SEVERE, null, ex);
