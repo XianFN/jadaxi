@@ -5,26 +5,26 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-
-
-
+ 
+ 
+ 
         <title>Login</title>
     </h:head>
-
-
+ 
+ 
     <h:body>
-
+ 
         <ui:composition template="template/nonSecureTemplate.xhtml">
             <ui:define name="content">
                 <!-- rgb(61, 110, 56)-->
                 <style>
-
+ 
                     .loginBox{
-
+ 
                         width: 500px;
                         height:350px;
-
-                        background-color:rgb(61, 110, 56); 
+ 
+                        background-color:rgb(61, 110, 56);
                         margin: 0;
                         position: absolute;
                         top: 50%;
@@ -33,103 +33,102 @@
                         transform: translate(-50%, -50%);
                         border-style: inset;
                         border-width: 10px;
-                        border-color: 	rgb(86, 87, 56) rgb(162, 204, 161) ;
-
-
-
-
+                        border-color:   rgb(86, 87, 56) rgb(162, 204, 161) ;
+ 
+ 
+ 
+ 
                     }
-
-
-
+ 
+ 
+ 
                     .input{
-
+ 
                         width: 220px;
                         margin-top: 20px;
                         background-color: rgba(0, 0, 56, 0.3);
                         color: black;
-
+ 
                     }
-
+ 
                     .ui-inputgroup{
                         margin-left: 120px;  
                         margin-top: 20px;
                         color: white
                     }
-
+ 
                     .register{
-
+ 
                         color: white;
-                        margin-left: 140px; 
+                        margin-left: 140px;
                         margin-top: 60px;
-
-
+ 
+ 
                     }
-
+ 
                     ::placeholder {
                         color: white;
-                        
+                       
                     }
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
                 </style>
-
-
+ 
+ 
                 <h:form>
-
-
-
+ 
+ 
+ 
                     <div class="loginBox">
                         <h:panelGrid class="grid" columns="2">
-
-
-
-
+ 
+ 
+ 
+ 
                             <div class="ui-inputgroup" style="margin-top: 50px">
                                 <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
                                 <p:inputText class="input" placeholder="Username" value="#{indexControler.user.userName}" style="margin-top: 50px" />      
                             </div>
-
-
-
-
+ 
+ 
+ 
+ 
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
                                 <p:password class="input"  placeholder="Contraseña" value="#{indexControler.user.password}" />      
                             </div>
-
+ 
                             <p:commandButton class = "input" value="Login" action="#{indexControler.login()}" />
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
                         </h:panelGrid>
-
-
+ 
+ 
                         <div class="register">
                             ¿Aun no tienes una cuenta?
                             <!-- TODO ?faces-redirect=true  -->
                             <h:link class="titleRegister" outcome="register?faces-redirect=true" value="Registrate"/>
-
+ 
                         </div>
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
                     </div>
                 </h:form>
             </ui:define>
-
+ 
         </ui:composition>
-
-    </h:body>   
+ 
+    </h:body>  
 </html>
-
