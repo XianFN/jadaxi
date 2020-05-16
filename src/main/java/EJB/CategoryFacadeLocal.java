@@ -7,26 +7,26 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
-import modelo.Ingredients;
+import modelo.Category;
 
 /**
  *
  * @author Javier
  */
 @Local
-public interface IngredientsFacadeLocal {
+public interface CategoryFacadeLocal {
 
-    void create(Ingredients ingredients);
+    void create(Category category);
 
-    void edit(Ingredients ingredients);
+    void edit(Category category);
 
-    void remove(Ingredients ingredients);
+    void remove(Category category);
 
-    Ingredients find(Object id);
+    Category find(Object id);
 
-    List<Ingredients> findAll();
+    List<Category> findAll();
 
-    List<Ingredients> findRange(int[] range);
+    List<Category> findRange(int[] range);
 
     int count();
     

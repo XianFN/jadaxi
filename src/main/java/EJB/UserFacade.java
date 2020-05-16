@@ -7,7 +7,6 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -15,7 +14,7 @@ import modelo.User;
 
 /**
  *
- * @author jadaxi
+ * @author Javier
  */
 @Stateless
 public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal {
@@ -31,7 +30,7 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
     public UserFacade() {
         super(User.class);
     }
-
+    
     
     /**
      * 
@@ -59,5 +58,5 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
         return results.get(0);
 
     }
-
+    
 }

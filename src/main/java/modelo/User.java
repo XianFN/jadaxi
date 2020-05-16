@@ -19,7 +19,7 @@ import javax.persistence.Temporal;
 /**
  *
  * @author jadaxi
- * 
+ *
  * Clase modelo de la tabla User de la BBDD
  */
 @Entity
@@ -29,34 +29,40 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "surname")
     private String surname;
-    
+
     @Column(name = "surname2")
     private String surname2;
-    
+
     @Column(name = "birthDate")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDate;
-    
+
     @Column(name = "userName")
     private String userName;
-    
+
     @Column(name = "password")
     private String password;
-    
+
     @Column(name = "email")
     private String email;
-    
+
+    @Column(name = "abaout")
+    private String abaut;
+
     @Column(name = "level")
     private int lv;
-    
+
     @Column(name = "experience")
     private long xp;
+
+    @Column(name = "recipes")
+    private int recipes;
 
     public int getId() {
         return id;
@@ -90,12 +96,12 @@ public class User implements Serializable {
         this.surname2 = surname2;
     }
 
-    public Date getAge() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date age) {
-        this.birthDate = age;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getUserName() {
@@ -122,6 +128,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public String getAbaut() {
+        return abaut;
+    }
+
+    public void setAbaut(String abaut) {
+        this.abaut = abaut;
+    }
+
     public int getLv() {
         return lv;
     }
@@ -138,19 +152,29 @@ public class User implements Serializable {
         this.xp = xp;
     }
 
+    public int getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(int recipes) {
+        this.recipes = recipes;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 71 * hash + this.id;
-        hash = 71 * hash + Objects.hashCode(this.name);
-        hash = 71 * hash + Objects.hashCode(this.surname);
-        hash = 71 * hash + Objects.hashCode(this.surname2);
-        hash = 71 * hash + Objects.hashCode(this.birthDate);
-        hash = 71 * hash + Objects.hashCode(this.userName);
-        hash = 71 * hash + Objects.hashCode(this.password);
-        hash = 71 * hash + Objects.hashCode(this.email);
-        hash = 71 * hash + this.lv;
-        hash = 71 * hash + (int) (this.xp ^ (this.xp >>> 32));
+        int hash = 5;
+        hash = 59 * hash + this.id;
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.surname);
+        hash = 59 * hash + Objects.hashCode(this.surname2);
+        hash = 59 * hash + Objects.hashCode(this.birthDate);
+        hash = 59 * hash + Objects.hashCode(this.userName);
+        hash = 59 * hash + Objects.hashCode(this.password);
+        hash = 59 * hash + Objects.hashCode(this.email);
+        hash = 59 * hash + Objects.hashCode(this.abaut);
+        hash = 59 * hash + this.lv;
+        hash = 59 * hash + (int) (this.xp ^ (this.xp >>> 32));
+        hash = 59 * hash + this.recipes;
         return hash;
     }
 
@@ -169,19 +193,45 @@ public class User implements Serializable {
         if (this.id != other.id) {
             return false;
         }
+        if (this.lv != other.lv) {
+            return false;
+        }
+        if (this.xp != other.xp) {
+            return false;
+        }
+        if (this.recipes != other.recipes) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.surname, other.surname)) {
+            return false;
+        }
+        if (!Objects.equals(this.surname2, other.surname2)) {
+            return false;
+        }
+        if (!Objects.equals(this.userName, other.userName)) {
+            return false;
+        }
+        if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.abaut, other.abaut)) {
+            return false;
+        }
+        if (!Objects.equals(this.birthDate, other.birthDate)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", surname2=" + surname2 + ", birthDate=" + birthDate + ", userName=" + userName + ", password=" + password + ", email=" + email + ", lv=" + lv + ", xp=" + xp + '}';
+        return "User{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", surname2=" + surname2 + ", birthDate=" + birthDate + ", userName=" + userName + ", password=" + password + ", email=" + email + ", abaut=" + abaut + ", lv=" + lv + ", xp=" + xp + ", recipes=" + recipes + '}';
     }
-
-    
-
-    
-    
-    
-    
 
 }

@@ -6,43 +6,38 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Objects;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
- * @author jadaxi
+ * @author Javier
  */
 @Entity
-@Table(name = "recipes")
-public class Recipe implements Serializable {
+@Table(name = "recipes_ingredients")
+public class Steps implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "title")
+    private String title;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "image", columnDefinition = "BLOB")
-    private byte[] image;
+    @Column(name = "description")
+    private String description;
+    
     
     //TODO PREGUNTAR
     @OneToMany
-    @Column(name = "category")
-    private int category;
+    @Column(name = "recipeId")
+    private int recipeId;
 
     public int getId() {
         return id;
@@ -52,37 +47,37 @@ public class Recipe implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getDescription() {
+        return description;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getCategory() {
-        return category;
+    public int getRecipeId() {
+        return recipeId;
     }
 
-    public void setCategory(int category) {
-        this.category = category;
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.name);
-        hash = 53 * hash + Arrays.hashCode(this.image);
-        hash = 53 * hash + Objects.hashCode(this.category);
+        int hash = 7;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.title);
+        hash = 97 * hash + Objects.hashCode(this.description);
+        hash = 97 * hash + this.recipeId;
         return hash;
     }
 
@@ -97,17 +92,17 @@ public class Recipe implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Recipe other = (Recipe) obj;
+        final Steps other = (Steps) obj;
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
+        if (this.recipeId != other.recipeId) {
             return false;
         }
-        if (!Arrays.equals(this.image, other.image)) {
+        if (!Objects.equals(this.title, other.title)) {
             return false;
         }
-        if (!Objects.equals(this.category, other.category)) {
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
         return true;
@@ -115,9 +110,8 @@ public class Recipe implements Serializable {
 
     @Override
     public String toString() {
-        return "Recipe{" + "id=" + id + ", name=" + name + ", image=" + image + ", category=" + category + '}';
+        return "Steps{" + "id=" + id + ", title=" + title + ", description=" + description + ", recipeId=" + recipeId + '}';
     }
-    
     
     
 

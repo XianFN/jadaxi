@@ -1,5 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modelo;
-
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,32 +14,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author jadaxi
- * 
- * Clase modelo de la tabla Ingredients de la BBDD
  */
+
 @Entity
-@Table(name="ingredients")
-public class Ingredients implements Serializable{
-    
+@Table(name = "category")
+public class Category implements Serializable {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
     
-    @Column(name="calories")
-    private int calories;
+    @Column(name = "ammount")
+    private int ammount;
 
     public int getId() {
         return id;
@@ -53,20 +49,20 @@ public class Ingredients implements Serializable{
         this.name = name;
     }
 
-    public int getCalories() {
-        return calories;
+    public int getAmmount() {
+        return ammount;
     }
 
-    public void setCalories(int calories) {
-        this.calories = calories;
+    public void setAmmount(int ammount) {
+        this.ammount = ammount;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 59 * hash + this.id;
-        hash = 59 * hash + Objects.hashCode(this.name);
-        hash = 59 * hash + this.calories;
+        int hash = 3;
+        hash = 83 * hash + this.id;
+        hash = 83 * hash + Objects.hashCode(this.name);
+        hash = 83 * hash + this.ammount;
         return hash;
     }
 
@@ -81,11 +77,11 @@ public class Ingredients implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Ingredients other = (Ingredients) obj;
+        final Category other = (Category) obj;
         if (this.id != other.id) {
             return false;
         }
-        if (this.calories != other.calories) {
+        if (this.ammount != other.ammount) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -96,23 +92,8 @@ public class Ingredients implements Serializable{
 
     @Override
     public String toString() {
-        return "Ingredients{" + "id=" + id + ", name=" + name + ", calories=" + calories + '}';
+        return "Category{" + "id=" + id + ", name=" + name + ", ammount=" + ammount + '}';
     }
-    
-    
-    
-    
-    
-    
-    
-
-   
-    
-    
-   
-    
-    
-    
     
     
 }
