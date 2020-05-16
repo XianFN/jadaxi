@@ -28,12 +28,12 @@ public class User_recipes implements Serializable {
     
     
     //TODO PREGUNTAR
-    @ManyToMany
+    //@ManyToMany
     @Column(name = "recipe_Id")
     private int recipe_id;
     
     //TODO PREGUNTAR
-    @ManyToMany
+    //@ManyToMany
     @Column(name = "user_Id")
     private int user_id;
 

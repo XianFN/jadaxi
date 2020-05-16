@@ -40,7 +40,7 @@ public class Recipe implements Serializable {
     private byte[] image;
     
     //TODO PREGUNTAR
-    @OneToMany
+   // @OneToMany
     @Column(name = "category")
     private int category;
 
