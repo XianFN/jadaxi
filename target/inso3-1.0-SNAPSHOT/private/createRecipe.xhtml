@@ -3,22 +3,278 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./../template/mainTemplate.xhtml">
 
             <ui:define name="content">
-                  <h:form>
-                <h:outputText value="Nombre de la receta:" />
-                <p:inputText value="#{createRecipeControler.recipe.name}" required="true" label="Nombre"/>
+                <style>
+                    
+                    
+                     .contenedor{
+                        height: 500px;
+                        width: 850px;
+                        text-align:center;
+                        background-color:rgb(61, 110, 56); 
+                        margin: 0;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        -ms-transform: translate(-50%, -50%);
+                        transform: translate(-50%, -50%);
+                        border-style: inset;
+                        border-width: 10px;
+                        border-color: 	rgb(86, 87, 56) rgb(162, 204, 161) ;
+                        
 
-                <h:outputText value="Categoria:" />
-                <p:inputText value="#{createRecipeControler.recipe.category}" required="true" label="Categoria"/>
+                    }
+                    
+                    .bar{
+                        background-color: rgb(148, 25, 25);
+                         color: white;
+                    }
+                    
+                    .ingredient{
+                        background-color:rgb(61, 110, 56); 
+                        margin-bottom: 10px;
+                    }
+                    
+                    .center{
+                       display: flex;
+                       justify-content: center;
+                     
+                    }
+                    
+                    .text {
+                       color: #ffffff;
+                       background-color: rgb(61, 110, 56);   
+                       height: 270px;
+                    }
+                    
+                    .out{
+                        color: #ffffff;
+                        font-size: 20px;
+                    }
+                    
+                    .in{
+                        margin: 20px;
+                    }
+                    
+                    .titulos{
+                        background-color: black;
+                    }
+                    .btt {
+                        margin-bottom: 5px;
+                    }
+                    
+                    .menuI{
+                        margin-left: 38px;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                    }
+                    
+                   ::placeholder{
+                        color: white;
+                    }
+                    
+                    
+                    
+                </style>
                 
-                 <p:commandButton value="Crear" action="#{createRecipeControler.insertRecipe()}"/>
+                
+                   
+                    <!--<div class="contenedor">
+                        
+                        
+                        <div class="recipe">
+                    
+                    <h:form>
+                        
+                        <h:outputText class="out" value="Nombre de la receta:" />
+                        <p:inputText class="in" value="#{createRecipeControler.recipe.name}" required="true" label="Nombre"/>
+
+                        <h:outputText class="out" value="Categoria:" />
+                        <p:inputText class="in" value="#{createRecipeControler.recipe.category}" required="true" label="Categoria"/>
+                
+                        <p:commandButton value="Crear" action="#{createRecipeControler.insertRecipe()}"/>
+                        
                    </h:form>
+                
+                </div>
+                
+                  
+                 <div class="ingredients">
+             
+                    <h:form>
+   
+                        <p:outputLabel class="out" for="advanced" value="Ingredientes:"/>
+                        
+                        <p:selectManyMenu id="advanced" value="#{createRecipeControler.selectedIngredients}" converter="#{themeConverter}"
+                            var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                            <f:selectItems value="#{createRecipeControler.ingredients}" var="theme" itemLabel="#{ingredients.name}" itemValue="#{ingredients}" />
+ 
+                            <p:column>
+                            <h:outputText value="#{t.name}" />
+                            </p:column>
+                        </p:selectManyMenu>
+ 
+                        <p:commandButton value="Agregar" icon="pi pi-check"/>
+ 
+                    </h:form>
+                     
+                     
+                     
+                    <h:form>
+                  <p:commandButton value="Crear un ingradiente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/>
+              </h:form>
+                </div>
+                        
+                        
+                    </div>-->
+                
+                
+              <p:sidebar class="bar" widgetVar="sidebar" position="top" baseZIndex="10000">
+                <h1 style="font-weight:normal">Añadir un nuevo ingrediente.</h1>
+                        
+                
+                        <div class="ingredient">
+                    
+                        <h:form>
+                        
+                        <h:outputText class="out" value="Nombre del ingrediente:" />
+                        <p:inputText class="in" value="#{createRecipeControler.ingredient.name}" required="true" label="Nombre"/>
+
+                        <h:outputText class="out" value="Calorías:" />
+                        <p:inputText class="in" value="#{createRecipeControler.ingredient.calories}" required="true" label="Calorias"/>
+                
+                        <p:commandButton value="Crear" action="#{createRecipeControler.insertIngredient()}" onclick="window.location.reload(true)" oncomplete="PF('sidebar').hide()"/>
+                        </h:form>
+                        </div>
+                    
+              </p:sidebar>
+                
+                <p:dialog header="Selected Values" modal="true" showEffect="fade" widgetVar="dlg" resizable="false">
+        <p:panelGrid columns="2" id="display" columnClasses="label,output">
+            <h:outputText value="Basic:" />
+            <p:dataList value="#{selectManyView.selectedOptions}" var="option">
+                <h:outputText value="#{option}" />
+            </p:dataList>
+ 
+            <h:outputText value="Advanced:" />
+            <p:dataList value="#{createRecipeControler.selectedIngredients}" var="t">
+                <h:outputText value="#{t}" />
+            </p:dataList>
+        </p:panelGrid>
+    </p:dialog>
+              
+              
+          
+    <p:tabView class="contenedor">
+        <p:tab class="titulos" title="Ingredientes">
+            <h:panelGrid class="center" columns="1" cellpadding="10">
+                <div class="ingredients">
+             
+                    
+                    <h:form>
+   
+                        <p:outputLabel class="out" for="advanced" value="Ingredientes:"/>
+                        
+                        <p:selectManyMenu class="menuI" id="advanced" value="#{createRecipeControler.selectedIngredients}" converter="#{themeConverter}"
+                            var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                            <f:selectItems value="#{createRecipeControler.ingredients}" var="theme" itemLabel="#{ingredients.name}" itemValue="#{ingredients}" />
+ 
+                            <p:column>
+                            <h:outputText value="#{t.name}" />
+                            </p:column>
+                        </p:selectManyMenu>
+ 
+                        <p:commandButton value="Agregar" update="display" oncomplete="PF('dlg').show()" icon="pi pi-check"/>
+ 
+                    </h:form>
+                     
+                     
+                     
+                    <h:form>
+                  <p:commandButton value="Crear un ingradiente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/>
+              </h:form>
+                </div>
+            </h:panelGrid>
+        </p:tab>
+        <p:tab class="titulos" title="Receta">
+            <h:panelGrid class="center" columns="2" cellpadding="10">
+                 <div class="recipe">
+                    
+                    <h:form>
+                        
+                        <h:outputText class="out" value="Nombre de la receta:" />
+                        <p:inputText class="in" value="#{createRecipeControler.recipe.name}" required="true" label="Nombre"/>
+                        <br></br>
+                            
+                        <h:outputText class="out" value="Categoria:" />
+                        <p:inputText class="in" value="#{createRecipeControler.recipe.category}" required="true" label="Categoria"/>
+                
+                        <p:commandButton value="Crear" action="#{createRecipeControler.insertRecipe()}"/>
+                        
+                   </h:form>
+                
+                </div>
+                       
+            </h:panelGrid>
+        </p:tab>
+        <p:tab class="titulos" title="Pasos">
+            <h:panelGrid class="center" columns="2" cellpadding="10">
+    <div class="steps">
+                    
+                     <h:form class="editor">
+                         
+                        <h:outputText class="out" value="Nombre del paso:"/>
+                        <p:inputText class="in" value="#{createRecipeControler.steps.title}" required="true" label="Titulo"/>
+                        
+                        
+                      <p:textEditor id="tx" class="text" widgetVar="editor2" value="#{createRecipeControler.steps.description}" placeholder="Describa el procedimiento a realizar en este paso.">
+                            <f:facet name="toolbar"><span class="ql-formats"/></f:facet>
+                        </p:textEditor>
+                        
+                        <p:commandButton class="btt" value="Añadir paso" action="#{createRecipeControler.insertSteps()}" />
+                        <p:commandButton class="btt" value="Nuevo paso" type="reset" onclick="PF('editor2').clear();"/>
+                        
+                    </h:form>
+                    
+                </div>
+            </h:panelGrid>
+        </p:tab>
+    </p:tabView>
+              
+              
+                  <!--<div class="steps">
+                    
+                     <h:form class="editor">
+                         
+                        <h:outputText class="out" value="Nombre del paso:"/>
+                        <p:inputText class="in" value="#{createRecipeControler.steps.title}" required="true" label="Titulo"/>
+                        
+                        
+                      <p:textEditor id="tx" class="text" widgetVar="editor2" value="#{createRecipeControler.steps.description}" placeholder="Describa el procedimiento a realizar en este paso.">
+                            <f:facet name="toolbar"><span class="ql-formats"/></f:facet>
+                        </p:textEditor>
+                        
+                        <p:commandButton class="btt" value="Añadir paso" action="#{createRecipeControler.insertSteps()}" />
+                        <p:commandButton class="btt" value="Nuevo paso" type="reset" onclick="PF('editor2').clear();"/>
+                        
+                    </h:form>
+                    
+                </div>-->
+                  
+                
+                
+               
+                
+                
+     
+                
             </ui:define>
 
         </ui:composition>
