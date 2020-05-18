@@ -9,6 +9,7 @@ controlador\UserControler.class
 modelo\Category.class
 EJB\UserFacadeLocal.class
 controlador\IndexControler.class
+controlador\ViewRecipesListControler.class
 EJB\Recipes_ingredientsFacadeLocal.class
 modelo\Steps_.class
 EJB\CategoryFacade.class

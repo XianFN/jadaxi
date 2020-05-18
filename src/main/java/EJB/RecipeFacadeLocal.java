@@ -30,4 +30,6 @@ public interface RecipeFacadeLocal {
 
     int count();
     
+    List<Recipe> findByName(String name);
+    
 }

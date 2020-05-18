@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.imageio.ImageIO;
 import javax.inject.Named;
@@ -36,15 +37,15 @@ public class MainPageControler implements Serializable {
     @EJB
     private RecipeFacadeLocal recipeEJB;
 
-    List<Recipe> recipes;
+    private List<Recipe> recipes;
 
     private List<String> images;
 
     @PostConstruct
     public void init() {
-        
-         images = new ArrayList<String>();
-        
+
+        images = new ArrayList<String>();
+
         try {
             recipes = recipeEJB.findAll();
 
@@ -64,8 +65,9 @@ public class MainPageControler implements Serializable {
             BufferedImage bImage2 = null;
 
             try {
+                
                 bImage2 = ImageIO.read(bis);
-               // File outputfile = new File("saved.png");
+                // File outputfile = new File("saved.png");
                 //ImageIO.write(bImage2, "jpg", new File("img/" + i + ".jpg"));
 
             } catch (IOException ex) {
@@ -73,8 +75,8 @@ public class MainPageControler implements Serializable {
 
             }
             System.out.println(System.getProperty("user.dir") + "\\img\\" + i + ".jpg");
-            
-           // images.add(System.getProperty("user.dir") + "\\img\\" + i + ".jpg");
+
+            // images.add(System.getProperty("user.dir") + "\\img\\" + i + ".jpg");
             //System.out.println(images.get(i));
         }
 
@@ -82,6 +84,16 @@ public class MainPageControler implements Serializable {
 
     public List<String> getImages() {
         return images;
+    }
+
+    //TODO PREGUNTAR si se pueden crear botones desde la vista de java
+    public String goToviewRecipesInCategories(String category) {
+        
+        Object ob = category;
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categoryToShow", ob);
+        //TODO ?faces-redirect=true
+        return "viewRecipesList.xhtml?faces-redirect=true";
+
     }
 
 }

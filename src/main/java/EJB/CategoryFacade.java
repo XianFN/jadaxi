@@ -5,10 +5,13 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modelo.Category;
+import modelo.Recipe;
 
 /**
  *
@@ -28,5 +31,23 @@ public class CategoryFacade extends AbstractFacade<Category> implements Category
     public CategoryFacade() {
         super(Category.class);
     }
-    
+
+    @Override
+    public Category findByName(String name) {
+
+        List<Category> results = null;
+        try {
+            String hql = "FROM Category c WHERE c.name=:param1";
+            Query query = em.createQuery(hql);
+            query.setParameter("param1", name);
+
+            results = query.getResultList();
+
+        } catch (Exception e) {
+            System.out.println("Fallo al obtener las categorias " + name + ": " + e.getMessage());
+        }
+
+        return results.get(0);
+    }
+
 }

@@ -30,4 +30,6 @@ public interface CategoryFacadeLocal {
 
     int count();
     
+    public Category findByName(String name);
+    
 }

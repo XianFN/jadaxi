@@ -29,7 +29,7 @@ public interface UserFacadeLocal {
     List<User> findRange(int[] range);
 
     int count();
-    
+    //TODO preguntar por la url que devuelven los usuarios
     User getUserURL(User user);
     
 }
