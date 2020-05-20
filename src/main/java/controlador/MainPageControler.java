@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import EJB.CategoryFacadeLocal;
 import EJB.RecipeFacadeLocal;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -12,8 +13,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.io.Serializable;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,7 +28,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.imageio.ImageIO;
 import javax.inject.Named;
+import javax.sql.rowset.serial.SerialBlob;
+import modelo.Category;
 import modelo.Recipe;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -36,15 +44,18 @@ public class MainPageControler implements Serializable {
 
     @EJB
     private RecipeFacadeLocal recipeEJB;
+    
+    @EJB
+    private CategoryFacadeLocal categoryEJB;
 
     private List<Recipe> recipes;
 
-    private List<String> images;
+    private List<StreamedContent> images;
 
     @PostConstruct
     public void init() {
 
-        images = new ArrayList<String>();
+        images = new ArrayList<StreamedContent>();
 
         try {
             recipes = recipeEJB.findAll();
@@ -53,47 +64,63 @@ public class MainPageControler implements Serializable {
 
             System.out.println("Fallo al obtener todas las recetas: " + e.getMessage());
         }
-
-        for (int i = 0; i < recipes.get(0).getImage().length; i++) {
-
-            //System.out.print(recipes.get(0).getImage()[i]);
+        
+        for(int i = 0; i < recipes.size(); i++){
+            
+            images.add(getImage(i));
+            
+            
         }
 
-        for (int i = 0; i < recipes.size(); i++) {
-
-            ByteArrayInputStream bis = new ByteArrayInputStream(recipes.get(i).getImage());
-            BufferedImage bImage2 = null;
-
-            try {
-                
-                bImage2 = ImageIO.read(bis);
-                // File outputfile = new File("saved.png");
-                //ImageIO.write(bImage2, "jpg", new File("img/" + i + ".jpg"));
-
-            } catch (IOException ex) {
-                Logger.getLogger(MainPageControler.class.getName()).log(Level.SEVERE, null, ex);
-
-            }
-            System.out.println(System.getProperty("user.dir") + "\\img\\" + i + ".jpg");
-
-            // images.add(System.getProperty("user.dir") + "\\img\\" + i + ".jpg");
-            //System.out.println(images.get(i));
-        }
+       
 
     }
-
-    public List<String> getImages() {
+    
+    public List<StreamedContent> getImages(){
         return images;
     }
+
+    
 
     //TODO PREGUNTAR si se pueden crear botones desde la vista de java
     public String goToviewRecipesInCategories(String category) {
         
         Object ob = category;
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categoryToShow", ob);
+        
+        Category cat = categoryEJB.findByName(category);
+        
+        
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categoryToShow", cat.getId());//guardamos el id en el contexto
         //TODO ?faces-redirect=true
         return "viewRecipesList.xhtml?faces-redirect=true";
 
     }
+    
+     public StreamedContent getImage(int i) {
+        
+
+        Blob bl = null;
+       
+
+        try {
+            bl = new SerialBlob(recipes.get(i).getImage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewRecipesListControler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        InputStream dbStream = null;
+        try {
+            dbStream = bl.getBinaryStream();
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewRecipesListControler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg" ,"nombre.jpeg");
+        System.out.println("jsahbdfñoiuhasñoiudfhñpoiaushdfñiouahdfñ.i");
+        return dbImage;
+    }
+    
+    
+    
 
 }

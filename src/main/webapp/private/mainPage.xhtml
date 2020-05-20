@@ -21,17 +21,18 @@
 
             <ui:define name="content">
 
-                <p:contentFlow value="#{mainPageControler.images}" var="image" rendered="true">
-                    <p:graphicImage name="#{image}" styleClass="content" />
-                    <div class="caption">#{image}</div>
-                </p:contentFlow>
-                <p:outputLabel value="#{image}"/>
+                <p:contentFlow style="background-color: rgba(152,210,128,0.6);" class="flow" var="image" value="#{mainPageControler.images}">
 
+
+
+                    <p:graphicImage value="#{image}" styleClass="content"   stream="false" />
+
+                </p:contentFlow>
 
                 <h:form>
 
                     <p:commandButton class ="btn"  value="Ensaladas" action="#{mainPageControler.goToviewRecipesInCategories('Ensaladas')}"/>
-                    <p:commandButton class ="btn" value="Legumbres" action="#{mainPageControler.goToviewRecipesInCategories(Legumbres)}"/>
+                    <p:commandButton class ="btn" value="Legumbres" action="#{mainPageControler.goToviewRecipesInCategories('Legumbres')}"/>
                     <p:commandButton class ="btn" value="Ensaladas"/>
                     <p:commandButton class ="btn" value="Ensaladas"/>
                     <p:commandButton class ="btn" value="Ensaladas"/>

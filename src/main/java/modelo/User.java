@@ -234,4 +234,6 @@ public class User implements Serializable {
         return "User{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", surname2=" + surname2 + ", birthDate=" + birthDate + ", userName=" + userName + ", password=" + password + ", email=" + email + ", abaut=" + abaut + ", lv=" + lv + ", xp=" + xp + ", recipes=" + recipes + '}';
     }
 
+    
+
 }

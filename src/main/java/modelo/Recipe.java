@@ -43,7 +43,8 @@ public class Recipe implements Serializable {
    // @OneToMany
     @Column(name = "category")
     private int category;
-
+// hascer join table a la intermedia
+    
     public int getId() {
         return id;
     }
