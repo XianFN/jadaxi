@@ -1,11 +1,10 @@
 modelo\Category_.class
 modelo\User.class
+controlador\RegisterConroler.class
 EJB\AbstractFacade.class
-jadaxi\UserWizard.class
 EJB\StepsFacade.class
 modelo\Steps.class
 controlador\perfilControler.class
-controlador\UserControler.class
 modelo\Category.class
 EJB\UserFacadeLocal.class
 controlador\IndexControler.class
@@ -21,6 +20,7 @@ modelo\User_recipes.class
 EJB\RecipeFacade.class
 modelo\User_.class
 modelo\Recipes_ingredients.class
+jadaxi\Email.class
 modelo\Recipes_ingredients_.class
 modelo\Ingredients.class
 EJB\RecipeFacadeLocal.class

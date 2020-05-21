@@ -91,7 +91,7 @@
 
                             <div class="ui-inputgroup" style="margin-top: 50px">
                                 <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                                <p:inputText class="input" placeholder="Username" value="#{indexControler.user.userName}" style="margin-top: 50px" />      
+                                <p:inputText class="input" placeholder="Username" value="#{indexControler.preUser}" style="margin-top: 50px" />      
                             </div>
 
 
@@ -99,7 +99,7 @@
 
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                <p:password class="input"  placeholder="Contraseña" value="#{indexControler.user.password}" />      
+                                <p:password class="input"  placeholder="Contraseña" value="#{indexControler.prePass}" />      
                             </div>
 
                             <p:commandButton class = "input" value="Login" action="#{indexControler.login()}" />

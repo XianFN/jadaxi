@@ -31,12 +31,12 @@ import javax.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
 import modelo.Category;
 import modelo.Recipe;
+import org.primefaces.component.contentflow.ContentFlow;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
  *
- * @author Javier
  */
 @Named
 @ViewScoped
@@ -44,7 +44,7 @@ public class MainPageControler implements Serializable {
 
     @EJB
     private RecipeFacadeLocal recipeEJB;
-    
+
     @EJB
     private CategoryFacadeLocal categoryEJB;
 
@@ -64,43 +64,37 @@ public class MainPageControler implements Serializable {
 
             System.out.println("Fallo al obtener todas las recetas: " + e.getMessage());
         }
-        
-        for(int i = 0; i < recipes.size(); i++){
-            
+
+        for (int i = 0; i < recipes.size(); i++) {
+
             images.add(getImage(i));
-            
-            
+
         }
 
-       
+        ContentFlow a = new ContentFlow();
 
     }
-    
-    public List<StreamedContent> getImages(){
+
+    public List<StreamedContent> getImages() {
         return images;
     }
 
-    
-
     //TODO PREGUNTAR si se pueden crear botones desde la vista de java
     public String goToviewRecipesInCategories(String category) {
-        
+
         Object ob = category;
-        
+
         Category cat = categoryEJB.findByName(category);
-        
-        
+
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categoryToShow", cat.getId());//guardamos el id en el contexto
         //TODO ?faces-redirect=true
         return "viewRecipesList.xhtml?faces-redirect=true";
 
     }
-    
-     public StreamedContent getImage(int i) {
-        
+
+    public StreamedContent getImage(int i) {
 
         Blob bl = null;
-       
 
         try {
             bl = new SerialBlob(recipes.get(i).getImage());
@@ -114,13 +108,12 @@ public class MainPageControler implements Serializable {
         } catch (SQLException ex) {
             Logger.getLogger(ViewRecipesListControler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg" ,"nombre.jpeg");
+
+        StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg", "nombre.jpeg");
+
+        System.out.println(dbImage.getName());
         System.out.println("jsahbdfñoiuhasñoiudfhñpoiaushdfñiouahdfñ.i");
         return dbImage;
     }
-    
-    
-    
 
 }

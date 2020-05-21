@@ -43,6 +43,7 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
     
     //TODO decir cuando las credenciales no son correctas
     public User getUserURL(User user) {
+        System.out.println("EJB: " + user.toString());
         List<User> results = null;
         try {
             String hql = "FROM User u WHERE u.userName=:param1 and u.password=:param2";

@@ -21,13 +21,62 @@
 
             <ui:define name="content">
 
+                <script>
+
+                    $(document).on('click', '.flow .item', function () {
+                        var imageIndex = $(this).index();// the image index
+                        $(this).find('canvas').attr('src');// the image src
+                        // then you could call a remoteCommand from here passing the index
+                    })
+                    function clickFlow(item, e, image2) {
+                        //prevents image opening...                                                                     
+                        if ($(item).parent().hasClass('active')) {
+                            e.stopImmediatePropagation();
+                            console.log(Object.values(image2));
+                            var imageIndex = $(this).index();
+                            console.log(imageIndex );
+                        }
+                    }
+                </script>
+
+
                 <p:contentFlow style="background-color: rgba(152,210,128,0.6);" class="flow" var="image" value="#{mainPageControler.images}">
 
+                    <p:graphicImage value="#{image}" styleClass="content" stream="false" onclick="clickFlow(this, event, '#{image}')"/>
 
-
-                    <p:graphicImage value="#{image}" styleClass="content"   stream="false" />
+                    <div class="caption" style="">
+                        <h:form> 
+                            <p:commandButton style="" class ="btn"  value="#{image}" action="#{mainPageControler.goToviewRecipesInCategories('Ensaladas')}"/>
+                        </h:form>
+                    </div>
 
                 </p:contentFlow>
+
+
+
+
+
+                <h3 style="margin-top:0">Manual</h3>
+                <p:commandButton type="button" onclick="PF('switcher').previous();"
+                                 icon="pi pi-caret-left" id="prev" style="margin-bottom: 5px"/>
+                <p:commandButton type="button" onclick="PF('switcher').next();"
+                                 icon="pi pi-caret-right" id="next" style="margin-bottom: 5px"/>
+
+
+
+                <p:imageSwitch effect="wipe" widgetVar="switcher" id="manuelSwitcher"
+                               slideshowAuto="false">
+                    <ui:repeat value="#{mainPageControler.images}" var="image2" id="manuelSwitcherImages">
+                        <p:graphicImage value="#{image2}" id="image2" stream="false"/>
+                    </ui:repeat>
+                </p:imageSwitch>
+
+
+
+
+
+
+                <p:graphicImage value="#{image}" styleClass="content" stream="false"/>
 
                 <h:form>
 

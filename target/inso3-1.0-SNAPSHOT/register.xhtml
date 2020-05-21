@@ -12,8 +12,8 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>TODO supply a title</title>
-       
-       
+
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     </h:head>
@@ -28,76 +28,60 @@ and open the template in the editor.
 
                     <p:growl id="growl" sticky="true" showDetail="true"/>
 
-                    <p:wizard class = "wiz" flowListener="#{userWizard.onFlowProcess}">
+                    <p:wizard class = "wiz" flowListener="#{registerConroler.onFlowProcess}">
                         <p:tab id="personal" title="Datos personales">
                             <p:panel header="Datos personales" class="panelReg">
                                 <p:messages />
                                 <h:panelGrid columns="2" columnClasses="label, value">
 
-                                    
-                                        <div class="ui-inputgroup">
-                                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                                            <p:inputText placeholder="Nombre" value="#{userControler.user.name}"/>      
-                                        </div>
-                                   
 
-                                    
-                                        <div class="ui-inputgroup">
-                                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                                            <p:inputText placeholder="1º Apellido" value="#{userControler.user.surname}" />      
-                                        </div>
-                                    
-
-                                    
-                                        <div class="ui-inputgroup">
-                                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                                            <p:inputText placeholder="2º Apellido" value="#{userControler.user.surname2}" />      
-                                        </div>
-                                    
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                                        <p:inputText placeholder="Nombre" value="#{registerConroler.user.name}" required="true"/>      
+                                    </div>
 
 
 
-                                    <!--
-                                                                <h:outputText value="Nombre *" />
-                                                                <p:inputText value="#{userControler.user.name}" required="true" label="Lastname"/>     
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                                        <p:inputText placeholder="1º Apellido" value="#{registerConroler.user.surname}" required="true"/>      
+                                    </div>
+
+
+
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                                        <p:inputText placeholder="2º Apellido" value="#{registerConroler.user.surname2}" required="true"/>      
+                                    </div>
+                                    
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+                                        <p:calendar placeholder="Fecha nacimiento" id="mask" value="#{registerConroler.user.birthDate}" pattern="dd-MM-yyyy" mask="true" />    
+                                    </div>
                                     
                                     
-                                                                <h:outputText value="1º Apelldo *" />
-                                                                <p:inputText value="#{userControler.user.surname}" required="true" label="Lastname"/>
-                                    
-                                                                <h:outputText value="2º Apellido *" />
-                                                                <p:inputText value="#{userControler.user.surname2}" required="true" label="Lastname"/>
-                                    
-                                    
-                                    
-                                    -->
 
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
+                                        <p:inputText placeholder="Usuario" value="#{registerConroler.user.userName}" required="true"/>      
+                                    </div>
 
-                                </h:panelGrid>
-                            </p:panel>
-                        </p:tab>
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                                        <p:password placeholder="Contraseña" value="#{registerConroler.user.password}" feedback="true" match="pass2" promptLabel="Introduzca la contraseña" weakLabel="Debil"
+                                                    goodLabel="Segura" strongLabel="Muy segura" required="true"/>      
+                                    </div>
 
-                        <p:tab id="address" title="Datos de la cuenta">
-                            <p:panel header="Datos de la cuenta" class="panelReg" >
-                                <p:messages />
-                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                                        <p:password id="pass2" placeholder="Repita contraseña" value="asd" required="true" />      
+                                    </div>
 
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+                                        <p:inputText placeholder="Email" value="#{registerConroler.user.email}"  required="true"/>      
+                                    </div>
 
-
-
-
-                                    <h:outputText value="Nombre de Usuario *" />
-                                    <p:inputText value="#{userControler.user.userName}" required="true" label="Email"/>
-
-
-                                    <h:outputText value="Email *" />
-                                    <p:inputText value="#{userControler.user.email}" required="true" label="Email"/>
-
-                                    <h:outputText value="Contraseña *" />
-                                    <p:password value="#{userControler.user.password}" required="true" label="Contraseña"/>
-
-                                    <h:outputText value="Repita contraseña *" />
-                                    <p:password value="#{userControler.checkPassword}" required="true" label="Repita contraseña"/>
                                 </h:panelGrid>
                             </p:panel>
                         </p:tab>
@@ -106,6 +90,11 @@ and open the template in the editor.
                             <p:panel header="Sobre ti" class="panelReg" >
                                 <p:messages />
                                 <h:panelGrid columns="2" columnClasses="label, value">
+
+
+                                    <p:inputTextarea rows="10" cols="55" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" value="#{registerConroler.user.abaut}" />
+                                    <br />
+                                    <h:outputText id="display" />
 
 
 
@@ -124,7 +113,7 @@ and open the template in the editor.
                                     </h:panelGrid>
                                 </h:panelGrid>
 
-                                <p:commandButton value="Submit" action="#{userControler.insertUser()}" update="growl" process="@this"/>
+                                <p:commandButton value="Submit" action="#{registerConroler.insertUser()}" update="growl" process="@this"/>
                             </p:panel>
                         </p:tab>
                     </p:wizard>

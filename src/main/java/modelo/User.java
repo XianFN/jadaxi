@@ -64,6 +64,12 @@ public class User implements Serializable {
     @Column(name = "recipes")
     private int recipes;
 
+    @Column(name = "activationCode")
+    private String acCode;
+
+    @Column(name = "activated")
+    private boolean activated;
+
     public int getId() {
         return id;
     }
@@ -160,9 +166,25 @@ public class User implements Serializable {
         this.recipes = recipes;
     }
 
+    public String getAcCode() {
+        return acCode;
+    }
+
+    public void setAcCode(String acCode) {
+        this.acCode = acCode;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         hash = 59 * hash + this.id;
         hash = 59 * hash + Objects.hashCode(this.name);
         hash = 59 * hash + Objects.hashCode(this.surname);
@@ -175,6 +197,8 @@ public class User implements Serializable {
         hash = 59 * hash + this.lv;
         hash = 59 * hash + (int) (this.xp ^ (this.xp >>> 32));
         hash = 59 * hash + this.recipes;
+        hash = 59 * hash + Objects.hashCode(this.acCode);
+        hash = 59 * hash + (this.activated ? 1 : 0);
         return hash;
     }
 
@@ -200,6 +224,12 @@ public class User implements Serializable {
             return false;
         }
         if (this.recipes != other.recipes) {
+            return false;
+        }
+        if (this.acCode != other.acCode) {
+            return false;
+        }
+        if (this.activated != other.activated) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -231,9 +261,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", surname2=" + surname2 + ", birthDate=" + birthDate + ", userName=" + userName + ", password=" + password + ", email=" + email + ", abaut=" + abaut + ", lv=" + lv + ", xp=" + xp + ", recipes=" + recipes + '}';
+        return "User{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", surname2=" + surname2 + ", birthDate=" + birthDate + ", userName=" + userName + ", password=" + password + ", email=" + email + ", abaut=" + abaut + ", lv=" + lv + ", xp=" + xp + ", recipes=" + recipes + ", acCode=" + acCode + ", activated=" + activated + '}';
     }
-
-    
 
 }
