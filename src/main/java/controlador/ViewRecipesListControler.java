@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import EJB.Category_recipeFacadeLocal;
 import EJB.RecipeFacadeLocal;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -21,6 +22,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
+import modelo.Category;
+import modelo.Category_recipe;
 import modelo.Recipe;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.DefaultStreamedContent;
@@ -38,10 +41,10 @@ public class ViewRecipesListControler implements Serializable {
 
     @EJB
     private RecipeFacadeLocal recipeEJB;
-    
-    
 
-    private List<Recipe> recipesFull;
+    @EJB
+    private Category_recipeFacadeLocal cat_recEJB;
+
     private List<Recipe> recipes;
 
     private Recipe selectedRecipe;
@@ -52,19 +55,17 @@ public class ViewRecipesListControler implements Serializable {
         categoryId = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("categoryToShow");
 
         System.out.println("category: " + categoryId);
+        
+        
+        
+        
 
-        try {
-            recipesFull = recipeEJB.findAll();
-            System.out.println(recipesFull);
-        } catch (Exception e) {
+        List<Category_recipe> idRecipe = cat_recEJB.findByCategoryId(categoryId);
 
-            System.out.println("Fallo al rellenar la lista de TODAS las recetas: " + e.getMessage());
-        }
+        for (int i = 0; i < idRecipe.size(); i++) {
 
-        for (int i = 0; i < recipesFull.size(); i++) {
-            if (recipesFull.get(i).getCategory() == categoryId) {
-                recipes.add(recipesFull.get(i));
-            }
+            recipes.add(recipeEJB.find(idRecipe.get(i)));
+
         }
 
         System.out.println(recipes);
@@ -122,35 +123,24 @@ public class ViewRecipesListControler implements Serializable {
         } catch (SQLException ex) {
             Logger.getLogger(ViewRecipesListControler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg" ,"nombre.jpeg");
+
+        StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg", "nombre.jpeg");
         System.out.println("jsahbdfñoiuhasñoiudfhñpoiaushdfñiouahdfñ.i");
         return dbImage;
     }
-    
-    public String getRecipeCategoryName(int id){
-        
-        
-        
-        
-        
-        
+
+    public String getRecipeCategoryName(int id) {
+
         return "";
     }
-    
-    public String viewRecipe(int id){
-        
-        
-      
-         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("recipe", id);
-        
-        
+
+    public String viewRecipe(int id) {
+
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("recipe", id);
+
         //TODO ?faces-redirect=true
-        return"viewRecipe.xhtml?faces-redirect=true" ;
-       
+        return "viewRecipe.xhtml?faces-redirect=true";
+
     }
-    
-    
-    
 
 }

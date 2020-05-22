@@ -30,4 +30,6 @@ public interface Category_recipeFacadeLocal {
 
     int count();
     
+    List<Category_recipe> findByCategoryId(int id);
+    
 }

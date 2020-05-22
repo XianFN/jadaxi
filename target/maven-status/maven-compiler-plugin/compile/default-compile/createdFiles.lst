@@ -7,6 +7,7 @@ modelo\Steps.class
 controlador\perfilControler.class
 controlador\ViewRecipeControler.class
 modelo\Category.class
+modelo\Category_recipe.class
 EJB\UserFacadeLocal.class
 controlador\IndexControler.class
 controlador\ViewRecipesListControler.class
@@ -19,6 +20,7 @@ modelo\User_recipes_.class
 modelo\Ingredients_.class
 EJB\User_recipesFacade.class
 modelo\User_recipes.class
+EJB\Category_recipeFacade.class
 EJB\RecipeFacade.class
 modelo\User_.class
 modelo\Recipes_ingredients.class
@@ -26,6 +28,7 @@ jadaxi\Email.class
 modelo\Recipes_ingredients_.class
 modelo\Ingredients.class
 EJB\RecipeFacadeLocal.class
+modelo\Category_recipe_.class
 EJB\UserFacade.class
 EJB\IngredientsFacade.class
 EJB\IngredientsFacadeLocal.class
@@ -36,4 +39,5 @@ EJB\Recipes_ingredientsFacade.class
 EJB\CategoryFacadeLocal.class
 EJB\User_recipesFacadeLocal.class
 controlador\CreateRecipeControler.class
+EJB\Category_recipeFacadeLocal.class
 controlador\MainTemplateControler.class

@@ -8,7 +8,9 @@ C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\controlad
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\controlador\RegisterConroler.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\StepsFacadeLocal.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\modelo\Ingredients.java
+C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\Category_recipeFacade.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\User_recipesFacade.java
+C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\modelo\Category_recipe.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\controlador\MainPageControler.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\Recipes_ingredientsFacade.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\AbstractFacade.java
@@ -28,5 +30,6 @@ C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\Ingre
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\UserFacadeLocal.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\controlador\MainTemplateControler.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\modelo\Steps.java
+C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\Category_recipeFacadeLocal.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\CategoryFacade.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\RecipeFacadeLocal.java

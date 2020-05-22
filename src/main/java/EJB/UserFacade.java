@@ -42,6 +42,7 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
     @Override
     
     //TODO decir cuando las credenciales no son correctas
+    //TODO eliminar esto y usar el find
     public User getUserURL(User user) {
         System.out.println("EJB: " + user.toString());
         List<User> results = null;
