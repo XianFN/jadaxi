@@ -101,8 +101,16 @@ public class IndexControler implements Serializable {
             }
 
         }
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
-        return navegacion;
+
+        if (us.isActivated()) {
+            System.out.println("Usuario activado");
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
+            return navegacion;
+        } else {
+            System.out.println("Usuario no activado");
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("code", us);
+            return "activate.xhtml";
+        }
 
     }
 

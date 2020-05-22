@@ -11,6 +11,7 @@ controlador\IndexControler.class
 controlador\ViewRecipesListControler.class
 EJB\Recipes_ingredientsFacadeLocal.class
 modelo\Steps_.class
+controlador\ActivateControler.class
 EJB\CategoryFacade.class
 modelo\Recipe_.class
 modelo\User_recipes_.class

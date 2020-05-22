@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.User;
@@ -43,6 +45,9 @@ public class RegisterConroler implements Serializable {
         } catch (Exception e) {
         }
 
+    }
+    public void info() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "PrimeFaces Rocks."));
     }
 
     public User getUser() {
@@ -94,27 +99,32 @@ public class RegisterConroler implements Serializable {
         return password.toString();
     }
 
-    public void insertUser() {
+    public String insertUser() {
 
         if (checkUserName(user.getUserName())) {
 
-            //user.setAcCode(genCode());
-            user.setAcCode("000112");
+            user.setAcCode(genCode());
+            //user.setAcCode("000112");
             System.out.println("asdasd: " + user.getAcCode());
             try {
 
-                userEJB.create(user);
+               userEJB.create(user); 
+                      
 
             } catch (Exception e) {
                 System.out.println("Error al insertar el usuario: " + e.getMessage());
             }
-            Email email = new Email(user.getEmail(), "Confirmación de cuenta", "Introduce el sigueinte codigo en la pagina: \n " + user.getAcCode());
+            Email email = new Email(user.getEmail(), "Confirmación de cuenta", "Para conformar tu cuenta, introduce el siguiente codigo en la pagina http://cocinalotodo.servebeer.com/cocinalotodo/  : \n Codigo:  \n " + user.getAcCode());
             try {
                 email.send();
             } catch (IOException ex) {
                 System.out.println("Error al enviar el email al usuario: " + ex.getMessage());
             }
+
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("code", user);
+            return "activate.xhtml?faces-redirect=true";
         }
+        return "";
 
     }
 

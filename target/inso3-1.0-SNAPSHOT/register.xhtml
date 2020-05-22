@@ -19,7 +19,7 @@ and open the template in the editor.
     </h:head>
     <h:body>
 
-        <ui:composition template="template/nonSecureTemplate.xhtml">
+        <ui:composition template="./template/nonSecureTemplate.xhtml">
             <ui:define name="content">
 
 
@@ -28,58 +28,66 @@ and open the template in the editor.
 
                     <p:growl id="growl" sticky="true" showDetail="true"/>
 
-                    <p:wizard class = "wiz" flowListener="#{registerConroler.onFlowProcess}">
+                    <p:wizard class = "wiz" flowListener="#{registerConroler.onFlowProcess}" nextLabel="Siguiente" backLabel="Anterior">
                         <p:tab id="personal" title="Datos personales">
                             <p:panel header="Datos personales" class="panelReg">
-                                <p:messages />
-                                <h:panelGrid columns="2" columnClasses="label, value">
+                                
+                                <h:panelGrid columns="3" columnClasses="label, value">
 
 
                                     <div class="ui-inputgroup">
                                         <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                                        <p:inputText placeholder="Nombre" value="#{registerConroler.user.name}" required="true"/>      
+                                        <p:inputText id="icon" placeholder="Nombre" value="#{registerConroler.user.name}" required="true" style="margin-left: 0px;"/>
+                                        <p:message for="icon" display="icon" />
                                     </div>
 
 
 
                                     <div class="ui-inputgroup">
                                         <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                                        <p:inputText placeholder="1º Apellido" value="#{registerConroler.user.surname}" required="true"/>      
+                                        <p:inputText id="sur1" placeholder="1º Apellido" value="#{registerConroler.user.surname}" required="true"/>   
+                                         <p:message for="sur1" display="icon"/>
                                     </div>
 
 
 
                                     <div class="ui-inputgroup">
                                         <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                                        <p:inputText placeholder="2º Apellido" value="#{registerConroler.user.surname2}" required="true"/>      
+                                        <p:inputText id="sur2" placeholder="2º Apellido" value="#{registerConroler.user.surname2}" required="true"/>     
+                                         <p:message for="sur2" display="icon" />
                                     </div>
-                                    
+
                                     <div class="ui-inputgroup">
                                         <span class="ui-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                                        <p:calendar placeholder="Fecha nacimiento" id="mask" value="#{registerConroler.user.birthDate}" pattern="dd-MM-yyyy" mask="true" />    
+                                        <p:calendar  placeholder="Fecha nacimiento" id="mask" value="#{registerConroler.user.birthDate}" required="true" pattern="dd-MM-yyyy" mask="true" />    
+                                    <p:message for="mask" display="icon"/>
                                     </div>
-                                    
-                                    
+
+
 
                                     <div class="ui-inputgroup">
                                         <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
-                                        <p:inputText placeholder="Usuario" value="#{registerConroler.user.userName}" required="true"/>      
+                                        <p:inputText id="user" placeholder="Usuario" value="#{registerConroler.user.userName}" required="true"/>      
+                                         <p:message for="user" display="icon" />
                                     </div>
 
                                     <div class="ui-inputgroup">
                                         <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                        <p:password placeholder="Contraseña" value="#{registerConroler.user.password}" feedback="true" match="pass2" promptLabel="Introduzca la contraseña" weakLabel="Debil"
+                                        <p:password  id="pass1" placeholder="Contraseña" value="#{registerConroler.user.password}" feedback="true" match="pass2" promptLabel="Introduzca la contraseña" weakLabel="Debil"
                                                     goodLabel="Segura" strongLabel="Muy segura" required="true"/>      
+                                         <p:message for="pass1" display="icon"/>
                                     </div>
 
                                     <div class="ui-inputgroup">
                                         <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                        <p:password id="pass2" placeholder="Repita contraseña" value="asd" required="true" />      
+                                        <p:password id="pass2" placeholder="Repita contraseña" value="asd" required="true" />   
+                                         <p:message for="pass2" display="icon" />
                                     </div>
 
                                     <div class="ui-inputgroup">
                                         <span class="ui-inputgroup-addon"><i class="pi pi-envelope"></i></span>
-                                        <p:inputText placeholder="Email" value="#{registerConroler.user.email}"  required="true"/>      
+                                        <p:inputText id="ema" placeholder="Email" value="#{registerConroler.user.email}"  required="true"/>   
+                                        <p:message for="ema" display="icon"/>
                                     </div>
 
                                 </h:panelGrid>
@@ -106,14 +114,34 @@ and open the template in the editor.
                             <p:panel header="Confirmation">
                                 <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
                                     <h:panelGrid columns="2" columnClasses="label, value">
+                                        <div style="color: gray">
+                                            
+                                          <br/>
+                                        Nombre: #{registerConroler.user.name}
+                                         <br/>
+                                        Apellido: #{registerConroler.user.surname}
+                                           <br/>
+                                        2º Apellido: #{registerConroler.user.surname2}
+                                           <br/>
+                                        Fecha naciemiento: #{registerConroler.user.birthDate.toString()}
+                                           <br/>
+                                        Usuario: #{registerConroler.user.userName}
+                                         <br/>
+                                        Email:  #{registerConroler.user.email}
+                                         <br/>
+                                    
+                                        
+                                        </div>
+                                        
 
 
-                                        <h:outputText />
-                                        <h:outputText />
+
+                                        
+
                                     </h:panelGrid>
                                 </h:panelGrid>
 
-                                <p:commandButton value="Submit" action="#{registerConroler.insertUser()}" update="growl" process="@this"/>
+                                <p:commandButton value="Confirmar datos y crear cuenta" action="#{registerConroler.insertUser()}" update="growl" process="@this"/>
                             </p:panel>
                         </p:tab>
                     </p:wizard>
