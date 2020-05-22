@@ -6,6 +6,7 @@
 package controlador;
 
 import EJB.CategoryFacadeLocal;
+import EJB.Category_recipeFacadeLocal;
 import EJB.IngredientsFacadeLocal;
 import EJB.RecipeFacadeLocal;
 import EJB.Recipes_ingredientsFacadeLocal;
@@ -22,6 +23,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Category;
+import modelo.Category_recipe;
 import modelo.Ingredients;
 import modelo.Recipe;
 import modelo.Recipes_ingredients;
@@ -57,6 +59,8 @@ public class CreateRecipeControler implements Serializable{
     
     private List<Category> category;
     
+    private Category_recipe categoryrecipe;
+    
     private List<Steps> stepsList;
     
     private UploadedFile file;
@@ -82,6 +86,9 @@ public class CreateRecipeControler implements Serializable{
     
     @EJB
     private CategoryFacadeLocal categoryEJB;
+    
+    @EJB
+    private Category_recipeFacadeLocal categoryrecipeEJB;
 
     
     @PostConstruct
@@ -90,6 +97,7 @@ public class CreateRecipeControler implements Serializable{
             sleep(500);
             recipe = new Recipe();
             recipeIngredients = new Recipes_ingredients();
+            categoryrecipe = new Category_recipe();
             userRecipes = new User_recipes();
             ingredient = new Ingredients();
             steps = new Steps();
@@ -185,7 +193,7 @@ public class CreateRecipeControler implements Serializable{
     public void insertRecipe() {
         int id=000;
         try {
-            recipe.setCategory(category.get(0).getId());
+            //recipe.setCategory(category.get(0).getId());
             //recipe.setImage(file.getContents());
             //System.out.println(recipe.getImage().toString());
             recipeEJB.create(recipe);
@@ -204,6 +212,27 @@ public class CreateRecipeControler implements Serializable{
             
         } catch (Exception e) {
             System.out.println("Error al agregar los ingredientes: " + e.getMessage());
+        }
+        
+        try {
+            categoryrecipe.setRecipe(id);
+            for (int i=0; i<category.size(); i++){
+                categoryrecipe.setCategory(category.get(i).getId());
+                categoryrecipeEJB.create(categoryrecipe);
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Error al agregar las categorias " + e.getMessage());
+        }
+        
+        try {
+            for (int i=0; i<category.size(); i++){
+                category.get(i).setAmmount(category.get(i).getAmmount()+1);
+                categoryEJB.edit(category.get(i));
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Error al sumar las categorias " + e.getMessage());
         }
 
          try {
