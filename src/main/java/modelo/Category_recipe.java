@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * @author Javier
  */
 @Entity
-@Table(name = "category_recipes")
+@Table(name = "category_recipe")
 public class Category_recipe implements Serializable {
 
     @Id
