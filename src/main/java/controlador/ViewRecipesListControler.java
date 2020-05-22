@@ -38,6 +38,8 @@ public class ViewRecipesListControler implements Serializable {
 
     @EJB
     private RecipeFacadeLocal recipeEJB;
+    
+    
 
     private List<Recipe> recipesFull;
     private List<Recipe> recipes;
@@ -125,5 +127,30 @@ public class ViewRecipesListControler implements Serializable {
         System.out.println("jsahbdfñoiuhasñoiudfhñpoiaushdfñiouahdfñ.i");
         return dbImage;
     }
+    
+    public String getRecipeCategoryName(int id){
+        
+        
+        
+        
+        
+        
+        return "";
+    }
+    
+    public String viewRecipe(int id){
+        
+        
+      
+         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("recipe", id);
+        
+        
+        //TODO ?faces-redirect=true
+        return"viewRecipe.xhtml?faces-redirect=true" ;
+       
+    }
+    
+    
+    
 
 }

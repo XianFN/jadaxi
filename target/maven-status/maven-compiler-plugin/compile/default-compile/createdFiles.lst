@@ -5,6 +5,7 @@ EJB\AbstractFacade.class
 EJB\StepsFacade.class
 modelo\Steps.class
 controlador\perfilControler.class
+controlador\ViewRecipeControler.class
 modelo\Category.class
 EJB\UserFacadeLocal.class
 controlador\IndexControler.class

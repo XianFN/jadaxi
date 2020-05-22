@@ -6,40 +6,35 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Objects;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
- * @author jadaxi
+ * @author Javier
  */
 @Entity
-@Table(name = "recipes")
-public class Recipe implements Serializable {
+@Table(name = "category_recipes")
+public class Category_recipe implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    //TODO PREGUNTAR
+    //@ManyToMany
+    @Column(name = "category_id")
+    private int category;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "image", columnDefinition = "BLOB")
-    private byte[] image;
+    //TODO PREGUNTAR
+    //@ManyToMany
+    @Column(name = "recipe_id")
+    private int recipe;
 
-// hascer join table a la intermedia
     public int getId() {
         return id;
     }
@@ -48,28 +43,28 @@ public class Recipe implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getCategory() {
+        return category;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategory(int category) {
+        this.category = category;
     }
 
-    public byte[] getImage() {
-        return image;
+    public int getRecipe() {
+        return recipe;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setRecipe(int recipe) {
+        this.recipe = recipe;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.name);
-        hash = 53 * hash + Arrays.hashCode(this.image);
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + this.category;
+        hash = 29 * hash + this.recipe;
         return hash;
     }
 
@@ -84,23 +79,22 @@ public class Recipe implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Recipe other = (Recipe) obj;
+        final Category_recipe other = (Category_recipe) obj;
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
+        if (this.category != other.category) {
             return false;
         }
-        if (!Arrays.equals(this.image, other.image)) {
+        if (this.recipe != other.recipe) {
             return false;
         }
-
         return true;
     }
 
     @Override
     public String toString() {
-        return "Recipe{" + "id=" + id + ", name=" + name + ", image=" + image + '}';
+        return "Category_recipe{" + "id=" + id + ", category=" + category + ", recipe=" + recipe + '}';
     }
 
 }
