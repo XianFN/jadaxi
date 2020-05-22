@@ -11,6 +11,7 @@
         <link rel="icon" type="image/png" sizes="192x192" href="resources/images/icon.png"/>
         <link rel="stylesheet" href="../resources/css/styleMainTemplate.css"/>
         <link rel="stylesheet" href="../resources/css/styleMainPage.css"/>
+
         <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
 
         <f:event type="preRenderView" listener="#{mainTemplateControler.checkAndShow()}"/> <!-- Esto permite a cualquir vista que controle que el usurio esta permitido --> 
@@ -20,7 +21,7 @@
 
     <h:body style="background-image: url(../resources/images/fondo2.jpg)">
 
-        
+
 
         <div id="top">
             <ui:insert name="top">
@@ -28,9 +29,10 @@
                 <h:form>
                     <div class ="topMenu">
                         <h:form>
-                            <p:commandButton action="#{buttonView.buttonAction}" id="iconOnly" style="margin-right:20px;" icon="pi pi-home" title="Icon Only" />
+                            <p:linkButton  outcome="mainPage" id="iconOnly" style="margin-right:20px;" icon="pi pi-home" title="Icon Only" />
 
                             <p:growl id="messages" showDetail="true"/>
+
 
                             <p:menuButton class="menuButtonn" value="Options">
                                 <p:menuitem value="Perfil" url="profile.xhtml" update="messages" icon="pi pi-save"/>
@@ -38,7 +40,8 @@
                                 <p:menuitem value="Mis recetas"  ajax="false" icon="pi pi-times"/>
                                 <p:menuitem value="Informacion"  ajax="false" icon="pi pi-times"/>
                                 <p:menuitem value="Administracion"  ajax="false" icon="pi pi-times"/>
-                                <p:menuitem value="Cerrar sesion"  ajax="false" icon="pi pi-times"/>
+                                <p:menuitem value="Cerrar sesion" url="../index.xhtml" icon="pi pi-times" immediate="true"/>
+
                                 <p:separator />
 
                             </p:menuButton>

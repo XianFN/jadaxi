@@ -35,6 +35,9 @@ public class IndexControler implements Serializable {
 
     @PostConstruct
     public void inicio() {
+        System.out.println("FUERA");
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();//Nos borra la sesion poara que al iniciar o al hacer logout se limpie
+
         try {
 
             user = new User();

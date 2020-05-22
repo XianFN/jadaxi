@@ -39,5 +39,14 @@ public class MainTemplateControler implements Serializable {
         }
 
     }
+    
+    
+    public String out(){
+        System.out.println("logOut");
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        
+        return "../index.xhtml";
+        
+    }
 
 }
