@@ -7,8 +7,10 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="icon" type="image/png" sizes="192x192" href="resources/images/icon.png"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+         <!-- https://papilagastronomica.com/wp-content/uploads/2019/10/AF_Iconos-10.5x10.5cm_Personal-de-Cocina.png -->
+          
         <link rel="stylesheet" href="../resources/css/styleMainTemplate.css"/>
         <link rel="stylesheet" href="../resources/css/styleMainPage.css"/>
 
@@ -25,16 +27,16 @@
 
         <div id="top">
             <ui:insert name="top">
-
+                  <p:growl id="messages" showDetail="true"/>
                 <h:form>
                     <div class ="topMenu">
-                        <h:form>
-                            <p:linkButton  outcome="mainPage" id="iconOnly" style="margin-right:20px;" icon="pi pi-home" title="Icon Only" />
+                  
+                            <p:linkButton  outcome="mainPage" id="iconOnly" icon="pi pi-home" title="Icon Only" />
 
-                            <p:growl id="messages" showDetail="true"/>
+                          
 
 
-                            <p:menuButton class="menuButtonn" value="Options">
+                            <p:menuButton class="menuButtonn" value="Options" style=" margin: 3px 0px 0px 0px;" >
                                 <p:menuitem value="Perfil" url="profile.xhtml" update="messages" icon="pi pi-save"/>
                                 <p:menuitem value="Crear Receta" url="createRecipe.xhtml" update="messages" icon="pi pi-refresh"/>
                                 <p:menuitem value="Mis recetas"  ajax="false" icon="pi pi-times"/>
@@ -45,24 +47,20 @@
                                 <p:separator />
 
                             </p:menuButton>
-                        </h:form>
+                      
 
                     </div>
                 </h:form>
-
-
-
-
 
             </ui:insert>
         </div>
 
         <div id="content" class="center_content">
-            <ui:insert name="content">Content</ui:insert>
+            <ui:insert name="content"></ui:insert>
         </div>
 
         <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
+            <ui:insert name="bottom"></ui:insert>
         </div>
 
     </h:body>

@@ -255,15 +255,15 @@
                         
                     <h:outputText class="out" value="Nombre de la receta:" />
                         
-                    <h:form>
+                    <h:form id="welcomeForm" enctype="multipart/form-data">
                         
                         <p:inputText class="in1" value="#{createRecipeControler.recipe.name}" required="true" label="Nombre"/>
                         <br></br>
                         <h:outputText class="out" value="Añadir una imagen:" />
                         <br></br>
-                        <p:fileUpload  class="bi" value="#{createRecipeControler.file}" mode="simple" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                        <p:fileUpload  class="bi" value="#{createRecipeControler.file}" mode="simple"  skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                         <br></br>
-                        <p:commandButton value="Crear y Terminar" action="#{createRecipeControler.insertRecipe()}"/>
+                        <p:commandButton value="Crear y Terminar" actionListener="#{createRecipeControler.insertRecipe()}" ajax="false"/>
                         
                     </h:form>
                         
