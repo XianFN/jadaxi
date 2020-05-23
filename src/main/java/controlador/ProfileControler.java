@@ -15,7 +15,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.User;
-import org.primefaces.model.chart.MeterGaugeChartModel;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.HorizontalBarChartModel;
+
 
 /**
  *
@@ -28,6 +33,8 @@ public class ProfileControler implements Serializable {
     
     private User user;
     
+    private int progreso;
+    
     
     @EJB
     private UserFacadeLocal userEJB;
@@ -36,7 +43,10 @@ public class ProfileControler implements Serializable {
     public void inicio() {
 
         user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-       
+        
+        int level = user.getLv();
+        int exp = (int) user.getXp();
+        progreso=exp%100;
                 
     }
     
@@ -48,7 +58,9 @@ public class ProfileControler implements Serializable {
         return user;
     }
     
-  
+    public int getProgreso(){
+        return progreso;
+    }
     
     
 }
