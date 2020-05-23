@@ -57,8 +57,8 @@
                                     <p:ajax event="rate" listener="#{viewRecipeControler.onrate}" update="messages" />
                                     <p:ajax event="cancel" listener="#{viewRecipeControler.oncancel}" update="messages" />
                                 </p:rating>
-                               
-                                <h:outputText/>
+
+                                    <p:commandButton value="Ajax Submit" id="ajax" update="growl"  style="margin-right:20px;" styleClass="ui-priority-primary" />
 
                             </h:panelGrid>
                         </p:panel>
