@@ -4,7 +4,6 @@ controlador\RegisterConroler.class
 EJB\AbstractFacade.class
 EJB\StepsFacade.class
 modelo\Steps.class
-controlador\PerfilControler.class
 controlador\ViewRecipeControler.class
 modelo\Category.class
 modelo\Category_recipe.class
@@ -27,6 +26,7 @@ modelo\Recipes_ingredients.class
 jadaxi\Email.class
 modelo\Recipes_ingredients_.class
 modelo\Ingredients.class
+controlador\ProfileControler.class
 EJB\RecipeFacadeLocal.class
 modelo\Category_recipe_.class
 EJB\UserFacade.class
