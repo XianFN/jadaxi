@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -11,8 +12,43 @@
 
             <ui:define name="content">
                 <h:form>
-                    <p:commandButton actionListener="#{viewRecipeControler.inicio()}"/>
+
+                    <style>
+                        .ui-widget-content {
+                            border: 1px solid #a8a8a8;
+                            background: #fff;
+                            background-color: rgb(61, 110, 56); 
+                        }
+
+                    </style>
+
+
+                    <p:graphicImage value="#{viewRecipeControler.image}" styleClass="content" stream="false" />
+
+
+                    <p:dataList value="#{viewRecipeControler.ingredientsList}" var="ingre" type="ordered">
+                        <f:facet name="header">
+                            Ingredients
+                        </f:facet>
+                        #{ingre.name}, #{ingre.calories} #{ingre.quantity}
+                    </p:dataList>
+                    <p:dataList value="#{viewRecipeControler.stepsList}" var="step" type="ordered">
+                        <f:facet name="header">
+                            Step
+                        </f:facet>
+                        #{step.title}, #{step.description}
+                    </p:dataList>
+
+
+
+
+
                 </h:form>
+
+
+
+
+
             </ui:define>
 
         </ui:composition>

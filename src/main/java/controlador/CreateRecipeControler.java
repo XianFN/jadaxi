@@ -212,7 +212,7 @@ public class CreateRecipeControler implements Serializable{
         int id=000;
         try {
             //recipe.setCategory(category.get(0).getId());
-            //recipe.setImage(file.getContents());
+            recipe.setImage(file.getContents());
             //System.out.println(recipe.getImage().toString());
             for (int i=0; i<selectedIngredients.size(); i++){
                 calorias=calorias + selectedIngredients.get(i).getCalories()*listRI.get(i).getAmmount()/100;
