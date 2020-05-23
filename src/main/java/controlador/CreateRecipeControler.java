@@ -15,7 +15,9 @@ import EJB.User_recipesFacadeLocal;
 import java.io.Serializable;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -30,6 +32,8 @@ import modelo.Recipes_ingredients;
 import modelo.Steps;
 import modelo.User;
 import modelo.User_recipes;
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -44,6 +48,8 @@ public class CreateRecipeControler implements Serializable{
     private Recipe recipe;
      
     private Recipes_ingredients recipeIngredients;
+    
+    private List<Recipes_ingredients> listRI;
     
     private User_recipes userRecipes;
     
@@ -68,8 +74,8 @@ public class CreateRecipeControler implements Serializable{
     private byte[] pixel;
     
     private double calorias;
-
     
+
 
     @EJB
     private RecipeFacadeLocal recipeEJB;
@@ -104,11 +110,13 @@ public class CreateRecipeControler implements Serializable{
             ingredient = new Ingredients();
             steps = new Steps();
             
+            listRI = new ArrayList<Recipes_ingredients>();
             
             stepsList = new ArrayList<Steps>();
             
             categorys=categoryEJB.findAll();
             ingredients = ingredientsEJB.findAll();
+            
 
         } catch (Exception e) {
             System.out.println("Fallo al crear el CreateRecipeControler: " + e.getMessage());
@@ -188,6 +196,14 @@ public class CreateRecipeControler implements Serializable{
     }
     
     
+    public void setListRI (List<Recipes_ingredients> listRI) {
+        this.listRI = listRI;
+    }
+    
+    public List<Recipes_ingredients> getListRI() {
+        return listRI;
+    }
+    
     
     
     
@@ -199,7 +215,7 @@ public class CreateRecipeControler implements Serializable{
             //recipe.setImage(file.getContents());
             //System.out.println(recipe.getImage().toString());
             for (int i=0; i<selectedIngredients.size(); i++){
-                calorias=calorias + selectedIngredients.get(i).getCalories();
+                calorias=calorias + selectedIngredients.get(i).getCalories()*(listRI.get(i).getAmmount()/100);
             }
             recipe.setCountCaloroies(calorias);
             recipeEJB.create(recipe);
@@ -214,6 +230,7 @@ public class CreateRecipeControler implements Serializable{
             for (int i=0; i<selectedIngredients.size(); i++){
                 calorias=calorias + selectedIngredients.get(i).getCalories();
                 recipeIngredients.setIngredients(selectedIngredients.get(i).getId());
+                recipeIngredients.setAmmount(listRI.get(i).getAmmount());
                 recipes_ingredientsEJB.create(recipeIngredients);
             }
             
@@ -295,5 +312,11 @@ public class CreateRecipeControler implements Serializable{
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-    
+        
+    public void prepararTabla(){
+        for (int i=0; i<selectedIngredients.size(); i++){
+                listRI.add(new Recipes_ingredients());
+                listRI.get(i).setIngredients(i);
+            }
+    }
 }
