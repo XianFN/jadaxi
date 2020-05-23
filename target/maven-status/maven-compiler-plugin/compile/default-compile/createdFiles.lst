@@ -4,7 +4,7 @@ controlador\RegisterConroler.class
 EJB\AbstractFacade.class
 EJB\StepsFacade.class
 modelo\Steps.class
-controlador\perfilControler.class
+controlador\PerfilControler.class
 controlador\ViewRecipeControler.class
 modelo\Category.class
 modelo\Category_recipe.class
