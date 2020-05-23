@@ -42,6 +42,14 @@ public class Recipe implements Serializable {
 
     @Column(name = "countcalories")
     private double countCaloroies;
+    
+    @Column(name = "totalrating")
+    private int totalRating;
+    
+    @Column(name = "peoplerating")
+    private int peopleRating;
+    
+    
 
 // hascer join table a la intermedia
     public int getId() {
@@ -76,13 +84,31 @@ public class Recipe implements Serializable {
         this.countCaloroies = countCaloroies;
     }
 
+    public int getTotalRating() {
+        return totalRating;
+    }
+
+    public void setTotalRating(int totalRating) {
+        this.totalRating = totalRating;
+    }
+
+    public int getPeopleRating() {
+        return peopleRating;
+    }
+
+    public void setPeopleRating(int peopleRating) {
+        this.peopleRating = peopleRating;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.name);
-        hash = 29 * hash + Arrays.hashCode(this.image);
-        hash = 29 * hash + Objects.hashCode(this.countCaloroies);
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + Objects.hashCode(this.name);
+        hash = 37 * hash + Arrays.hashCode(this.image);
+        hash = 37 * hash + (int) (Double.doubleToLongBits(this.countCaloroies) ^ (Double.doubleToLongBits(this.countCaloroies) >>> 32));
+        hash = 37 * hash + this.totalRating;
+        hash = 37 * hash + this.peopleRating;
         return hash;
     }
 
@@ -101,10 +127,16 @@ public class Recipe implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
+        if (Double.doubleToLongBits(this.countCaloroies) != Double.doubleToLongBits(other.countCaloroies)) {
             return false;
         }
-        if (!Objects.equals(this.countCaloroies, other.countCaloroies)) {
+        if (this.totalRating != other.totalRating) {
+            return false;
+        }
+        if (this.peopleRating != other.peopleRating) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
         if (!Arrays.equals(this.image, other.image)) {
@@ -115,7 +147,9 @@ public class Recipe implements Serializable {
 
     @Override
     public String toString() {
-        return "Recipe{" + "id=" + id + ", name=" + name + ", image=" + image + ", countCaloroies=" + countCaloroies + '}';
+        return "Recipe{" + "id=" + id + ", name=" + name + ", image=" + image + ", countCaloroies=" + countCaloroies + ", totalRating=" + totalRating + ", peopleRating=" + peopleRating + '}';
     }
+    
+    
 
 }

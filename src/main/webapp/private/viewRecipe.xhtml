@@ -12,31 +12,75 @@
 
             <ui:define name="content">
                 <h:form>
-
+                    <p:growl id="messages" showDetail="true" />
                     <style>
                         .ui-widget-content {
                             border: 1px solid #a8a8a8;
                             background: #fff;
-                            background-color: rgb(61, 110, 56); 
+                            background-color: rgba(152,210,128,0.6); 
+                            color: black;
+
                         }
+                        .ui-panel {
+                            padding: .0em; 
+                        }
+
+                        .ui-datalist .ui-datalist-header {
+                            border-bottom: 0 none;
+                            background-color: rgba(152,210,128,1);
+                        }
+                        .ui-widget-header {
+                            border: 1px solid #a8a8a8;
+                            background: #c4c4c4 url(/jadaxi/faces/javax.faces.resource/images/ui-bg_highlight-soft_100_c4c4c4_1x100.png?ln=primefaces-aristo) 50% 50% repeat-x;
+                            background: #c4c4c4 linear-gradient(top,rgba(255,255,255,0.8),rgba(255,255,255,0));
+                            background: #c4c4c4 -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0.8)),to(rgba(255,255,255,0)));
+                            background-color:  rgba(152,210,128,1);
+                            color: #333;
+                            font-weight: bold;
+                            height: 50%;
+                            text-align: center;
+                            text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+                        }
+                        .ui-panel-titlebar {
+                            padding: 4px 10px;
+                        }
+
 
                     </style>
 
 
-                    <p:graphicImage value="#{viewRecipeControler.image}" styleClass="content" stream="false" />
+                    <p:graphicImage value="#{viewRecipeControler.image}" styleClass="content" stream="false" style="margin-left: 25%; width: 50%; height: 50%"/>
+                    <div>
+                        <p:panel id="basic" header="Valoracion y añadir receta" style="margin-left: 25%; width: 49.8%; height: 50%">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <p:rating value="#{viewRecipeControler.rating}">
+                                    <p:ajax event="rate" listener="#{viewRecipeControler.onrate}" update="messages" />
+                                    <p:ajax event="cancel" listener="#{viewRecipeControler.oncancel}" update="messages" />
+                                </p:rating>
+                               
+                                <h:outputText/>
 
+                            </h:panelGrid>
+                        </p:panel>
+                    </div>
 
-                    <p:dataList value="#{viewRecipeControler.ingredientsList}" var="ingre" type="ordered">
+                    <p:dataList value="#{viewRecipeControler.ingredientsList}" var="ingre" type="ordered" style="width: 50%; margin-left: 25%">
                         <f:facet name="header">
-                            Ingredients
+                            Ingredientes
                         </f:facet>
-                        #{ingre.name}, #{ingre.calories} #{ingre.quantity}
+                        #{ingre.name},  #{ingre.quantity} g
                     </p:dataList>
-                    <p:dataList value="#{viewRecipeControler.stepsList}" var="step" type="ordered">
+                    <p:dataList value="#{viewRecipeControler.stepsList}" var="step" type="ordered" style="width: 50%; margin-left: 25%">
                         <f:facet name="header">
-                            Step
+                            Pasos
                         </f:facet>
-                        #{step.title}, #{step.description}
+                        <div style="font-weight: bold;">#{step.title}:</div>
+
+
+                        #{step.description} 
+                        <br/>
+                        <br/>
+
                     </p:dataList>
 
 

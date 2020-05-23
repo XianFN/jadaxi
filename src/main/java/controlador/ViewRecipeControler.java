@@ -1,4 +1,3 @@
-
 package controlador;
 
 import EJB.IngredientsFacadeLocal;
@@ -15,24 +14,31 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
 import modelo.Ingredients;
 import modelo.Recipe;
 import modelo.Recipes_ingredients;
 import modelo.Steps;
+import org.primefaces.event.RateEvent;
+
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
  *
  * @author Javier
+ *
  */
 @Named
-@ViewScoped
+
+@RequestScoped
 public class ViewRecipeControler implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @EJB
     private RecipeFacadeLocal recipeEJB;
@@ -42,7 +48,7 @@ public class ViewRecipeControler implements Serializable {
 
     @EJB
     private IngredientsFacadeLocal ingredientsEJB;
-     @EJB
+    @EJB
     private StepsFacadeLocal stepsEJB;
 
     private int idRecipe;
@@ -52,9 +58,11 @@ public class ViewRecipeControler implements Serializable {
 
     private List<otherIngredient> ingredientsList;
     private List<Steps> stepsList;
+    private Integer rating;
 
     @PostConstruct
     public void inicio() {
+
         recipe = null;
         idRecipe = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("recipe");
         System.out.println("ID: " + idRecipe);
@@ -66,10 +74,29 @@ public class ViewRecipeControler implements Serializable {
 
         System.out.println("RECIPE: " + recipe.toString());
 
+        try {
+            int ratings = recipe.getTotalRating();
+            int peopleRated = recipe.getPeopleRating();
+
+            rating = ratings / peopleRated;
+
+        } catch (Exception e) {
+
+            System.out.println("La gente es 0 asique atora: " + e.getMessage());
+        }
+
     }
 
     public void setImage(StreamedContent image) {
         this.image = image;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     public StreamedContent getImage() {
@@ -111,13 +138,14 @@ public class ViewRecipeControler implements Serializable {
         }
         return ingredientsList;
     }
-     public List<Steps> getStepsList() {
+
+    public List<Steps> getStepsList() {
         stepsList = new ArrayList<>();
         List<Steps> allSteps = stepsEJB.findAll();
 
         for (Steps step : allSteps) {
 
-            if (step.getRecipeId()== recipe.getId()) {
+            if (step.getRecipeId() == recipe.getId()) {
 
                 stepsList.add(step);
 
@@ -125,6 +153,30 @@ public class ViewRecipeControler implements Serializable {
 
         }
         return stepsList;
+    }
+
+    /**
+     *
+     * @param rateEvent
+     */
+    public void onrate(RateEvent rateEvent) {
+        System.out.println("ljkahsdoñihasoñlidhaoiñsld");
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Rate Event", "You rated:" + rateEvent.getRating());
+        FacesContext.getCurrentInstance().addMessage(null, message);
+
+        int ratings = recipe.getTotalRating();
+        int peopleRated = recipe.getPeopleRating();
+        ratings = ratings + (int) rateEvent.getRating();
+        peopleRated++;
+        recipe.setTotalRating(ratings);
+        recipe.setPeopleRating(peopleRated);
+        recipeEJB.edit(recipe);
+    }
+
+    public void oncancel() {
+        System.out.println("ljkahsdoñihasoñlidhaoiñsld");
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cancel Event", "Rate Reset");
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     public class otherIngredient {
@@ -164,8 +216,5 @@ public class ViewRecipeControler implements Serializable {
         }
 
     }
-   
-    
-   
 
 }
