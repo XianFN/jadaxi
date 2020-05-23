@@ -83,7 +83,7 @@ public class MainPageControler implements Serializable {
     public String goToviewRecipesInCategories(String category) {
 
         Object ob = category;
-
+        System.out.println("cat: " + category);
         Category cat = categoryEJB.findByName(category);
 
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categoryToShow", cat.getId());//guardamos el id en el contexto
@@ -111,8 +111,8 @@ public class MainPageControler implements Serializable {
 
         StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg", "nombre.jpeg");
 
-        System.out.println(dbImage.getName());
-        System.out.println("jsahbdfñoiuhasñoiudfhñpoiaushdfñiouahdfñ.i");
+      
+       
         return dbImage;
     }
     

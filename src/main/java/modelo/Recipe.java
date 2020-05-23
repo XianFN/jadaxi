@@ -26,6 +26,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "recipes")
 public class Recipe implements Serializable {
+    //TODO quitar default 0 a countcalories
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +39,9 @@ public class Recipe implements Serializable {
     @Basic(fetch = FetchType.LAZY)
     @Column(name = "image", columnDefinition = "BLOB")
     private byte[] image;
+
+    @Column(name = "countcalories")
+    private String countCaloroies;
 
 // hascer join table a la intermedia
     public int getId() {
@@ -64,12 +68,21 @@ public class Recipe implements Serializable {
         this.image = image;
     }
 
+    public String getCountCaloroies() {
+        return countCaloroies;
+    }
+
+    public void setCountCaloroies(String countCaloroies) {
+        this.countCaloroies = countCaloroies;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.name);
-        hash = 53 * hash + Arrays.hashCode(this.image);
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Arrays.hashCode(this.image);
+        hash = 29 * hash + Objects.hashCode(this.countCaloroies);
         return hash;
     }
 
@@ -91,16 +104,18 @@ public class Recipe implements Serializable {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
+        if (!Objects.equals(this.countCaloroies, other.countCaloroies)) {
+            return false;
+        }
         if (!Arrays.equals(this.image, other.image)) {
             return false;
         }
-
         return true;
     }
 
     @Override
     public String toString() {
-        return "Recipe{" + "id=" + id + ", name=" + name + ", image=" + image + '}';
+        return "Recipe{" + "id=" + id + ", name=" + name + ", image=" + image + ", countCaloroies=" + countCaloroies + '}';
     }
 
 }

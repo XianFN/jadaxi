@@ -34,7 +34,7 @@
                             e.stopImmediatePropagation();
                             console.log(Object.values(image2));
                             var imageIndex = $(this).index();
-                            console.log(imageIndex );
+                            console.log(imageIndex);
                         }
                     }
                 </script>
@@ -82,17 +82,17 @@
 
                     <p:commandButton class ="btn"  value="Ensaladas" action="#{mainPageControler.goToviewRecipesInCategories('Ensaladas')}"/>
                     <p:commandButton class ="btn" value="Legumbres" action="#{mainPageControler.goToviewRecipesInCategories('Legumbres')}"/>
-                    <p:commandButton class ="btn" value="Ensaladas"/>
-                    <p:commandButton class ="btn" value="Ensaladas"/>
-                    <p:commandButton class ="btn" value="Ensaladas"/>
+                    <p:commandButton class ="btn" value="Carnes" action="#{mainPageControler.goToviewRecipesInCategories('Carnes')}"/>
+                    <p:commandButton class ="btn" value="Pescado" action="#{mainPageControler.goToviewRecipesInCategories('Pescado')}"/>
+                    <p:commandButton class ="btn" value="Vegetariana" action="#{mainPageControler.goToviewRecipesInCategories('Vegetariana')}"/>
 
-                    <h:form>
-                        <p:commandButton class ="btn" value="Ensaladas" />
-                        <p:commandButton class ="btn" value="Ensaladas"/>
-                        <p:commandButton class ="btn" value="Ensaladas"/>
-                        <p:commandButton class ="btn" value="Ensaladas"/>
-                        <p:commandButton class ="btn" value="Ensaladas"/>
-                    </h:form>
+
+                    <p:commandButton class ="btn" value="Carne de pollo" action="#{mainPageControler.goToviewRecipesInCategories('Carne de pollo')}" />
+                    <p:commandButton class ="btn" value="Carne de vaca" action="#{mainPageControler.goToviewRecipesInCategories('Carne de vaca')}"/>
+                    <p:commandButton class ="btn" value="Carne de cerdo" action="#{mainPageControler.goToviewRecipesInCategories('Carne de cerdo')}"/>
+                    <p:commandButton class ="btn" value="Carne de pavo" action="#{mainPageControler.goToviewRecipesInCategories('Carne de pavo')}"/>
+
+
 
                 </h:form>
 

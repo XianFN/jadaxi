@@ -64,7 +64,7 @@ public class ViewRecipesListControler implements Serializable {
 
         for (int i = 0; i < idRecipe.size(); i++) {
 
-            recipes.add(recipeEJB.find(idRecipe.get(i)));
+            recipes.add(recipeEJB.find(idRecipe.get(i).getRecipe()));
 
         }
 
