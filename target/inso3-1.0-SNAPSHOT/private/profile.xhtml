@@ -19,8 +19,35 @@
                     
                     .drch{
                         float:right;
+                        height: 240px;
                         width: 50%;
+                        background-color: wheat;
+                        margin-top: 200px;
+                      
+                    }
+                    
+                    .prg{
+                        color: black;
+                        background-color: black;
+                        margin: 20px;
+                    }
+                    
+                    .content{
+                        margin: 90px;
                         
+                        margin: 20px;
+                    }
+                        
+                    .out{
+                        color: black;
+                        font-size: 50px;
+                        margin: 20px;
+                    }
+                    
+                    .sig{
+                        font-size: 50px;
+                        float:right;
+                        margin:20px;
                     }
                     
                 </style>
@@ -48,10 +75,22 @@
                         
                         <h:outputText class="outN" value="Email:"/>
                         <h:outputText class="out" value="#{profileControler.user.email}"/>      
+                        
+                        <h:outputText class="outN" value="Sobre ti:"/>
+                        <h:outputText class="out" value="#{profileControler.user.abaut}"/>      
+                        
                     </div>
                     
                     <div class="drch">
-                       
+                        
+                        <div class="content">
+                            
+                            <h:outputText class="out" value="Nivel"/>    <h:outputText class="out" value="#{profileControler.user.lv}"/>    
+                            <p:progressBar class="prg" value="#{profileControler.progreso}" labelTemplate="{value}%" displayOnly="true"/>
+                            <h:outputText class="sig" value="#{profileControler.user.lv+1}"/>    <h:outputText class="sig" value="Nivel"/>
+                            
+                        </div>
+                      
                     </div>
                     
                     

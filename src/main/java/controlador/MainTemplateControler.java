@@ -48,5 +48,22 @@ public class MainTemplateControler implements Serializable {
         return "../index.xhtml";
         
     }
+    
+    public String goToCreateRecipe(){
+        
+        System.out.println("ENTRA IU");
+        
+        if(((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv() < 2 ){
+            System.out.println("NIVEL MENOR");
+            return "";
+            
+        }else{
+             return "createRecipe.xhtml";
+        }
+        
+        
+        
+       
+    }
 
 }

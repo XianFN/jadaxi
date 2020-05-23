@@ -5,15 +5,22 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <h:head>
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{createRecipeControler.checkLevel()}"/> <!-- Esto permite a cualquir vista que controle que el usurio esta permitido --> 
+        </f:metadata>
+    </h:head>
     <body>
 
         <ui:composition template="./../template/mainTemplate.xhtml">
 
             <ui:define name="content">
                 <style>
-                    
-                    
-                     .contenedor{
+
+
+                    .contenedor{
                         height: 500px;
                         width: 850px;
                         text-align:center;
@@ -27,288 +34,288 @@
                         border-style: inset;
                         border-width: 10px;
                         border-color: 	rgb(86, 87, 56) rgb(162, 204, 161) ;
-                        
+
 
                     }
-                    
+
                     .bar{
                         background-color: rgb(148, 25, 25);
-                         color: white;
+                        color: white;
                     }
-                    
+
                     .bar2{
                         background-color: rgb(148, 25, 25);
                     }
-                    
+
                     .cabeceras{
-                         background-color:rgb(61, 110, 56); 
-                          color: #ffffff;
+                        background-color:rgb(61, 110, 56); 
+                        color: #ffffff;
                     }
-                    
+
                     .ingredient{
                         background-color:rgb(61, 110, 56); 
                         margin-bottom: 10px;
                     }
-                    
+
                     .center{
-                       display: flex;
-                       justify-content: center;
-                     
+                        display: flex;
+                        justify-content: center;
+
                     }
-                    
+
                     .text {
-                       color: #ffffff;
-                       background-color: rgb(61, 110, 56);   
-                       height: 270px;
+                        color: #ffffff;
+                        background-color: rgb(61, 110, 56);   
+                        height: 270px;
                     }
-                    
+
                     .out{
                         color: #ffffff;
                         font-size: 20px;
                     }
-                    
+
                     .in{
                         margin: 20px;
                     }
-                    
+
                     .in1{
                         margin-left: 20px;
                         margin-right: 20px;
                         margin-bottom: 20px;
                     }
-                    
+
                     .titulos{
                         background-color: black;
                     }
                     .btt {
                         margin-bottom: 5px;
                     }
-                    
+
                     .bttBAR {
                         margin-top: 10px;
                     }
-                    
+
                     .menuI{
                         margin-left: 38px;
                         margin-top: 10px;
                         margin-bottom: 10px;
                     }
-                    
+
                     .menuC{
                         margin-left: 12px;
                         margin-top: 10px;
                         margin-bottom: 10px;
                     }
-                    
+
                     .bi{
                         margin: 10px;
                     }
-                    
-                   ::placeholder{
+
+                    ::placeholder{
                         color: white;
                     }
-                    
-                    
-                    
+
+
+
                 </style>
-                
-                
-                   
-                
-              <p:sidebar class="bar" widgetVar="sidebar" position="top" baseZIndex="10000">
-                  
-                <h1 style="font-weight:normal">Añadir un nuevo ingrediente.</h1>
-                        
+
+
+
+
+                <p:sidebar class="bar" widgetVar="sidebar" position="top" baseZIndex="10000">
+
+                    <h1 style="font-weight:normal">Añadir un nuevo ingrediente.</h1>
+
                     <div class="ingredient">
-                    
+
                         <h:form>
-                        
+
                             <h:outputText class="out" value="Nombre del ingrediente:" />
                             <p:inputText class="in" value="#{createRecipeControler.ingredient.name}" required="true" label="Nombre"/>
 
                             <h:outputText class="out" value="Calorías:" />
                             <p:inputText class="in" value="#{createRecipeControler.ingredient.calories}" required="true" label="Calorias"/>
-                
+
                             <p:commandButton value="Crear" action="#{createRecipeControler.insertIngredient()}" onclick="window.location.reload(true)" oncomplete="PF('sidebar').hide()"/>
-                            
+
                         </h:form>
-                            
+
                     </div>
-                    
-              </p:sidebar>
-              
-                
+
+                </p:sidebar>
+
+
                 <p:sidebar class="bar2" id="bb" widgetVar="sidebar5" fullScreen="true" baseZIndex="10000">
-                    
+
                     <h:form>
-                        
+
                         <p:dataTable var="recipes_ingredients" value="#{createRecipeControler.listRI}">
-                    
+
                             <p:column class ="cabeceras" headerText="Ingrediente">
                                 <h:outputText value="#{createRecipeControler.selectedIngredients.get(recipes_ingredients.ingredients).name}" />
                             </p:column>
-                    
+
                             <p:column class="cabeceras" headerText="Cantidad (en gramos)">  
                                 <p:inputNumber id="input1" value="#{recipes_ingredients.ammount}"> </p:inputNumber>  
                             </p:column>
-                            
+
                         </p:dataTable>
-                        
+
                         <p:commandButton class="bttBAR" value="Confirmar cantidades" oncomplete="PF('sidebar5').hide()"/>
-                        
+
                     </h:form>
-                    
+
                 </p:sidebar>
-                                   
-                
-          
-    <p:tabView class="contenedor">
-        
-        <p:tab class="titulos" title="Ingredientes">
-            
-            <h:panelGrid class="center" columns="1" cellpadding="10">
-                
-                <div class="ingredients">
-                    
-                    <h:form>
-                        
-                        <p:growl id="message" showDetail="true" />
-                        
-                        <h:outputText class="out" value="Ingredientes:"/>
-                                                
-                            <p:selectManyMenu class="menuI" value="#{createRecipeControler.selectedIngredients}"
-                            var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
-                            <f:selectItems value="#{createRecipeControler.ingredients}" var="theme" itemLabel="#{ingredients.name}" itemValue="#{ingredients}" />
-                                <p:column>
-                                    <h:outputText value="#{t.name}" />
-                                </p:column>
-                            </p:selectManyMenu>
-                        
-                        <p:commandButton value="Agregar" action="#{createRecipeControler.prepararTabla()}" update="bb" oncomplete="PF('sidebar5').show()" />
- 
-                    </h:form>
-                     
-                    <h:form>
-                        
-                        <p:commandButton value="Crear un ingradiente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/>
-                        
-                    </h:form>
-                    
-                </div>
-                
-            </h:panelGrid>
-            
-        </p:tab>
-        
-        
-        
-        
-        
-        
-        
-       
-        <p:tab class="titulos" title="Pasos">
-            
-            <h:panelGrid class="center" columns="2" cellpadding="10">
-                
-                <div class="steps">
-                    
-                    <h:form>
-                        
-                        <p:growl id="message" showDetail="true" />
-                         
-                        <h:outputText class="out" value="Nombre del paso:"/>
-                        <p:inputText class="in" value="#{createRecipeControler.steps.title}" required="true" label="Titulo"/>
-                        
-                        
-                        <p:textEditor id="tx" class="text" widgetVar="editor2" value="#{createRecipeControler.steps.description}" placeholder="Describa el procedimiento a realizar en este paso.">
-                            <f:facet name="toolbar"><span class="ql-formats"/></f:facet>
-                        </p:textEditor>
 
-                        <p:commandButton class="btt" value="Añadir paso" action="#{createRecipeControler.insertSteps()}" update="message"/>
-                        
-                        <p:commandButton class="btt" value="Nuevo paso" type="reset" onclick="PF('editor2').clear();"/>
-                        
-                    </h:form>  
 
-                </div>
-                
-            </h:panelGrid>
-            
-        </p:tab>
-        
-        
-        
-        
-        
-        
-        
-        
-        <p:tab class="titulos" title="Categoría">
-            
-            <h:panelGrid class="center" columns="1" cellpadding="10">
-                
-                <div class="cat">
-                    
-                    <h:form>  
-                        
-                        <p:growl id="message" showDetail="true" />
-                        
-                        <h:outputText class="out" value="Categoria:" />
-                        
-                            <p:selectManyMenu class="menuC" value="#{createRecipeControler.category}"
-                                var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
-                            <f:selectItems value="#{createRecipeControler.categorys}" var="theme" itemLabel="#{categorys.name}" itemValue="#{categorys}" />
-                                <p:column>
-                                    <h:outputText value="#{t.name}" />
-                                </p:column>
-                            </p:selectManyMenu>
-                        <p:commandButton value="Añadir Categoría" action="#{createRecipeControler.destroyWorld()}" update="message"/>
-                    </h:form>  
 
-                </div>
-                
-            </h:panelGrid>
-            
-        </p:tab>
-        
-        
-        
-        
-        
-        
-        
-        
-         <p:tab class="titulos" title="Receta">
-             
-            <h:panelGrid class="center" columns="1" cellpadding="10">
-                
-                 <div class="recipe">
-                        
-                    <h:outputText class="out" value="Nombre de la receta:" />
-                        
-                    <h:form id="welcomeForm" enctype="multipart/form-data">
-                        
-                        <p:inputText class="in1" value="#{createRecipeControler.recipe.name}" required="true" label="Nombre"/>
-                        <br></br>
-                        <h:outputText class="out" value="Añadir una imagen:" />
-                        <br></br>
-                        <p:fileUpload  class="bi" value="#{createRecipeControler.file}" mode="simple"  skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
-                        <br></br>
-                        <p:commandButton value="Crear y Terminar" actionListener="#{createRecipeControler.insertRecipe()}" ajax="false"/>
-                        
-                    </h:form>
-                        
-                </div>
-                       
-            </h:panelGrid>
-             
-        </p:tab>
-        
-    </p:tabView>
+                <p:tabView class="contenedor">
 
-                
-                
+                    <p:tab class="titulos" title="Ingredientes">
+
+                        <h:panelGrid class="center" columns="1" cellpadding="10">
+
+                            <div class="ingredients">
+
+                                <h:form>
+
+                                    <p:growl id="message" showDetail="true" />
+
+                                    <h:outputText class="out" value="Ingredientes:"/>
+
+                                    <p:selectManyMenu class="menuI" value="#{createRecipeControler.selectedIngredients}"
+                                                      var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                                        <f:selectItems value="#{createRecipeControler.ingredients}" var="theme" itemLabel="#{ingredients.name}" itemValue="#{ingredients}" />
+                                        <p:column>
+                                            <h:outputText value="#{t.name}" />
+                                        </p:column>
+                                    </p:selectManyMenu>
+
+                                    <p:commandButton value="Agregar" action="#{createRecipeControler.prepararTabla()}" update="bb" oncomplete="PF('sidebar5').show()" />
+
+                                </h:form>
+
+                                <h:form>
+
+                                    <p:commandButton value="Crear un ingradiente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/>
+
+                                </h:form>
+
+                            </div>
+
+                        </h:panelGrid>
+
+                    </p:tab>
+
+
+
+
+
+
+
+
+                    <p:tab class="titulos" title="Pasos">
+
+                        <h:panelGrid class="center" columns="2" cellpadding="10">
+
+                            <div class="steps">
+
+                                <h:form>
+
+                                    <p:growl id="message" showDetail="true" />
+
+                                    <h:outputText class="out" value="Nombre del paso:"/>
+                                    <p:inputText class="in" value="#{createRecipeControler.steps.title}" required="true" label="Titulo"/>
+
+
+                                    <p:textEditor id="tx" class="text" widgetVar="editor2" value="#{createRecipeControler.steps.description}" placeholder="Describa el procedimiento a realizar en este paso.">
+                                        <f:facet name="toolbar"><span class="ql-formats"/></f:facet>
+                                    </p:textEditor>
+
+                                    <p:commandButton class="btt" value="Añadir paso" action="#{createRecipeControler.insertSteps()}" update="message"/>
+
+                                    <p:commandButton class="btt" value="Nuevo paso" type="reset" onclick="PF('editor2').clear();"/>
+
+                                </h:form>  
+
+                            </div>
+
+                        </h:panelGrid>
+
+                    </p:tab>
+
+
+
+
+
+
+
+
+                    <p:tab class="titulos" title="Categoría">
+
+                        <h:panelGrid class="center" columns="1" cellpadding="10">
+
+                            <div class="cat">
+
+                                <h:form>  
+
+                                    <p:growl id="message" showDetail="true" />
+
+                                    <h:outputText class="out" value="Categoria:" />
+
+                                    <p:selectManyMenu class="menuC" value="#{createRecipeControler.category}"
+                                                      var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                                        <f:selectItems value="#{createRecipeControler.categorys}" var="theme" itemLabel="#{categorys.name}" itemValue="#{categorys}" />
+                                        <p:column>
+                                            <h:outputText value="#{t.name}" />
+                                        </p:column>
+                                    </p:selectManyMenu>
+                                    <p:commandButton value="Añadir Categoría" action="#{createRecipeControler.destroyWorld()}" update="message"/>
+                                </h:form>  
+
+                            </div>
+
+                        </h:panelGrid>
+
+                    </p:tab>
+
+
+
+
+
+
+
+
+                    <p:tab class="titulos" title="Receta">
+
+                        <h:panelGrid class="center" columns="1" cellpadding="10">
+
+                            <div class="recipe">
+
+                                <h:outputText class="out" value="Nombre de la receta:" />
+
+                                <h:form id="welcomeForm" enctype="multipart/form-data">
+
+                                    <p:inputText class="in1" value="#{createRecipeControler.recipe.name}" required="true" label="Nombre"/>
+                                    <br></br>
+                                    <h:outputText class="out" value="Añadir una imagen:" />
+                                    <br></br>
+                                    <p:fileUpload  class="bi" value="#{createRecipeControler.file}" mode="simple"  skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                    <br></br>
+                                    <p:commandButton value="Crear y Terminar" actionListener="#{createRecipeControler.insertRecipe()}" ajax="false"/>
+
+                                </h:form>
+
+                            </div>
+
+                        </h:panelGrid>
+
+                    </p:tab>
+
+                </p:tabView>
+
+
+
             </ui:define>
 
         </ui:composition>
