@@ -11,6 +11,7 @@ import EJB.IngredientsFacadeLocal;
 import EJB.RecipeFacadeLocal;
 import EJB.Recipes_ingredientsFacadeLocal;
 import EJB.StepsFacadeLocal;
+import EJB.UserFacadeLocal;
 import EJB.User_recipesFacadeLocal;
 import java.io.IOException;
 import java.io.Serializable;
@@ -98,6 +99,9 @@ public class CreateRecipeControler implements Serializable{
     
     @EJB
     private Category_recipeFacadeLocal categoryrecipeEJB;
+    
+    @EJB
+    private UserFacadeLocal userEJB;
 
     
     @PostConstruct
@@ -225,6 +229,15 @@ public class CreateRecipeControler implements Serializable{
             System.out.println("Error al insertar la receta: " + e.getMessage());
        }
         
+       try {
+           User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+           user.setXp(user.getXp()+20/(user.getLv()+1));
+           userEJB.edit(user);
+           subirNivel(user);
+        } catch (Exception e) {
+            System.out.println("Error al añadir EXP: " + e.getMessage());
+        }
+        
         try {
              System.out.println(selectedIngredients.toString());
             recipeIngredients.setRecipe(id);
@@ -320,6 +333,14 @@ public class CreateRecipeControler implements Serializable{
                 listRI.add(new Recipes_ingredients());
                 listRI.get(i).setIngredients(i);
             }
+    }
+    
+    
+    public void subirNivel(User user){
+        if(user.getLv()!=((int)user.getXp()/100)){
+            user.setLv(user.getLv()+1);
+            userEJB.edit(user);
+        }
     }
     
      public void checkLevel() throws IOException{
