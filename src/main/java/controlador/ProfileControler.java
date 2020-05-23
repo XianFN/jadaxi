@@ -6,11 +6,15 @@
 package controlador;
 
 import EJB.UserFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -35,6 +39,10 @@ public class ProfileControler implements Serializable {
     
     private int progreso;
     
+    private String myDate;
+    
+    private String pass;
+    
     
     @EJB
     private UserFacadeLocal userEJB;
@@ -47,6 +55,8 @@ public class ProfileControler implements Serializable {
         int level = user.getLv();
         int exp = (int) user.getXp();
         progreso=exp%100;
+        
+        myDate = new SimpleDateFormat("dd-MM-yyyy").format(user.getBirthDate());
                 
     }
     
@@ -62,5 +72,30 @@ public class ProfileControler implements Serializable {
         return progreso;
     }
     
+    public String getMyDate(){
+        return myDate;
+    }
+    
+     public void setPass(String pass){
+        this.pass=pass;
+    }
+    
+    public String getPass(){
+        return pass;
+    }
+    
+    public void checkPassword() throws IOException{
+
+        if (!((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getPassword().equals(pass)) {
+
+            System.out.println("Fallo al introducir la contraseña");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("notAcess.xhtml");
+        }
+
+    }
+    
+    public void guardar(){
+        userEJB.edit(user);
+    }
     
 }

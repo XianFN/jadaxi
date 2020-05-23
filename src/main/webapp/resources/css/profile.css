@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23-may-2020, 23:32:35
+    Author     : David Rosales
+*/
+
+                    .izq{
+                        float:left;
+                        width: 50%;
+                    }
+                    
+                    .drch{
+                        float:right;
+                        height: 240px;
+                        width: 50%;
+                        background-color: wheat;
+                        margin-top: 200px;
+                      
+                    }
+                    
+                    .prg{
+                        color: black;
+                        background-color: black;
+                        margin: 20px;
+                    }
+                    
+                    .content{
+                        margin: 90px;
+                        
+                        margin: 20px;
+                    }
+                        
+                    .out{
+                        color: black;
+                        font-size: 50px;
+                        margin: 20px;
+                    }
+                    
+                    .sig{
+                        font-size: 50px;
+                        float:right;
+                        margin:20px;
+                    }
