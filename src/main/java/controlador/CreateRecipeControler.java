@@ -65,7 +65,9 @@ public class CreateRecipeControler implements Serializable{
     
     private UploadedFile file;
     
-    byte[] pixel;
+    private byte[] pixel;
+    
+    private double calorias;
 
     
 
@@ -196,6 +198,10 @@ public class CreateRecipeControler implements Serializable{
             //recipe.setCategory(category.get(0).getId());
             //recipe.setImage(file.getContents());
             //System.out.println(recipe.getImage().toString());
+            for (int i=0; i<selectedIngredients.size(); i++){
+                calorias=calorias + selectedIngredients.get(i).getCalories();
+            }
+            recipe.setCountCaloroies(calorias);
             recipeEJB.create(recipe);
             id = recipe.getId();
         } catch (Exception e) {
@@ -206,6 +212,7 @@ public class CreateRecipeControler implements Serializable{
              System.out.println(selectedIngredients.toString());
             recipeIngredients.setRecipe(id);
             for (int i=0; i<selectedIngredients.size(); i++){
+                calorias=calorias + selectedIngredients.get(i).getCalories();
                 recipeIngredients.setIngredients(selectedIngredients.get(i).getId());
                 recipes_ingredientsEJB.create(recipeIngredients);
             }
