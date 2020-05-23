@@ -1,6 +1,5 @@
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\Recipes_ingredientsFacadeLocal.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\controlador\ViewRecipeControler.java
-C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\controlador\perfilControler.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\modelo\Recipe.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\controlador\CreateRecipeControler.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\jadaxi\Email.java
@@ -27,6 +26,7 @@ C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\Categ
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\RecipeFacade.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\modelo\User_recipes.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\IngredientsFacadeLocal.java
+C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\controlador\ProfileControler.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\EJB\UserFacadeLocal.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\controlador\MainTemplateControler.java
 C:\Users\Javier\Documents\NetBeansProjects\jadaxi\jadaxi\src\main\java\modelo\Steps.java

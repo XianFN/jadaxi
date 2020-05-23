@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author Javier
  */
 @Entity
-@Table(name = "steps")
+@Table(name = "steps2")
 public class Steps implements Serializable {
 
     @Id
@@ -33,6 +33,9 @@ public class Steps implements Serializable {
     @Column(name = "description")
     private String description;
     
+    
+    @Column(name = "ordernum")
+    private int order;
     
     //TODO PREGUNTAR
   //  @OneToMany
@@ -71,13 +74,22 @@ public class Steps implements Serializable {
         this.recipeId = recipeId;
     }
 
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.title);
-        hash = 97 * hash + Objects.hashCode(this.description);
-        hash = 97 * hash + this.recipeId;
+        int hash = 3;
+        hash = 23 * hash + this.id;
+        hash = 23 * hash + Objects.hashCode(this.title);
+        hash = 23 * hash + Objects.hashCode(this.description);
+        hash = 23 * hash + this.order;
+        hash = 23 * hash + this.recipeId;
         return hash;
     }
 
@@ -96,6 +108,9 @@ public class Steps implements Serializable {
         if (this.id != other.id) {
             return false;
         }
+        if (this.order != other.order) {
+            return false;
+        }
         if (this.recipeId != other.recipeId) {
             return false;
         }
@@ -110,8 +125,10 @@ public class Steps implements Serializable {
 
     @Override
     public String toString() {
-        return "Steps{" + "id=" + id + ", title=" + title + ", description=" + description + ", recipeId=" + recipeId + '}';
+        return "Steps{" + "id=" + id + ", title=" + title + ", description=" + description + ", order=" + order + ", recipeId=" + recipeId + '}';
     }
+
+    
     
     
 
