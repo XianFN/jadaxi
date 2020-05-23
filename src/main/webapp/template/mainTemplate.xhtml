@@ -9,8 +9,8 @@
     <h:head>
         <link rel="icon" type="image/png" sizes="192x192" href="resources/images/icon.png"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-         <!-- https://papilagastronomica.com/wp-content/uploads/2019/10/AF_Iconos-10.5x10.5cm_Personal-de-Cocina.png -->
-          
+        <!-- https://papilagastronomica.com/wp-content/uploads/2019/10/AF_Iconos-10.5x10.5cm_Personal-de-Cocina.png -->
+
         <link rel="stylesheet" href="../resources/css/styleMainTemplate.css"/>
         <link rel="stylesheet" href="../resources/css/styleMainPage.css"/>
 
@@ -22,32 +22,32 @@
     </h:head>
 
     <h:body style="background-image: url(../resources/images/fondo2.jpg)">
-
+        
 
 
         <div id="top">
             <ui:insert name="top">
-                  <p:growl id="messages" showDetail="true"/>
+                <p:growl id="messages" showDetail="true" severity="info,warn"/>
                 <h:form>
                     <div class ="topMenu">
-                  
-                            <p:linkButton  outcome="mainPage" id="iconOnly" icon="pi pi-home" title="Icon Only" />
 
-                          
+                        <p:linkButton  outcome="mainPage" id="iconOnly" icon="pi pi-home" title="Icon Only" />
 
 
-                            <p:menuButton class="menuButtonn" value="Options" style=" margin: 3px 0px 0px 0px;" >
-                                <p:menuitem value="Perfil" url="profile.xhtml" update="messages" icon="pi pi-save"/>
-                                <p:menuitem value="Crear Receta" action="#{mainTemplateControler.goToCreateRecipe()}" update="messages" icon="pi pi-refresh"/>
-                                <p:menuitem value="Mis recetas"  ajax="false" icon="pi pi-times"/>
-                                <p:menuitem value="Informacion"  ajax="false" icon="pi pi-times"/>
-                                <p:menuitem value="Administracion"  ajax="false" icon="pi pi-times"/>
-                                <p:menuitem value="Cerrar sesion" url="../index.xhtml" icon="pi pi-times" immediate="true"/>
 
-                                <p:separator />
 
-                            </p:menuButton>
-                      
+                        <p:menuButton class="menuButtonn" value="Options" style=" margin: 3px 0px 0px 0px;" >
+                            <p:menuitem value="Perfil" url="profile.xhtml" update="messages" icon="pi pi-save"/>
+                            <p:menuitem value="Crear Receta" action="#{mainTemplateControler.goToCreateRecipe()}" update="messages" icon="pi pi-refresh"/>
+                            <p:menuitem value="Mis recetas"  ajax="false" icon="pi pi-times"/>
+                            <p:menuitem value="Informacion"  ajax="false" icon="pi pi-times"/>
+                            <p:menuitem value="Administracion"  action="#{mainTemplateControler.goToAdmin()}" update="messages" icon="pi pi-times"/>
+                            <p:menuitem value="Cerrar sesion" url="../index.xhtml" icon="pi pi-times" immediate="true"/>
+
+                            <p:separator />
+
+                        </p:menuButton>
+
 
                     </div>
                 </h:form>

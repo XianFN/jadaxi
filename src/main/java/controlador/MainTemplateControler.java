@@ -8,6 +8,7 @@ package controlador;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -39,31 +40,50 @@ public class MainTemplateControler implements Serializable {
         }
 
     }
-    
-    
-    public String out(){
+
+    public String out() {
         System.out.println("logOut");
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        
+
         return "../index.xhtml";
-        
+
     }
-    
-    public String goToCreateRecipe(){
-        
+
+    public String goToCreateRecipe() {
+
         System.out.println("ENTRA IU");
-        
-        if(((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv() < 2 ){
+
+        if (((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv() < 2) {
             System.out.println("NIVEL MENOR");
+
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            context.addMessage(null, new FacesMessage("ERROR", "No tienes nivel para acceder a esta parte, necesitas nivel 2. Tu nivel actual: " + ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv()));
+
             return "";
-            
-        }else{
-             return "createRecipe.xhtml";
+
+        } else {
+            return "createRecipe.xhtml";
         }
-        
-        
-        
-       
+
+    }
+    public String goToAdmin() {
+
+        System.out.println("ENTRA Isdcfvbnm,");
+
+        if (((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv() < 100) {
+            System.out.println("NIVEL MENOR");
+
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            context.addMessage(null, new FacesMessage("ERROR", "No tienes nivel para acceder a esta parte, necesitas nivel 100. Tu nivel actual: " + ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv()));
+
+            return "";
+
+        } else {
+            return "admin.xhtml";
+        }
+
     }
 
 }

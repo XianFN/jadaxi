@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -324,7 +322,7 @@ public class CreateRecipeControler implements Serializable{
             }
     }
     
-     public void checkLevel(){
+     public void checkLevel() throws IOException{
 
          System.out.println("ENTRA QUI");
           
@@ -332,11 +330,7 @@ public class CreateRecipeControler implements Serializable{
         if (((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv() < 2) {
 
             System.out.println("La plantilla dice que el ususrio no esta autorizado por tener un nivel menor a 2");
-             try {
-                 FacesContext.getCurrentInstance().getExternalContext().redirect("notAcess.xhtml");
-             } catch (IOException ex) {
-                 Logger.getLogger(CreateRecipeControler.class.getName()).log(Level.SEVERE, null, ex);
-             }
+            FacesContext.getCurrentInstance().getExternalContext().redirect("notAcess.xhtml");
         }
 
     }

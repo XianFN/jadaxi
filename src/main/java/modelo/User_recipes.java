@@ -25,17 +25,19 @@ public class User_recipes implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    
+
     //TODO PREGUNTAR
     //@ManyToMany
     @Column(name = "recipe_Id")
     private int recipe_id;
-    
+
     //TODO PREGUNTAR
     //@ManyToMany
     @Column(name = "user_Id")
     private int user_id;
+
+    @Column(name = "created")
+    private boolean created;
 
     public int getId() {
         return id;
@@ -61,12 +63,21 @@ public class User_recipes implements Serializable {
         this.user_id = user_id;
     }
 
+    public boolean isCreated() {
+        return created;
+    }
+
+    public void setCreated(boolean created) {
+        this.created = created;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + this.recipe_id;
-        hash = 97 * hash + this.user_id;
+        hash = 71 * hash + this.id;
+        hash = 71 * hash + this.recipe_id;
+        hash = 71 * hash + this.user_id;
+        hash = 71 * hash + (this.created ? 1 : 0);
         return hash;
     }
 
@@ -91,14 +102,19 @@ public class User_recipes implements Serializable {
         if (this.user_id != other.user_id) {
             return false;
         }
+        if (this.created != other.created) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "User_recipes{" + "id=" + id + ", recipe_id=" + recipe_id + ", user_id=" + user_id + '}';
+        return "User_recipes{" + "id=" + id + ", recipe_id=" + recipe_id + ", user_id=" + user_id + ", created=" + created + '}';
     }
     
     
+
+
 
 }
