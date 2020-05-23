@@ -64,14 +64,16 @@ public class MainPageControler implements Serializable {
 
             System.out.println("Fallo al obtener todas las recetas: " + e.getMessage());
         }
+        try {
+            for (int i = 0; i < recipes.size(); i++) {
 
-        for (int i = 0; i < recipes.size(); i++) {
+                images.add(getImage(i));
 
-            images.add(getImage(i));
+            }
 
+        } catch (Exception e) {
+            System.out.println("Para variar algo ha fallado con las ***** imagenes");
         }
-
-        ContentFlow a = new ContentFlow();
 
     }
 
@@ -111,11 +113,7 @@ public class MainPageControler implements Serializable {
 
         StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg", "nombre.jpeg");
 
-      
-       
         return dbImage;
     }
-    
-     
 
 }

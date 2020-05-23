@@ -41,7 +41,7 @@ public class Recipe implements Serializable {
     private byte[] image;
 
     @Column(name = "countcalories")
-    private String countCaloroies;
+    private double countCaloroies;
 
 // hascer join table a la intermedia
     public int getId() {
@@ -68,11 +68,11 @@ public class Recipe implements Serializable {
         this.image = image;
     }
 
-    public String getCountCaloroies() {
+    public double getCountCaloroies() {
         return countCaloroies;
     }
 
-    public void setCountCaloroies(String countCaloroies) {
+    public void setCountCaloroies(double countCaloroies) {
         this.countCaloroies = countCaloroies;
     }
 
