@@ -232,6 +232,7 @@ public class CreateRecipeControler implements Serializable{
        try {
            User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
            user.setXp(user.getXp()+20/(user.getLv()+1));
+           user.setRecipes(user.getRecipes()+1);
            userEJB.edit(user);
            subirNivel(user);
         } catch (Exception e) {
@@ -277,6 +278,7 @@ public class CreateRecipeControler implements Serializable{
             User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
             userRecipes.setRecipe_id(id);
             userRecipes.setUser_id(user.getId());
+            userRecipes.setCreated(true);
             user_recipesEJB.create(userRecipes);
         } catch (Exception e) {
             System.out.println("Error al asignar al usuario: " + e.getMessage());
