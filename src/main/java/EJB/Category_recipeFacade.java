@@ -51,4 +51,23 @@ public class Category_recipeFacade extends AbstractFacade<Category_recipe> imple
         
     }
     
+    @Override
+    public List<Category_recipe> findByRecipeId(int id){
+        List<Category_recipe> results = null;
+        try {
+            String hql = "FROM Category_recipe c WHERE c.recipe=:param1";
+            Query query = em.createQuery(hql);
+            query.setParameter("param1", id);
+            
+            results = query.getResultList();
+
+            //System.out.println(results.get(0).toString());
+        } catch (Exception e) {
+            System.out.println("Algo ha salido mal al obtener las id de las recetas desde las categorias: " + e.getMessage());
+        }
+        
+        return results;
+        
+    }
+    
 }

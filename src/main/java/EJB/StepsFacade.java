@@ -5,9 +5,11 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modelo.Steps;
 
 /**
@@ -27,6 +29,25 @@ public class StepsFacade extends AbstractFacade<Steps> implements StepsFacadeLoc
 
     public StepsFacade() {
         super(Steps.class);
+    }
+    
+    @Override
+    public List<Steps> findByRecipeId(int id){
+        List<Steps> results = null;
+        try {
+            String hql = "FROM Steps r WHERE r.recipeId=:param1";
+            Query query = em.createQuery(hql);
+            query.setParameter("param1", id);
+            
+            results = query.getResultList();
+
+            //System.out.println(results.get(0).toString());
+        } catch (Exception e) {
+            System.out.println("Algo ha salido mal al obtener los pasos de una categoria: " + e.getMessage());
+        }
+        
+        return results;
+        
     }
     
 }

@@ -52,4 +52,22 @@ public class Recipes_ingredientsFacade extends AbstractFacade<Recipes_ingredient
         
     }
     
+    @Override
+    public List<Recipes_ingredients> findByRecipeId(int id){
+        List<Recipes_ingredients> results = null;
+        try {
+            String hql = "FROM Recipes_ingredients c WHERE c.recipe=:param1";
+            Query query = em.createQuery(hql);
+            query.setParameter("param1", id);
+            
+            results = query.getResultList();
+
+        } catch (Exception e) {
+            System.out.println("Algo ha salido mal al obtener los ingredientes de la receta: " + e.getMessage());
+        }
+        
+        return results;
+        
+    }
+    
 }
