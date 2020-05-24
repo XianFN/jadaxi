@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 
     <h:head>
@@ -16,7 +17,81 @@
         <ui:composition template="./../template/mainTemplate.xhtml">
 
             <ui:define name="content">
-                ADMIN
+                
+                <style>
+                    
+                    .cat{
+                        margin-top: 20px;
+                    }
+                    
+                </style>
+                
+                
+                <h:form>
+                    
+                    <p:dataTable class="cat" var="recipe" value="#{adminControler.listRecipes}" selection="#{adminControler.recipe}" selectionMode="single" rowKey="#{recipe.id}">
+                    
+                            <f:facet name="header">
+                               Recetas
+                            </f:facet>
+
+                            <p:column class ="cabeceras" headerText="Nombre de la receta">
+                                <h:outputText value="#{recipe.name}" />
+                            </p:column>
+
+                            <p:column class="cabeceras" headerText="Kcal">  
+                                <h:outputText value="#{recipe.countCaloroies}" >
+                                <f:convertNumber pattern="#0" />
+                                </h:outputText>
+                            </p:column>
+                    
+                            <p:column class="cabeceras" headerText="Valoración media de los usuarios">  
+                                <h:outputText value="#{recipe.media}" >
+                                 <f:convertNumber pattern="#0.00" />
+                                </h:outputText>
+                            </p:column>
+                    
+                             <p:column class="cabeceras" headerText="">  
+                              <p:commandButton value="Eliminar" action="#{adminControler.eliminarReceta(recipe)}"/>
+                            </p:column>
+
+                    </p:dataTable>
+                    
+                    
+                </h:form>
+                
+                
+                
+                <h:form>
+                    
+                   
+                    
+                    <p:dataTable class = "cat" var="cat" value="1">
+                    
+           
+                        
+                            <f:facet name="header">
+                               Crear una categoría
+                            </f:facet>
+
+                            <p:column class ="cabeceras" >
+                                <h:outputText value="Nombre de la categoría" />
+                            </p:column>
+
+                            <p:column class="cabeceras" >  
+                                <p:inputText class="in" value="#{adminControler.category.name}" required="true" label="Nombre"/>
+                            </p:column>
+                    
+                    
+                             <p:column class="cabeceras" >  
+                                  <p:growl id="message" showDetail="true" />
+                              <p:commandButton value="Crear"  action="#{adminControler.crearCategoria()}" update="message"/>
+                            </p:column>
+
+                    </p:dataTable>
+
+                </h:form>
+                
             </ui:define>
 
         </ui:composition>
