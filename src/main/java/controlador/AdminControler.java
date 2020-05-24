@@ -10,6 +10,7 @@ import EJB.Category_recipeFacadeLocal;
 import EJB.RecipeFacadeLocal;
 import EJB.Recipes_ingredientsFacadeLocal;
 import EJB.StepsFacadeLocal;
+import EJB.UserFacadeLocal;
 import EJB.User_recipesFacadeLocal;
 import java.io.IOException;
 import java.io.Serializable;
@@ -53,6 +54,9 @@ public class AdminControler implements Serializable {
     
     @EJB
     private RecipeFacadeLocal recipeEJB;
+    
+    @EJB
+    private UserFacadeLocal userEJB;
      
     @EJB
     private User_recipesFacadeLocal user_recipesEJB;
@@ -175,6 +179,14 @@ public class AdminControler implements Serializable {
             
         } catch (Exception e) {
             System.out.println("Error al borrar receta: " + e.getMessage());
+       }
+      
+      try {
+            user.setRecipes(user.getRecipes()-1);
+            userEJB.edit(user);
+            
+        } catch (Exception e) {
+            System.out.println("Error al decrementar ocntador: " + e.getMessage());
        }
        
     }

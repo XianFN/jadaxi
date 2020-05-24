@@ -234,6 +234,7 @@ public class CreateRecipeControler implements Serializable{
            
             user.setXp(user.getXp() + 80);
             user.setLv((int) (user.getXp() / 100));
+            user.setRecipes(user.getRecipes()+1);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
              userEJB.edit(user);
         } catch (Exception e) {
@@ -307,6 +308,8 @@ public class CreateRecipeControler implements Serializable{
          s.setTitle(steps.getTitle());
          s.setDescription(steps.getDescription());
         stepsList.add(s);
+        steps.setTitle("");
+        System.out.println(stepsList.toString());
         destroyWorld();
     }
      

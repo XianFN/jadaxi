@@ -232,7 +232,7 @@
                                     <p:growl id="message" showDetail="true" />
 
                                     <h:outputText class="out" value="Nombre del paso:"/>
-                                    <p:inputText class="in" value="#{createRecipeControler.steps.title}" required="true" label="Titulo"/>
+                                    <p:inputText id ="titulo" class="in" value="#{createRecipeControler.steps.title}" required="true" label="Titulo"/>
 
 
                                     <p:textEditor id="tx" class="text" style="font-family: Typo Round Bold Demo;" widgetVar="editor2" value="#{createRecipeControler.steps.description}" placeholder="Describa el procedimiento a realizar en este paso.">
