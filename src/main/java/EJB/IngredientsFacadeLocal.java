@@ -7,7 +7,9 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
+import modelo.Category;
 import modelo.Ingredients;
+import modelo.Recipe;
 
 /**
  *
@@ -29,5 +31,7 @@ public interface IngredientsFacadeLocal {
     List<Ingredients> findRange(int[] range);
 
     int count();
+    
+    public Ingredients findByName(String name);
     
 }

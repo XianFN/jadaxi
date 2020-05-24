@@ -6,6 +6,7 @@
 package controlador;
 
 import EJB.CategoryFacadeLocal;
+import EJB.IngredientsFacadeLocal;
 import EJB.RecipeFacadeLocal;
 
 import java.io.InputStream;
@@ -25,6 +26,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
 import modelo.Category;
+import modelo.Ingredients;
 import modelo.Recipe;
 
 import org.primefaces.model.DefaultStreamedContent;
@@ -43,11 +45,13 @@ public class MainPageControler implements Serializable {
     @EJB
     private CategoryFacadeLocal categoryEJB;
 
+    @EJB
+    private IngredientsFacadeLocal ingredientsEJB;
+
     private List<Recipe> recipes;
-
     private List<StreamedContent> images;
-
     private List<Category> categories;
+    private List<Ingredients> ingredients;
 
     @PostConstruct
     public void init() {
@@ -78,7 +82,6 @@ public class MainPageControler implements Serializable {
         return images;
     }
 //TODO actualizar a top 15/10
-    //TODO PREGUNTAR si se pueden crear botones desde la vista de java
 
     public String goToviewRecipesInCategories(String category) {
 
@@ -89,6 +92,18 @@ public class MainPageControler implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categoryToShow", cat.getId());//guardamos el id en el contexto
         //TODO ?faces-redirect=true
         return "viewRecipesList.xhtml?faces-redirect=true";
+
+    }
+
+    public String goToviewRecipesIngredients(String ingredient) {
+
+        Object ob = ingredient;
+        System.out.println("cat: " + ingredient);
+        Ingredients ing = ingredientsEJB.findByName(ingredient);
+
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ingredientToShow", ing.getId());//guardamos el id en el contexto
+        //TODO ?faces-redirect=true
+        return "viewRecipeListIngredients.xhtml?faces-redirect=true";
 
     }
 
@@ -119,8 +134,18 @@ public class MainPageControler implements Serializable {
         categories = new ArrayList<>();
 
         categories = categoryEJB.findAll();
-        
+
         return categories;
+
+    }
+
+    public List<Ingredients> getIngredients() {
+
+        ingredients = new ArrayList<>();
+
+        ingredients = ingredientsEJB.findAll();
+
+        return ingredients;
 
     }
 

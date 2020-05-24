@@ -5,8 +5,8 @@
  */
 package controlador;
 
-import EJB.Category_recipeFacadeLocal;
 import EJB.RecipeFacadeLocal;
+import EJB.Recipes_ingredientsFacadeLocal;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Blob;
@@ -17,33 +17,31 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
 
-import modelo.Category_recipe;
 import modelo.Recipe;
-
+import modelo.Recipes_ingredients;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
  *
- * @author jadaxi
+ * @author Javier
  */
 @Named
 @ViewScoped
-public class ViewRecipesListControler implements Serializable {
+public class ViewRecipeListIngredientsControler implements Serializable {
 
-    private int categoryId;
+    private int ingredientId;
 
     @EJB
     private RecipeFacadeLocal recipeEJB;
 
     @EJB
-    private Category_recipeFacadeLocal cat_recEJB;
+    private Recipes_ingredientsFacadeLocal red_ingEJB;
 
     private List<Recipe> recipes;
 
@@ -52,11 +50,13 @@ public class ViewRecipesListControler implements Serializable {
     @PostConstruct
     public void inicio() {
         recipes = new ArrayList<>();
-        categoryId = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("categoryToShow");
+        ingredientId = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ingredientToShow");
 
-   
-        List<Category_recipe> idRecipe = cat_recEJB.findByCategoryId(categoryId);
+        System.out.println("ID:" + ingredientId);
 
+        List<Recipes_ingredients> idRecipe = red_ingEJB.findByIngredientId(ingredientId);
+
+        System.out.println("SIZE: " + idRecipe.size());
         for (int i = 0; i < idRecipe.size(); i++) {
 
             recipes.add(recipeEJB.find(idRecipe.get(i).getRecipe()));
@@ -70,29 +70,12 @@ public class ViewRecipesListControler implements Serializable {
         return recipes;
     }
 
-    public Recipe getSelectedRecipe() {
-        return selectedRecipe;
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
     }
-
-    public void setSelectedRecipe(Recipe selectedRecipe) {
-        this.selectedRecipe = selectedRecipe;
-    }
-
-    /*
-     public void clearMultiViewState() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        String viewId = context.getViewRoot().getViewId();
-        PrimeFaces.current().multiViewState().clearAll(viewId, true, (clientId) -> {
-            showMessage(clientId);
-        });
-    }
-     */
-    private void showMessage(String clientId) {
-        FacesContext.getCurrentInstance()
-                .addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, clientId + " multiview state has been cleared out", null));
-    }
-
+    
+    
+    
     public StreamedContent getImage(int id) {
         System.out.println("id: " + id);
 
@@ -122,20 +105,6 @@ public class ViewRecipesListControler implements Serializable {
         StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg", "nombre.jpeg");
         System.out.println("jsahbdfñoiuhasñoiudfhñpoiaushdfñiouahdfñ.i");
         return dbImage;
-    }
-
-    public String getRecipeCategoryName(int id) {
-
-        return "";
-    }
-
-    public String viewRecipe(int id) {
-
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("recipe", id);
-
-        //TODO ?faces-redirect=true
-        return "viewRecipe.xhtml?faces-redirect=true";
-
     }
 
 }
