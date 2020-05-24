@@ -183,6 +183,10 @@ public class AdminControler implements Serializable {
         addMessage("Éxito", "Se ha creado una nueva categoría.");
     }
     
+    public void destroyRecipe() {
+        addMessage("Éxito", "Se ha eliminado la receta.");
+    }
+    
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
