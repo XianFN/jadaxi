@@ -70,7 +70,8 @@
                             </p:column>
                     
                              <p:column class="cabeceras" headerText="">  
-                              <p:commandButton value="Eliminar" action="#{adminControler.eliminarReceta(recipe)}"/>
+                                  <p:growl id="message" showDetail="true" />
+                              <p:commandButton value="Eliminar" action="#{adminControler.eliminarReceta(recipe)}" update="message"/>
                             </p:column>
 
                     </p:dataTable>
