@@ -42,14 +42,15 @@ public class Recipe implements Serializable {
 
     @Column(name = "countcalories")
     private double countCaloroies;
-    
+
     @Column(name = "totalrating")
     private int totalRating;
-    
+
     @Column(name = "peoplerating")
     private int peopleRating;
-    
-    
+
+    @Column(name = "media")
+    private double media;
 
 // hascer join table a la intermedia
     public int getId() {
@@ -100,15 +101,24 @@ public class Recipe implements Serializable {
         this.peopleRating = peopleRating;
     }
 
+    public double getMedia() {
+        return media;
+    }
+
+    public void setMedia(double media) {
+        this.media = media;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + this.id;
-        hash = 37 * hash + Objects.hashCode(this.name);
-        hash = 37 * hash + Arrays.hashCode(this.image);
-        hash = 37 * hash + (int) (Double.doubleToLongBits(this.countCaloroies) ^ (Double.doubleToLongBits(this.countCaloroies) >>> 32));
-        hash = 37 * hash + this.totalRating;
-        hash = 37 * hash + this.peopleRating;
+        int hash = 3;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Arrays.hashCode(this.image);
+        hash = 29 * hash + (int) (Double.doubleToLongBits(this.countCaloroies) ^ (Double.doubleToLongBits(this.countCaloroies) >>> 32));
+        hash = 29 * hash + this.totalRating;
+        hash = 29 * hash + this.peopleRating;
+        hash = (int) (29 * hash + this.media);
         return hash;
     }
 
@@ -136,6 +146,9 @@ public class Recipe implements Serializable {
         if (this.peopleRating != other.peopleRating) {
             return false;
         }
+        if (this.media != other.media) {
+            return false;
+        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -147,9 +160,8 @@ public class Recipe implements Serializable {
 
     @Override
     public String toString() {
-        return "Recipe{" + "id=" + id + ", name=" + name + ", image=" + image + ", countCaloroies=" + countCaloroies + ", totalRating=" + totalRating + ", peopleRating=" + peopleRating + '}';
+        return "Recipe{" + "id=" + id + ", name=" + name + ", image=" + image + ", countCaloroies=" + countCaloroies + ", totalRating=" + totalRating + ", peopleRating=" + peopleRating + ", media=" + media + '}';
     }
-    
-    
 
+    
 }

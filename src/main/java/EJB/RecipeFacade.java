@@ -45,9 +45,9 @@ public class RecipeFacade extends AbstractFacade<Recipe> implements RecipeFacade
         System.out.println("cat:" + cat.toString());
 
         List<Recipe> results = null;
-        //TODO PREGUNTAR dalla por ls FK ????
+        
         try {
-            String hql = "FROM Recipes r WHERE r.category=:param1";
+            String hql = "FROM Recipe r WHERE r.category=:param1";
             Query query = em.createQuery(hql);
             query.setParameter("param1", cat.getId());
 
@@ -58,6 +58,28 @@ public class RecipeFacade extends AbstractFacade<Recipe> implements RecipeFacade
         }
         System.out.println(results);
         return results;
+    }
+    
+    
+    @Override
+    public List<Recipe> orderBymedia(){
+         List<Recipe> results = null;
+         
+         
+         try {
+            String hql = "FROM Recipe r ORDER BY r.media DESC";
+            Query query = em.createQuery(hql);
+            
+
+            results = query.getResultList();
+
+        } catch (Exception e) {
+            System.out.println("Fallo al obtener las recetas ordenadas: "  + e.getMessage());
+        }
+        System.out.println(results);
+        return results;
+        
+        
     }
     
     

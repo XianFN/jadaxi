@@ -103,8 +103,17 @@ public class ViewRecipeListIngredientsControler implements Serializable {
         }
 
         StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg", "nombre.jpeg");
-        System.out.println("jsahbdfñoiuhasñoiudfhñpoiaushdfñiouahdfñ.i");
+       
         return dbImage;
+    }
+    
+    public String viewRecipe(int id) {
+
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("recipe", id);
+
+        //TODO ?faces-redirect=true
+        return "viewRecipe.xhtml?faces-redirect=true";
+
     }
 
 }

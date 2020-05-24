@@ -46,7 +46,7 @@ public class ViewRecipeControler implements Serializable {
 
     @EJB
     private RecipeFacadeLocal recipeEJB;
-    
+
     @EJB
     private UserFacadeLocal userEJB;
 
@@ -96,6 +96,14 @@ public class ViewRecipeControler implements Serializable {
             System.out.println("La gente es 0 asique atora: " + e.getMessage());
         }
 
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     public void setImage(StreamedContent image) {
@@ -182,21 +190,21 @@ public class ViewRecipeControler implements Serializable {
             peopleRated++;
             recipe.setTotalRating(ratings);
             recipe.setPeopleRating(peopleRated);
+            recipe.setMedia((double) ratings / (peopleRated + 0.0));
+
             recipeEJB.edit(recipe);
             flagRate = false;
-            
-            
-            
+
             /**
              * Conjunto de subir de nivel
              */
             User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
-            int xpadd2 = user.getLv()<5 ? 10 - user.getLv() : 5;
+            int xpadd2 = user.getLv() < 5 ? 10 - user.getLv() : 5;
             user.setXp(user.getXp() + xpadd2);
             user.setLv((int) (user.getXp() / 100));
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
             userEJB.edit(user);
-            
+
         } else {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "ALERTA", "Ya has votado esta receta");
             FacesContext.getCurrentInstance().addMessage(null, message);

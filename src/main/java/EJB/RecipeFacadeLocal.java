@@ -32,4 +32,11 @@ public interface RecipeFacadeLocal {
     
     List<Recipe> findByName(String name);
     
+    
+    List<Recipe> orderBymedia();
+        
+        
+        
+    
+    
 }

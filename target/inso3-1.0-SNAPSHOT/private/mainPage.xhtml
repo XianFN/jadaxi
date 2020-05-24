@@ -41,7 +41,7 @@
                     }
                     .ui-panel .ui-panel-titlebar {
                         padding: .3em 1em .2em;
-                        height: 50px;
+                        height: 55px;
                         border: 1px;
                         background-color: rgb(61, 110, 56); 
                         border-color: black;
@@ -65,14 +65,14 @@
                         font-family: 'Garlic Sans';
                         font-weight: normal;
                         font-style: normal;
-                        src: url('../resources/Garlic-Sans-Regular.ttf')format('truetype');
+                        src: url('../resources/fonts/Garlic-Sans-Regular.ttf')format('truetype');
                     }
                     @font-face
                     {
                         font-family: 'Typo Round Bold Demo';
                         font-weight: normal;
                         font-style: normal;
-                        src: url('../resources/Typo_Round_Bold_Demo.ttf')format('truetype');
+                        src: url('../resources/fonts/Typo_Round_Bold_Demo.ttf')format('truetype');
                     }
 
 
@@ -134,7 +134,7 @@
                                  gridIcon="pi pi-th-large" listIcon="pi pi-bars" layout="grid" widgetVar="asdasd" >
 
                         <p:dataViewGridItem columns="6"  >
-                            <p:panel header="#{buttons.name}" style="text-align:center;">
+                            <p:panel header="#{buttons.name}: #{buttons.ammount}" style="text-align:center;">
                                 <h:panelGrid columns="1" style="  padding-top: 10%; padding-bottom: 5%; padding-left: 0px;padding-right: 0px;">
 
 
@@ -155,16 +155,16 @@
                         BUSQUEDA POR INGREDIENTE: 
                     </div>
 
-                    <p:dataView  class="noHeader" var="buttonsIng" value="#{mainPageControler.ingredients}"
+                    <p:dataView   class="noHeader" var="buttonsIng" value="#{mainPageControler.ingredients}"
                                  gridIcon="pi pi-th-large" listIcon="pi pi-bars" layout="grid" widgetVar="asdasd" >
 
-                        <p:dataViewGridItem columns="6"  >
-                            <p:panel header="#{buttonsIng.name}" style="text-align:center;">
-                                <h:panelGrid columns="1" style="  padding-top: 10%; padding-bottom: 5%; padding-left: 0px;padding-right: 0px;">
+                        <p:dataViewGridItem  columns="6"  >
+                            <p:panel header="#{buttonsIng.name} " style="text-align:center;">
+                                <h:panelGrid  columns="1" style="  padding-top: 10%; padding-bottom: 5%; padding-left: 0px;padding-right: 0px;">
 
 
 
-                                    <p:commandButton  style="  font-family: Typo Round Bold Demo; font-size: 20px;  height: 90px; width: 100%; background-color: rgb(0, 102, 0); color: black ; text-shadow: 0px 0 rgba(0,0,0,1);" value="Ver todas los ingredientes de #{buttons.name}" action="#{mainPageControler.goToviewRecipesIngredients(buttonsIng.name)}"/>
+                                    <p:commandButton update="messages" style="  font-family: Typo Round Bold Demo; font-size: 20px;  height: 100px; width: 100%; background-color: rgb(0, 102, 0); color: black ; text-shadow: 0px 0 rgba(0,0,0,1);" value="Recetas que contengan #{buttonsIng.name}" action="#{mainPageControler.goToviewRecipesIngredients(buttonsIng.name)}"/>
 
                                 </h:panelGrid>
                             </p:panel>   

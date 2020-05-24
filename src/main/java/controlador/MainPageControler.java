@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 
@@ -28,6 +29,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import modelo.Category;
 import modelo.Ingredients;
 import modelo.Recipe;
+import modelo.User;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -59,21 +61,22 @@ public class MainPageControler implements Serializable {
         images = new ArrayList<StreamedContent>();
 
         try {
-            recipes = recipeEJB.findAll();
+            recipes = recipeEJB.orderBymedia();
 
         } catch (Exception e) {
 
             System.out.println("Fallo al obtener todas las recetas: " + e.getMessage());
         }
+
         try {
-            for (int i = 0; i < recipes.size(); i++) {
+            for (int i = 0; i < 10; i++) {
 
                 images.add(getImage(i));
 
             }
 
         } catch (Exception e) {
-            System.out.println("Para variar algo ha fallado con las ***** imagenes");
+            System.out.println("Para variar algo ha fallado con las p**** imagenes");
         }
 
     }
@@ -97,13 +100,23 @@ public class MainPageControler implements Serializable {
 
     public String goToviewRecipesIngredients(String ingredient) {
 
-        Object ob = ingredient;
-        System.out.println("cat: " + ingredient);
-        Ingredients ing = ingredientsEJB.findByName(ingredient);
+        int usLv = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv();
 
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ingredientToShow", ing.getId());//guardamos el id en el contexto
-        //TODO ?faces-redirect=true
-        return "viewRecipeListIngredients.xhtml?faces-redirect=true";
+        if (usLv < 5) {
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            context.addMessage(null, new FacesMessage("ERROR", "No tienes nivel para acceder a esta parte, necesitas nivel 5. Tu nivel actual: " + ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv()));
+            System.out.println("NIvel menor que 5");
+            return "";
+        } else {
+            Object ob = ingredient;
+            System.out.println("cat: " + ingredient);
+            Ingredients ing = ingredientsEJB.findByName(ingredient);
+
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ingredientToShow", ing.getId());//guardamos el id en el contexto
+            //TODO ?faces-redirect=true
+            return "viewRecipeListIngredients.xhtml?faces-redirect=true";
+        }
 
     }
 

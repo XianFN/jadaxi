@@ -13,7 +13,7 @@
             <ui:define name="content">
                 <h:form>
                     <p:growl id="messages" showDetail="true" />
-                   
+
                     <style>
                         .ui-widget-content {
                             border: 1px solid #a8a8a8;
@@ -22,6 +22,42 @@
                             color: black;
 
                         }
+
+                        .ui-rating-star a{
+
+                            width: 42px;
+                            height: 40px;
+                            display: block;
+                            background: url(../resources/images/tenedores.png) no-repeat 0 0;
+                        }
+                        .ui-rating-cancel a {
+
+                            width: 42px;
+                            height: 40px;
+                            display: block;
+                            background: url(../resources/images/cancel.png) no-repeat 0 0;
+                        }
+                        .ui-rating-star-on a {
+
+
+                            background: url(../resources/images/tenedoreson.png) no-repeat 0 0;
+                            display: block;
+                            height: 40px;
+                            width: 42px;  
+
+                        }
+                        @font-face{
+                            font-family: 'Garlic Sans';
+                            font-weight: normal;
+                            font-style: normal;
+                            src: url('../resources/fonts/Garlic-Sans-Regular.ttf')format('truetype');
+                        }
+                        @font-face{
+                        font-family: 'Typo Round Bold Demo';
+                        font-weight: normal;
+                        font-style: normal;
+                        src: url('../resources/fonts/Typo_Round_Bold_Demo.ttf')format('truetype');
+                    }
                         .ui-panel {
                             padding: .0em; 
                         }
@@ -40,42 +76,61 @@
                             font-weight: bold;
                             height: 50%;
                             text-align: center;
-                            text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+                            font-family:Garlic Sans; 
+                            font-size: 25px;
+                                text-shadow: 0 1px 0 rgba(255,255,255,0.7);
                         }
                         .ui-panel-titlebar {
                             padding: 4px 10px;
                         }
+                        
+                    .titulo{
+
+                        text-align: center;
+                        background-color: lightgray;
+                        color:black;
+                        font-size: 50px;
+
+                        font-family: Garlic Sans;
+
+
+                    }
+
 
 
                     </style>
 
                     <!--TODO arreglar color verde claro en el desplegable -->
+                      <div class="titulo" >
+                    #{viewRecipeControler.recipe.name}
+                </div>
+                    <br/>
                     <p:graphicImage value="#{viewRecipeControler.image}" styleClass="content" stream="false" style="margin-left: 25%; width: 50%; height: 50%"/>
                     <div>
-                        <p:panel id="basic" header="Valoracion y añadir receta" style="margin-left: 25%; width: 49.8%; height: 50%">
+                        <p:panel id="basic" header="VALORACION Y VER RECETA" style="margin-left: 25%; width: 49.8%; height: 50%">
                             <h:panelGrid class="fondoverde" columns="2" cellpadding="10">
-                                <p:rating value="#{viewRecipeControler.rating}" style="width: 200px; margin-right: 200%">
+                                <p:rating value="#{viewRecipeControler.rating}" style=" width: 260px; margin-right: 20%">
                                     <p:ajax event="rate" listener="#{viewRecipeControler.onrate}" update="messages" />
                                     <p:ajax event="cancel" listener="#{viewRecipeControler.oncancel}" update="messages" />
                                 </p:rating>
-                                  <!--TODO comprobar nivel-->
-                                <p:commandButton value="Guardar Receta" actionListener="#{viewRecipeControler.addToMyRecipes()}"  update="messages" style="margin-left: 200%;"  />
+                                <!--TODO comprobar nivel-->
+                                <p:commandButton value="Guardar Receta" actionListener="#{viewRecipeControler.addToMyRecipes()}"  update="messages" style="  height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); font-family: 'Typo Round Bold Demo'; background-color: darkgreen; width: 100%;margin-right: 20px ; margin-left: 50%; margin-right: 20px;"  />
 
                             </h:panelGrid>
                         </p:panel>
                     </div>
 
-                    <p:dataList value="#{viewRecipeControler.ingredientsList}" var="ingre" type="ordered" style="width: 50%; margin-left: 25%">
+                    <p:dataList value="#{viewRecipeControler.ingredientsList}" var="ingre" type="ordered" style=" font-family: Typo Round Bold Demo; font-size: 22px; width: 50%; margin-left: 25%">
                         <f:facet name="header">
                             Ingredientes
                         </f:facet>
                         #{ingre.name},  #{ingre.quantity} g
                     </p:dataList>
-                    <p:dataList value="#{viewRecipeControler.stepsList}" var="step" type="ordered" style="width: 50%; margin-left: 25%">
+                    <p:dataList value="#{viewRecipeControler.stepsList}" var="step" type="ordered" style=" font-family: Typo Round Bold Demo; font-size: 22px; width: 50%; margin-left: 25%">
                         <f:facet name="header">
                             Pasos
                         </f:facet>
-                        <div style="font-weight: bold;">#{step.title}:</div>
+                        <div style=" font-family:' Typo Round Bold Demo'; font-size: 22px; font-weight: bold;">#{step.title}:</div>
 
 
                         #{step.description} 

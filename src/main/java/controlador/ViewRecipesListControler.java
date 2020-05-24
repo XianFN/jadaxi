@@ -113,6 +113,7 @@ public class ViewRecipesListControler implements Serializable {
         }
 
         InputStream dbStream = null;
+        
         try {
             dbStream = bl.getBinaryStream();
         } catch (SQLException ex) {

@@ -10,27 +10,27 @@
         <ui:composition template="./../template/mainTemplate.xhtml">
 
             <ui:define name="content">
-               
-                
-                
+
+
+
                 <style>
-                    
-                    
+
+
                     .image{
                         width: 200px;
                         height: 90px;
-                        
+
                     }
                     .logo{
-                           width: 400px;
+                        width: 400px;
                         height: 90px;
                     }
                     .detail{
-                           width: 600px;
+                        width: 600px;
                         height: 90px;
                     }
-                    
-                    
+
+
                 </style>
 
 
@@ -41,11 +41,12 @@
                         <p:dataViewGridItem>
                             <p:panel header="#{recipe.name}" style="text-align:center">
                                 <h:panelGrid columns="1" style="width:100%">
-                                   
-                                    
-                                    
+                                    <p:graphicImage class="image" value="#{viewRecipeListIngredientsControler.getImage(recipe.id)}" stream="false"/> 
+
+
+
                                     <h:outputText value="Calorias: #{recipe.countCaloroies}" />
-                                    
+
 
                                     <p:commandButton value="ver receta" action="#{viewRecipeListIngredientsControler.viewRecipe(recipe.id)}" icon="ui-icon pi pi-search" style="margin:0 auto;"/>
 
@@ -55,7 +56,7 @@
 
                         <p:dataViewListItem>
                             <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
-                               
+                                <p:graphicImage  class="image" value="#{viewRecipeListIngredientsControler.getImage(recipe.id)}" stream="false"/> 
 
                                 <p:outputPanel  >
                                     <h:panelGrid   columns="2" cellpadding="5px" >
@@ -65,39 +66,39 @@
                                         <h:outputText value="Calorias: " />
                                         <h:outputText value="#{recipe.countCaloroies}" style="font-weight: bold"/>
 
-                                        
+
                                     </h:panelGrid>
                                 </p:outputPanel>
 
-                               
+
                                 <p:commandButton value="ver receta" action="#{viewRecipeListIngredientsControler.viewRecipe(recipe.id)}" icon="ui-icon pi pi-search" style="margin:0 auto;"/>
-                               
+
                             </h:panelGrid>
                         </p:dataViewListItem>
                     </p:dataView>
 
-                  
+
                 </h:form>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </ui:define>
 
         </ui:composition>
