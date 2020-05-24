@@ -75,5 +75,25 @@ public class User_recipesFacade extends AbstractFacade<User_recipes> implements 
             }
     }
     
+    @Override
+    public List<User_recipes> findByRecipeId(int id){
+        List<User_recipes> results = null;
+        try {
+            String hql = "FROM User_recipes c WHERE c.recipe_id=:param1";
+            Query query = em.createQuery(hql);
+            query.setParameter("param1", id);
+            
+            results = query.getResultList();
+
+            //System.out.println(results.get(0).toString());
+        } catch (Exception e) {
+            System.out.println("Algo ha salido mal al obtener las id de las recetas desde las categorias: " + e.getMessage());
+        }
+        
+        return results;
+        
+    }
+    
+    
     
 }

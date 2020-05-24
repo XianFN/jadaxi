@@ -30,4 +30,6 @@ public interface StepsFacadeLocal {
 
     int count();
     
+    List<Steps> findByRecipeId(int id);
+    
 }

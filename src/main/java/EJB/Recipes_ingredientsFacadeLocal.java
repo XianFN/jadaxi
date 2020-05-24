@@ -32,4 +32,6 @@ public interface Recipes_ingredientsFacadeLocal {
     
     List<Recipes_ingredients> findByIngredientId(int id);
     
+    List<Recipes_ingredients> findByRecipeId(int id);
+    
 }

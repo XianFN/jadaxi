@@ -6,7 +6,10 @@
 package controlador;
 
 import EJB.CategoryFacadeLocal;
+import EJB.Category_recipeFacadeLocal;
 import EJB.RecipeFacadeLocal;
+import EJB.Recipes_ingredientsFacadeLocal;
+import EJB.StepsFacadeLocal;
 import EJB.User_recipesFacadeLocal;
 import java.io.IOException;
 import java.io.Serializable;
@@ -18,7 +21,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Category;
+import modelo.Category_recipe;
+import modelo.Ingredients;
 import modelo.Recipe;
+import modelo.Recipes_ingredients;
+import modelo.Steps;
 import modelo.User;
 import modelo.User_recipes;
 
@@ -41,6 +48,9 @@ public class AdminControler implements Serializable {
     
     private Category category;
     
+    private Category_recipe categoryRecipe;
+    
+    
     @EJB
     private RecipeFacadeLocal recipeEJB;
      
@@ -50,6 +60,15 @@ public class AdminControler implements Serializable {
     @EJB
     private CategoryFacadeLocal categoryEJB;
     
+    @EJB
+    private Category_recipeFacadeLocal categoryRecipeEJB;
+    
+    @EJB
+    private StepsFacadeLocal stepsEJB;
+    
+    @EJB
+    private Recipes_ingredientsFacadeLocal recipe_ingredientsEJB;
+    
     @PostConstruct
     public void inicio() {
         
@@ -57,11 +76,6 @@ public class AdminControler implements Serializable {
         listRecipes=recipeEJB.findAll();
         recipe = new Recipe();
         category = new Category();
-        /*userRecipes=user_recipesEJB.findByUserId(user.getId());     
-        
-        for(int i=0; i<userRecipes.size(); i++){
-           listRecipes.add(recipeEJB.find(userRecipes.get(i).getRecipe_id()));
-        }*/
        
     }
     
@@ -115,7 +129,54 @@ public class AdminControler implements Serializable {
     }
     
     public void eliminarReceta(Recipe r){
-        System.out.println(r.toString());
+        
+        try {
+             List<Category_recipe> cr = categoryRecipeEJB.findByRecipeId(r.getId());
+             for(int i=0; i<cr.size();i++){
+                 categoryRecipeEJB.remove(cr.get(i));
+             }
+            
+        } catch (Exception e) {
+            System.out.println("Error al borrar category recipes: " + e.getMessage());
+       }
+        
+       try {
+             List<Steps> s = stepsEJB.findByRecipeId(r.getId());
+             for(int i=0; i<s.size();i++){
+                 stepsEJB.remove(s.get(i));
+             }
+            
+        } catch (Exception e) {
+            System.out.println("Error al borrar pasos: " + e.getMessage());
+       }
+       
+       try {
+             List<User_recipes> u = user_recipesEJB.findByRecipeId(r.getId());
+             for(int i=0; i<u.size();i++){
+                 user_recipesEJB.remove(u.get(i));
+             }
+            
+        } catch (Exception e) {
+            System.out.println("Error al borrar user recipes: " + e.getMessage());
+       }
+        
+       try {
+             List<Recipes_ingredients> in = recipe_ingredientsEJB.findByRecipeId(r.getId());
+             for(int i=0; i<in.size();i++){
+                 recipe_ingredientsEJB.remove(in.get(i));
+             }
+            
+        } catch (Exception e) {
+            System.out.println("Error al borrar ingredients recipes: " + e.getMessage());
+       }
+       
+      try {
+             recipeEJB.remove(r);
+            
+        } catch (Exception e) {
+            System.out.println("Error al borrar receta: " + e.getMessage());
+       }
+       
     }
     
     public void destroyWorld() {
