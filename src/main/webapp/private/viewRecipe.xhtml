@@ -65,6 +65,7 @@
                         .ui-datalist .ui-datalist-header {
                             border-bottom: 0 none;
                             background-color: rgba(152,210,128,1);
+                            font-family: Garlic Sans;
                         }
                         .ui-widget-header {
                             border: 1px solid #a8a8a8;
@@ -120,17 +121,17 @@
                         </p:panel>
                     </div>
 
-                    <p:dataList value="#{viewRecipeControler.ingredientsList}" var="ingre" type="ordered" style=" font-family: Typo Round Bold Demo; font-size: 22px; width: 50%; margin-left: 25%">
+                    <p:dataList value="#{viewRecipeControler.ingredientsList}" var="ingre" type="ordered" style=" font-family: Garlic Sans; font-size: 22px; width: 50%; margin-left: 25%">
                         <f:facet name="header">
                             Ingredientes
                         </f:facet>
                         #{ingre.name},  #{ingre.quantity} g
                     </p:dataList>
-                    <p:dataList value="#{viewRecipeControler.stepsList}" var="step" type="ordered" style=" font-family: Typo Round Bold Demo; font-size: 22px; width: 50%; margin-left: 25%">
+                    <p:dataList value="#{viewRecipeControler.stepsList}" var="step" type="ordered" style=" font-family: Garlic Sans; font-size: 22px; width: 50%; margin-left: 25%">
                         <f:facet name="header">
                             Pasos
                         </f:facet>
-                        <div style=" font-family:' Typo Round Bold Demo'; font-size: 22px; font-weight: bold;">#{step.title}:</div>
+                        <div style=" font-family: Garlic Sans;font-size: 22px; font-weight: bold;">#{step.title}:</div>
 
 
                         #{step.description} 

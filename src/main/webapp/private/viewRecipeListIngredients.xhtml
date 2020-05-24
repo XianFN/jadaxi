@@ -29,6 +29,15 @@
                         width: 600px;
                         height: 90px;
                     }
+                          
+                    .ui-dataview-list .ui-dataview-list-container {
+    list-style-type: none;
+    font-family: Typo Round Bold Demo;
+}
+.ui-widget {
+     font-family: Garlic Sans;
+    font-size: 1.1em;
+}
 
 
                 </style>
@@ -48,7 +57,7 @@
                                     <h:outputText value="Calorias: #{recipe.countCaloroies}" />
 
 
-                                    <p:commandButton value="ver receta" action="#{viewRecipeListIngredientsControler.viewRecipe(recipe.id)}" icon="ui-icon pi pi-search" style="margin:0 auto;"/>
+                                    <p:commandButton value="Ver receta" action="#{viewRecipeListIngredientsControler.viewRecipe(recipe.id)}" icon="ui-icon pi pi-search" style="margin:0 auto;"/>
 
                                 </h:panelGrid>
                             </p:panel>
@@ -71,7 +80,7 @@
                                 </p:outputPanel>
 
 
-                                <p:commandButton value="ver receta" action="#{viewRecipeListIngredientsControler.viewRecipe(recipe.id)}" icon="ui-icon pi pi-search" style="margin:0 auto;"/>
+                                <p:commandButton value="Ver receta" action="#{viewRecipeListIngredientsControler.viewRecipe(recipe.id)}" icon="ui-icon pi pi-search" style="margin:0 auto;"/>
 
                             </h:panelGrid>
                         </p:dataViewListItem>

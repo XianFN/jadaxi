@@ -35,6 +35,14 @@
                            width: 600px;
                         height: 90px;
                     }
+                    .ui-dataview-list .ui-dataview-list-container {
+    list-style-type: none;
+    font-family: Garlic Sans;
+}
+.ui-widget {
+     font-family: Garlic Sans;
+    font-size: 1.1em;
+}
                     
                     
                 </style>
@@ -45,7 +53,7 @@
                                 gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
                         <p:dataViewGridItem>
-                            <p:panel header="#{recipe.name}" style="text-align:center">
+                            <p:panel header="#{recipe.name}" style="text-align:center ; font-family: Garlic Sans;">
                                 <h:panelGrid columns="1" style="width:100%">
                                     <p:graphicImage class="image" value="#{viewRecipesListControler.getImage(recipe.id)}" stream="false"/> 
                                     
@@ -53,14 +61,14 @@
                                     <h:outputText value="Calorias: #{recipe.countCaloroies}" />
                                     
 
-                                    <p:commandButton value="ver receta" action="#{viewRecipesListControler.viewRecipe(recipe.id)}" icon="ui-icon pi pi-search" style="margin:0 auto;"/>
+                                    <p:commandButton value="Ver receta" action="#{viewRecipesListControler.viewRecipe(recipe.id)}" icon="ui-icon pi pi-search" style="margin:0 auto;"/>
 
                                 </h:panelGrid>
                             </p:panel>
                         </p:dataViewGridItem>
 
                         <p:dataViewListItem>
-                            <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+                            <h:panelGrid columns="3" style="width:100% ; font-family: Garlic Sans;" columnClasses="logo,detail">
                                 <p:graphicImage  class="image" value="#{viewRecipesListControler.getImage(recipe.id)}" stream="false"/> 
 
                                 <p:outputPanel  >
@@ -69,14 +77,14 @@
                                         <h:outputText value="#{recipe.name}" style="font-weight: bold"/>
 
                                         <h:outputText value="Calorias: " />
-                                        <h:outputText value="#{recipe.countCaloroies}" style="font-weight: bold"/>
+                                        <h:outputText value="#{recipe.countCaloroies}" style="font-weight: bold;"/>
 
                                         
                                     </h:panelGrid>
                                 </p:outputPanel>
 
                                
-                                <p:commandButton value="ver receta" action="#{viewRecipesListControler.viewRecipe(recipe.id)}" icon="ui-icon pi pi-search" style="margin:0 auto;"/>
+                                <p:commandButton value="Ver receta" action="#{viewRecipesListControler.viewRecipe(recipe.id)}" icon="ui-icon pi pi-search" style="margin:0 auto;"/>
                                
                             </h:panelGrid>
                         </p:dataViewListItem>
