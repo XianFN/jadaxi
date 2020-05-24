@@ -4,71 +4,106 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    
-   
+
+
 
     <body>
 
         <ui:composition template="./../template/mainTemplate.xhtml">
 
             <ui:define name="content">
-              
-               <style>
-                    
-                   .general{
-                       display: flex;
-                       align-items: center;
-                       justify-content: center;
-                       width: 70%;
-                       margin-top: 50px;
-                       background-color: wheat;
-                       margin-left: 15%;
-                   }
-                    
-                    
-                  
-                    
+
+                <style>
+
+                    @font-face{
+                        font-family: 'Garlic Sans';
+                        font-weight: normal;
+                        font-style: normal;
+                        src: url('../resources/fonts/Garlic-Sans-Regular.ttf')format('truetype');
+                    }
+                    @font-face{
+                        font-family: 'Typo Round Bold Demo';
+                        font-weight: normal;
+                        font-style: normal;
+                        src: url('../resources/fonts/Typo_Round_Bold_Demo.otf')format('truetype');
+                    }
+
+                    .general{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 70%;
+                        margin-top: 50px;
+                        background-color: wheat;
+                        margin-left: 15%;
+
+
+                    }
+
+
+
+
                     .contenidos{
                         margin: 30px;
+
                     }
-                    
-                    
+
+                    .titulo{
+
+                        text-align: center;
+                        background-color: lightgray;
+                        color:black;
+                        font-size: 50px;
+                       
+                        font-family: Garlic Sans;
+
+
+                    }
+
+
                     .prg{
                         color: black;
                         background-color: white;
+                        margin: 5px;
+                        width: 580px;
+                    }
+
+                    .content{
+
                         margin: 20px;
                     }
-                    
-                    .content{
-                       
-                       margin: 20px;
-                    }
-                        
+
                     .outl{
                         color: black;
                         font-size: 50px;
                         margin: 20px;
                     }
-                    
+
                     .out{
-                         font-size: 40px;
-                         margin: 20px;
+                        font-family: Typo Round Bold Demo;
+                        font-size: 20px;
+                        width: 300px;
+                        height: 20%;
+
                     }
-                    
+
                     .sig{
-                        font-size: 50px;
+                        font-size: 20px;
+                        font-weight: bold;
                         float:right;
                         margin:20px;
                     }
-                    
+
                     .ui-inputgroup-addon{
                         font-size: 50px;
                     }
-                    
+
                     .outN{
-                        font-size: 50px;
+
+                        font-family: Typo Round Bold Demo;
+                        font-size: 20px;
                     }
-                    
+
                     .outB{
                         color: #ffffff;
                         font-size: 20px;
@@ -78,195 +113,178 @@
                     .inB{
                         margin: 20px;
                     }
-                    
+
                     .bar{
                         background-color:rgb(61, 110, 56); 
                         color: white;
                     }
-                    
+
                     .edit{
                         background-color:rgb(61, 110, 56); 
                         margin-bottom: 10px;
                     }
 
-                    
-                    
+
+
                 </style>
-                
-                
-                
-                <p:sidebar class="bar" widgetVar="sidebar" position="top" baseZIndex="10000">
-
-
-                    
-
-                        <h:form>
-
-                            <h:outputText class="outB" value="Introduce tu contraseña:" />
-                            <p:inputText class="inB" value="#{profileControler.pass}" label="pass"/>
-
-
-                            <p:commandButton value="Confrimar contraseña"  action="#{profileControler.checkPassword()}" oncomplete="PF('sidebar2').show()"/>
-
-                        </h:form>
-
-                   
-
-                </p:sidebar>
-                
-                <p:sidebar class="bar" widgetVar="sidebar2" fullScreen="true" baseZIndex="10000">
-
-
-                    <div class="ed">
-                        
-                        <h:form>
-                            
-                            <p:growl id="message" showDetail="true" />
-                            
-                            <h:panelGrid columns="3" columnClasses="label, value">
-
-
-                                    <div class="ui-inputgroup">
-                                        <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                                        <p:inputText id="icon" placeholder="Nombre" value="#{profileControler.user.name}" required="true" style="margin-left: 0px;"/>
-                                        <p:message for="icon" display="icon" />
-                                    </div>
 
 
 
-                                    <div class="ui-inputgroup">
-                                        <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                                        <p:inputText id="sur1" placeholder="1º Apellido" value="#{profileControler.user.surname}" required="true"/>   
-                                         <p:message for="sur1" display="icon"/>
-                                    </div>
+
+
+                <p:growl id="message" showDetail="true" />
+
+
+                <h:form>             
 
 
 
-                                    <div class="ui-inputgroup">
-                                        <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                                        <p:inputText id="sur2" placeholder="2º Apellido" value="#{profileControler.user.surname2}" required="true"/>     
-                                         <p:message for="sur2" display="icon" />
-                                    </div>
-
-                                    <div class="ui-inputgroup">
-                                        <span class="ui-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                                        <p:calendar  placeholder="Fecha nacimiento" id="mask" value="#{profileControler.user.birthDate}" required="true" pattern="dd-MM-yyyy" mask="true" />    
-                                    <p:message for="mask" display="icon"/>
-                                    </div>
-
-
-
-                                    <div class="ui-inputgroup">
-                                        <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
-                                        <p:inputText id="user" placeholder="Usuario" value="#{profileControler.user.userName}" required="true"/>      
-                                         <p:message for="user" display="icon" />
-                                    </div>
-
-                                    <div class="ui-inputgroup">
-                                        <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                        <p:password  id="pass1" placeholder="Contraseña" value="#{profileControler.user.password}" feedback="true" match="pass2" promptLabel="Introduzca la contraseña" weakLabel="Debil"
-                                                    goodLabel="Segura" strongLabel="Muy segura" required="true"/>      
-                                         <p:message for="pass1" display="icon"/>
-                                    </div>
-                                
-                                <div class="ui-inputgroup">
-                                        <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                        <p:password id="pass2" placeholder="Repita contraseña" value="asd" required="true" />   
-                                         <p:message for="pass2" display="icon" />
-                                    </div>
-
-                                    <div class="ui-inputgroup">
-                                        <span class="ui-inputgroup-addon"><i class="pi pi-envelope"></i></span>
-                                        <p:inputText id="ema" placeholder="Email" value="#{profileControler.user.email}"  required="true"/>   
-                                        <p:message for="ema" display="icon"/>
-                                    </div>
-
-                                </h:panelGrid>
-                            
-                            <br></br>
-                            <br></br>
-                          
-                             <p:commandButton value="Guardar cambios"  action="#{profileControler.guardar()}" onclick="window.location.reload(true)"/>
-                            
-                        </h:form>
-
-                       
-                        
-                        
-                    </div>
-                        
-                        
-                
-
-                </p:sidebar>
-                
-                
                     <div class="general">
-                        
-                        <div class="izq">
-                        
+
+
+
                         <div class="contenidos">
-                            
+                            <div class="titulo">
+
+                                NIVEL: 
+
+                            </div>
+                            <h:panelGrid columns="3" >
+                                <h:outputText class="sig" value="Nivel #{profileControler.user.lv}"/>     
+                                <p:progressBar class="prg" value="#{profileControler.progreso}" labelTemplate="{value}%" displayOnly="true"/>
+                                <h:outputText class="sig" value=" Nivel #{profileControler.user.lv+1}"/>  
+
+                            </h:panelGrid>
+
+                            <div class="titulo">
+
+                                EDITAR DATOS PERSONALES:  
+
+                            </div>
+
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                            <h:outputText class="outN" value=" Nombre:"/>
-                            <h:outputText class="out" value="#{profileControler.user.name}"/>
-                        
+                            <h:outputText class="outN" value=" Nombre: "/>
+                            <h:inputText class="out" value="#{profileControler.user.name}"/>
+
                             <br></br>
-                        
+
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                            <h:outputText class="outN" value=" Apellido1:"/>
-                            <h:outputText class="out" value="#{profileControler.user.surname}"/>
-                        
+                            <h:outputText class="outN" value=" Apellido1: "/>
+                            <h:inputText class="out" value="#{profileControler.user.surname}"/>
+
                             <br></br>
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                            <h:outputText class="outN" value=" Apellido2:"/>
-                            <h:outputText class="out" value="#{profileControler.user.surname2}"/>
-                        
+                            <h:outputText class="outN" value=" Apellido2: "/>
+                            <h:inputText class="out" value="#{profileControler.user.surname2}"/>
+
                             <br></br>
-                        
+
                             <span class="ui-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                            <h:outputText class="outN" value=" Fecha de Nacimiento:"/>
-                            <h:outputText class="out" value="#{profileControler.myDate}"/>
-                        
+                            <h:outputText class="outN" value=" Fecha de Nacimiento: "/>
+                            <p:calendar   id="mask" value="#{profileControler.user.birthDate}" required="true" pattern="dd-MM-yyyy" mask="true" />    
+
+
                             <br></br>
-                        
-                            <span class="ui-inputgroup-addon"><i class="pi pi-envelope"></i></span>
-                            <h:outputText class="outN" value=" Email:"/>
-                            <h:outputText class="out" value="#{profileControler.user.email}"/>   
-                        
-                            <br></br>
-                        
+
+
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
-                            <h:outputText class="outN" value="Sobre ti:"/>
-                            <h:outputText class="out" value="#{profileControler.user.abaut}"/>  
-                            
+                            <h:outputText class="outN" value="Sobre ti: "/>
                             <br></br>
-                            <br></br>
-                            
-                            <h:outputText class="outl" value="Nivel"/>    <h:outputText class="out" value="#{profileControler.user.lv}"/>    
-                            <p:progressBar class="prg" value="#{profileControler.progreso}" labelTemplate="{value}%" displayOnly="true"/>
-                            <h:outputText class="sig" value="#{profileControler.user.lv+1}"/>    <h:outputText class="sig" value="Nivel"/>
-                            
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            
+                            <p:inputTextarea rows="10" cols="55" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" value="#{profileControler.user.abaut}" />
+                            <br />
+                            <h:outputText id="display" />
+
+                            <br/>
+                            <br/>
+
                             <h:form>
-                                <p:commandButton value="Modificar datos" oncomplete="PF('sidebar').show()" />
+                                <p:commandButton  style="margin-left: 10%; font-family:Typo Round Bold Demo; " value="Modificar datos"  />
                             </h:form>
-                            
+
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <div class="titulo">
+
+                                EDITAR USUARIO Y CONTRASEÑA 
+
+                            </div>
+
+
+                            <br></br>
+
+                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
+                            <h:outputText class="outN" value=" Nombre de usuario: "/>
+                            <h:inputText  class="out" value="#{profileControler.user.userName}" />    
+
+
+                            <br></br>
+
+
+                            <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>              
+                            <h:outputText class="outN" value="Contraseña: "/>
+
+
+                            <p:password  id="pass1"  value="#{registerConroler.user.password}" feedback="true" match="pass2" promptLabel="Introduzca la contraseña" weakLabel="Debil"
+                                         goodLabel="Segura" strongLabel="Muy segura" required="true"/>      
+                            <p:message for="pass1" display="icon"/>
+
+                            <br/>
+
+                            <span style="width: 10%;" class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                            <h:outputText class="outN" value="Repita contraseña: "/>
+
+                            <p:password id="pass2" value="asd" required="true" />   
+                            <p:message for="pass2" display="icon" />
+
+
+
+                            <br/>
+                            <br/>
+                            <br/>
+
+
+                            <h:form>
+                                <p:commandButton  style=" margin-left: 10%; font-family:Typo Round Bold Demo; " value="Modificar datos"/>
+                            </h:form>
+
+                            <br/>
+                            <br/>
+
+                            <div class="titulo">
+
+                                EDITAR CORREO:
+
+                            </div>
+                            <br/>
+                            <br/>
+                            <h:panelGrid columns="2" style="margin-left: 20%;width: 300px;margin-bottom: 5px;text-align: center;color: white;">
+
+                                <p:inputText class="input" value="#{activateControler.us.email}" style="width: 300px;color: white" />  
+
+
+                                <p:commandButton value="Reenviar Email"  action="#{activateControler.resentEmail()}" style=" margin-left: 5px;width: 150px; font-family:Typo Round Bold Demo;" />
+
+                            </h:panelGrid>
+
+
+
+
+
+
                         </div>
-                        
+
+
+
+
+
+
+
                     </div>
-                    
-                        
-                        
-                        
-                        
-                    </div>
-                        
-                    
+
+
+                </h:form>    
 
             </ui:define>
 
