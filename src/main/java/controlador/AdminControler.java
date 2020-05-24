@@ -49,6 +49,8 @@ public class AdminControler implements Serializable {
     
     private Category category;
     
+    private List<Category> listCategory;
+    
     private Category_recipe categoryRecipe;
     
     
@@ -78,6 +80,7 @@ public class AdminControler implements Serializable {
         
         user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         listRecipes=recipeEJB.findAll();
+        listCategory = categoryEJB.findAll();
         recipe = new Recipe();
         category = new Category();
        
@@ -137,6 +140,9 @@ public class AdminControler implements Serializable {
         try {
              List<Category_recipe> cr = categoryRecipeEJB.findByRecipeId(r.getId());
              for(int i=0; i<cr.size();i++){
+                 Category aux=categoryEJB.find(cr.get(i).getCategory());
+                 aux.setAmmount(aux.getAmmount()-1);
+                 categoryEJB.edit(aux);
                  categoryRecipeEJB.remove(cr.get(i));
              }
             
