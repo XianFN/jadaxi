@@ -13,6 +13,7 @@
             <ui:define name="content">
                 <h:form>
                     <p:growl id="messages" showDetail="true" />
+                   
                     <style>
                         .ui-widget-content {
                             border: 1px solid #a8a8a8;
@@ -52,12 +53,13 @@
                     <p:graphicImage value="#{viewRecipeControler.image}" styleClass="content" stream="false" style="margin-left: 25%; width: 50%; height: 50%"/>
                     <div>
                         <p:panel id="basic" header="Valoracion y añadir receta" style="margin-left: 25%; width: 49.8%; height: 50%">
-                            <h:panelGrid columns="2" cellpadding="10">
+                            <h:panelGrid class="fondoverde" columns="2" cellpadding="10">
                                 <p:rating value="#{viewRecipeControler.rating}" style="width: 200px; margin-right: 200%">
                                     <p:ajax event="rate" listener="#{viewRecipeControler.onrate}" update="messages" />
                                     <p:ajax event="cancel" listener="#{viewRecipeControler.oncancel}" update="messages" />
                                 </p:rating>
-                                <p:commandButton value="Guardar Receta" actionListener="#{viewRecipeControler.addToMyRecipes()}"   style="margin-left: 200%;"  />
+                                  <!--TODO comprobar nivel-->
+                                <p:commandButton value="Guardar Receta" actionListener="#{viewRecipeControler.addToMyRecipes()}"  update="messages" style="margin-left: 200%;"  />
 
                             </h:panelGrid>
                         </p:panel>

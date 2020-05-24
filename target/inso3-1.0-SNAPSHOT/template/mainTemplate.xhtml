@@ -39,7 +39,7 @@
                         <p:menuButton class="menuButtonn" value="Options" style=" margin: 3px 0px 0px 0px;" >
                             <p:menuitem value="Perfil" url="profile.xhtml" update="messages" icon="pi pi-save"/>
                             <p:menuitem value="Crear Receta" action="#{mainTemplateControler.goToCreateRecipe()}" update="messages" icon="pi pi-refresh"/>
-                            <p:menuitem value="Mis recetas"  ajax="false" icon="pi pi-times"/>
+                            <p:menuitem value="Mis recetas" url="sawRecipesUser.xhtml" icon="pi pi-times"/>
                             <p:menuitem value="Informacion"  ajax="false" icon="pi pi-times"/>
                             <p:menuitem value="Administracion"  action="#{mainTemplateControler.goToAdmin()}" update="messages" icon="pi pi-times"/>
                             <p:menuitem value="Cerrar sesion" url="../index.xhtml" icon="pi pi-times" immediate="true"/>

@@ -180,30 +180,48 @@ public class ViewRecipeControler implements Serializable {
             recipeEJB.edit(recipe);
             flagRate = false;
         } else {
-            FacesMessage message = new FacesMessage(null, "ALERTA", "Ya has votado esta receta");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "ALERTA", "Ya has votado esta receta");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
 
     public void oncancel() {
-        System.out.println("ljkahsdoñihasoñlidhaoiñsld");
+
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cancel Event", "Rate Reset");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     public void addToMyRecipes() {
-        int idUser = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getId();
 
-        User_recipes userRecipes = new User_recipes();
+        User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
 
-        userRecipes.setRecipe_id(recipe.getId());
-        userRecipes.setUser_id(idUser);
-        userRecipes.setCreated(false);
+        if (user.getLv() >= 1) {
 
-        try {
-            us_reEJB.create(userRecipes);
-        } catch (Exception e) {
-            System.out.println("Error al añadir a favoritos:" + e.getMessage());
+            int idUser = user.getId();
+            User_recipes userRecipes = new User_recipes();
+
+            userRecipes.setRecipe_id(recipe.getId());
+            userRecipes.setUser_id(idUser);
+            userRecipes.setCreated(false);
+
+            if (!us_reEJB.isJustStored(idUser, recipe.getId())) {
+                System.out.println("Creamos la receta");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Se ha añadido la receta");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                try {
+                    us_reEJB.create(userRecipes);
+                } catch (Exception e) {
+                    System.out.println("Error al añadir a favoritos:" + e.getMessage());
+                }
+
+            } else {
+
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "La receta ya esta en tus recetas");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            }
+        } else {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "No tienes nivel para guardar la receta, el nicel necesario es: 1 , y tu nivel es: " + user.getLv());
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
 

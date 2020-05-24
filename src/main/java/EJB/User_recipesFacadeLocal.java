@@ -29,5 +29,10 @@ public interface User_recipesFacadeLocal {
     List<User_recipes> findRange(int[] range);
 
     int count();
-    
+
+    List<User_recipes> findByUserId(int id);
+
+    boolean isJustStored(int idUSer, int idRecipe);
+
+
 }
