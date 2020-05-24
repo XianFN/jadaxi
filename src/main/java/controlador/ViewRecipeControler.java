@@ -4,6 +4,7 @@ import EJB.IngredientsFacadeLocal;
 import EJB.RecipeFacadeLocal;
 import EJB.Recipes_ingredientsFacadeLocal;
 import EJB.StepsFacadeLocal;
+import EJB.User_recipesFacadeLocal;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Blob;
@@ -23,6 +24,8 @@ import modelo.Ingredients;
 import modelo.Recipe;
 import modelo.Recipes_ingredients;
 import modelo.Steps;
+import modelo.User;
+import modelo.User_recipes;
 import org.primefaces.event.RateEvent;
 
 import org.primefaces.model.DefaultStreamedContent;
@@ -51,6 +54,9 @@ public class ViewRecipeControler implements Serializable {
     @EJB
     private StepsFacadeLocal stepsEJB;
 
+    @EJB
+    private User_recipesFacadeLocal us_reEJB;
+
     private int idRecipe;
     private Recipe recipe;
 
@@ -59,10 +65,11 @@ public class ViewRecipeControler implements Serializable {
     private List<otherIngredient> ingredientsList;
     private List<Steps> stepsList;
     private Integer rating;
+    private boolean flagRate = true;
 
     @PostConstruct
     public void inicio() {
-
+        flagRate = true;
         recipe = null;
         idRecipe = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("recipe");
         System.out.println("ID: " + idRecipe);
@@ -160,23 +167,44 @@ public class ViewRecipeControler implements Serializable {
      * @param rateEvent
      */
     public void onrate(RateEvent rateEvent) {
-        System.out.println("ljkahsdoñihasoñlidhaoiñsld");
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Rate Event", "You rated:" + rateEvent.getRating());
-        FacesContext.getCurrentInstance().addMessage(null, message);
 
-        int ratings = recipe.getTotalRating();
-        int peopleRated = recipe.getPeopleRating();
-        ratings = ratings + (int) rateEvent.getRating();
-        peopleRated++;
-        recipe.setTotalRating(ratings);
-        recipe.setPeopleRating(peopleRated);
-        recipeEJB.edit(recipe);
+        if (flagRate) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Rate Event", "You rated:" + rateEvent.getRating());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            int ratings = recipe.getTotalRating();
+            int peopleRated = recipe.getPeopleRating();
+            ratings = ratings + (int) rateEvent.getRating();
+            peopleRated++;
+            recipe.setTotalRating(ratings);
+            recipe.setPeopleRating(peopleRated);
+            recipeEJB.edit(recipe);
+            flagRate = false;
+        } else {
+            FacesMessage message = new FacesMessage(null, "ALERTA", "Ya has votado esta receta");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
     }
 
     public void oncancel() {
         System.out.println("ljkahsdoñihasoñlidhaoiñsld");
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cancel Event", "Rate Reset");
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public void addToMyRecipes() {
+        int idUser = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getId();
+
+        User_recipes userRecipes = new User_recipes();
+
+        userRecipes.setRecipe_id(recipe.getId());
+        userRecipes.setUser_id(idUser);
+        userRecipes.setCreated(false);
+
+        try {
+            us_reEJB.create(userRecipes);
+        } catch (Exception e) {
+            System.out.println("Error al añadir a favoritos:" + e.getMessage());
+        }
     }
 
     public class otherIngredient {
@@ -216,5 +244,4 @@ public class ViewRecipeControler implements Serializable {
         }
 
     }
-
 }

@@ -48,17 +48,16 @@
 
                     </style>
 
-
+                    <!--TODO arreglar color verde claro en el desplegable -->
                     <p:graphicImage value="#{viewRecipeControler.image}" styleClass="content" stream="false" style="margin-left: 25%; width: 50%; height: 50%"/>
                     <div>
                         <p:panel id="basic" header="Valoracion y añadir receta" style="margin-left: 25%; width: 49.8%; height: 50%">
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:rating value="#{viewRecipeControler.rating}">
+                                <p:rating value="#{viewRecipeControler.rating}" style="width: 200px; margin-right: 200%">
                                     <p:ajax event="rate" listener="#{viewRecipeControler.onrate}" update="messages" />
                                     <p:ajax event="cancel" listener="#{viewRecipeControler.oncancel}" update="messages" />
                                 </p:rating>
-
-                                    <p:commandButton value="Ajax Submit" id="ajax" update="growl"  style="margin-right:20px;" styleClass="ui-priority-primary" />
+                                <p:commandButton value="Guardar Receta" actionListener="#{viewRecipeControler.addToMyRecipes()}"   style="margin-left: 200%;"  />
 
                             </h:panelGrid>
                         </p:panel>
