@@ -25,14 +25,22 @@
                         height:50%;
                         text-align:center;
                         background-color:rgb(61, 110, 56); 
-                       margin-left: 30%;
+                        margin-left: 30%;
                         margin-top: 5%;
                         border-style: inset;
                         border-width: 10px;
-                
+
                         border-color: 	rgb(86, 87, 56) rgb(162, 204, 161) ;
+                        font-family: Garlic Sans;
+                        font-size: 20px;
 
 
+
+                    }
+                    .ui-selectonelistbox .ui-selectlistbox-item, .ui-selectmanymenu .ui-selectlistbox-item, .ui-multiselectlistbox .ui-multiselectlistbox-item {
+                        cursor: pointer;
+                        font-weight: normal;
+                        font-family: Typo Round Bold Demo;
                     }
 
                     .bar{
@@ -64,11 +72,13 @@
                         color: #ffffff;
                         background-color: rgb(61, 110, 56);   
                         height: 270px;
+                        font-family: Typo Round Bold Demo;
                     }
 
                     .out{
                         color: #ffffff;
                         font-size: 20px;
+                        font-family: Typo Round Bold Demo;
                     }
 
                     .in{
@@ -121,16 +131,16 @@
 
                 <p:sidebar class="bar" widgetVar="sidebar" position="top" baseZIndex="10000">
 
-                    <h1 style="font-weight:normal">Añadir un nuevo ingrediente.</h1>
+                    <h1 style="font-weight:normal ;font-family: Typo Round Bold Demo;" >Añadir un nuevo ingrediente:</h1>
 
                     <div class="ingredient">
 
                         <h:form>
 
-                            <h:outputText class="out" value="Nombre del ingrediente:" />
+                            <h:outputText class="out" value=" Nombre del ingrediente:" />
                             <p:inputText class="in" value="#{createRecipeControler.ingredient.name}" required="true" label="Nombre"/>
 
-                            <h:outputText class="out" value="Calorías:" />
+                            <h:outputText class="out" value=" Calorías:" />
                             <p:inputText class="in" value="#{createRecipeControler.ingredient.calories}" required="true" label="Calorias"/>
 
                             <p:commandButton value="Crear" action="#{createRecipeControler.insertIngredient()}" onclick="window.location.reload(true)" oncomplete="PF('sidebar').hide()"/>
@@ -194,7 +204,7 @@
 
                                 <h:form>
 
-                                    <p:commandButton value="Crear un ingradiente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/>
+                                    <p:commandButton  style="height: 40px;" value="Crear un ingrediente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/>
 
                                 </h:form>
 
@@ -225,7 +235,7 @@
                                     <p:inputText class="in" value="#{createRecipeControler.steps.title}" required="true" label="Titulo"/>
 
 
-                                    <p:textEditor id="tx" class="text" widgetVar="editor2" value="#{createRecipeControler.steps.description}" placeholder="Describa el procedimiento a realizar en este paso.">
+                                    <p:textEditor id="tx" class="text" style="font-family: Typo Round Bold Demo;" widgetVar="editor2" value="#{createRecipeControler.steps.description}" placeholder="Describa el procedimiento a realizar en este paso.">
                                         <f:facet name="toolbar"><span class="ql-formats"/></f:facet>
                                     </p:textEditor>
 

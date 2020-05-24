@@ -1,10 +1,23 @@
-
-
+ @font-face
+                    {
+                        font-family: 'Typo Round Bold Demo';
+                        font-weight: normal;
+                        font-style: normal;
+                        src: url('../fonts/Typo_Round_Bold_Demo.otf')format('truetype');
+                    }
+                    @font-face
+                    {
+                        font-family: 'Garlic Sans';
+                        font-weight: normal;
+                        font-style: normal;
+                        src: url('../fonts/Garlic-Sans-Regular.ttf')format('truetype');
+                    }
 
 .topMenu{
     
     height:40px;
     background-color:rgb(61, 110, 56); 
+    font-family: Typo Round Bold Demo;
 
 }
 
@@ -16,5 +29,6 @@
 
 
 }
+
 
 

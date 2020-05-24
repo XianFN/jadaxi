@@ -1,4 +1,18 @@
-
+ @font-face
+                    {
+                        font-family: 'Typo Round Bold Demo';
+                        font-weight: normal;
+                        font-style: normal;
+                        src: url('../resources/fonts/Typo_Round_Bold_Demo.otf')format('truetype');
+                    }
+                    @font-face
+                    {
+                        font-family: 'Garlic Sans';
+                        font-weight: normal;
+                        font-style: normal;
+                        src: url('../resources/fonts/Garlic-Sans-Regular.ttf')format('truetype');
+                    }
+                    
 #top {
     position: relative;
     background-color: #036fab;
@@ -10,6 +24,7 @@
 #bottom {
     position: relative;
     background-color: #c2dfef;
+    font-family:Garlic Sans; 
     padding: 5px;
     margin: 10px 0px 0px 0px;
     font-style: oblique;
