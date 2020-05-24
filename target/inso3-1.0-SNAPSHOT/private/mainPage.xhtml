@@ -20,6 +20,42 @@
         <ui:composition template="./../template/mainTemplate.xhtml">
 
             <ui:define name="content">
+                <style>
+                  .noHeader.ui-datatable table thead tr {
+    display: none;
+}
+                    .ui-panel {
+                        padding: .0em; 
+                    }
+                    .ui-panel .ui-panel-content {
+                        border: 0;
+                        height: 150px; 
+                        width: 100%;
+                        background: 0;
+                        padding: .1em 1em;
+                        padding-left: 0px;padding-right: 0px;
+                        background-color:rgb(61, 110, 56); 
+
+                    
+                    }
+                    .ui-panel .ui-panel-titlebar {
+    padding: .3em 1em .2em;
+    height: 40px;
+    border: 1px;
+    background-color: rgb(61, 110, 56); 
+    border-color: black;
+}
+.ui-widget-content {
+    border: 1px solid #a8a8a8;
+    background-color: rgba(152,210,128,0.6);
+    color: black;
+}
+.ui-widget-header {
+    text-shadow: 0px 0 rgba(0,0,0,1);
+}
+                   
+                
+                </style>
 
                 <script>
 
@@ -44,44 +80,38 @@
 
                     <p:graphicImage value="#{image}" styleClass="content" stream="false" onclick="clickFlow(this, event, '#{image}')"/>
 
-                    
+
 
                 </p:contentFlow>
 
-
-                <p:graphicImage value="#{image}" styleClass="content" stream="false"/>
-
                 <h:form>
 
-                    <p:commandButton class ="btn"  value="Ensaladas" action="#{mainPageControler.goToviewRecipesInCategories('Ensaladas')}"/>
-                    <p:commandButton class ="btn" value="Legumbres" action="#{mainPageControler.goToviewRecipesInCategories('Legumbres')}"/>
-                    <p:commandButton class ="btn" value="Carnes" action="#{mainPageControler.goToviewRecipesInCategories('Carnes')}"/>
-                    <p:commandButton class ="btn" value="Pescado" action="#{mainPageControler.goToviewRecipesInCategories('Pescado')}"/>
-                    <p:commandButton class ="btn" value="Vegetariana" action="#{mainPageControler.goToviewRecipesInCategories('Vegetariana')}"/>
+
+0
 
 
-                    <p:commandButton class ="btn" value="Carne de pollo" action="#{mainPageControler.goToviewRecipesInCategories('Carne de pollo')}" />
-                    <p:commandButton class ="btn" value="Carne de vaca" action="#{mainPageControler.goToviewRecipesInCategories('Carne de vaca')}"/>
-                    <p:commandButton class ="btn" value="Carne de cerdo" action="#{mainPageControler.goToviewRecipesInCategories('Carne de cerdo')}"/>
-                    <p:commandButton class ="btn" value="Carne de pavo" action="#{mainPageControler.goToviewRecipesInCategories('Carne de pavo')}"/>
+
+                    <p:dataView  class="noHeader" var="buttons" value="#{mainPageControler.categories}"
+                                 gridIcon="pi pi-th-large" listIcon="pi pi-bars" layout="grid" widgetVar="asdasd" >
+
+                        <p:dataViewGridItem columns="6"  >
+                            <p:panel header="#{buttons.name}" style="text-align:center;">
+                                <h:panelGrid columns="1" style="  padding-top: 10%; padding-bottom: 5%; padding-left: 0px;padding-right: 0px;">
 
 
+
+                                    <p:commandButton  style="background-color: rgb(0, 102, 0); color: black ; text-shadow: 0px 0 rgba(0,0,0,1);" value="Ver todas las recetas de #{buttons.name}" action="#{mainPageControler.goToviewRecipesInCategories(buttons.name)}"/>
+
+                                </h:panelGrid>
+                            </p:panel>   
+                        </p:dataViewGridItem>
+
+
+                    </p:dataView>
 
                 </h:form>
 
-
-
-
-
-
-
             </ui:define>
-
-
-
-
-
-
 
 
         </ui:composition>

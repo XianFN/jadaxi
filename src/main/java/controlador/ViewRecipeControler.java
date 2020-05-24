@@ -4,6 +4,7 @@ import EJB.IngredientsFacadeLocal;
 import EJB.RecipeFacadeLocal;
 import EJB.Recipes_ingredientsFacadeLocal;
 import EJB.StepsFacadeLocal;
+import EJB.UserFacadeLocal;
 import EJB.User_recipesFacadeLocal;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -45,6 +46,9 @@ public class ViewRecipeControler implements Serializable {
 
     @EJB
     private RecipeFacadeLocal recipeEJB;
+    
+    @EJB
+    private UserFacadeLocal userEJB;
 
     @EJB
     private Recipes_ingredientsFacadeLocal rec_ingEJB;
@@ -169,6 +173,7 @@ public class ViewRecipeControler implements Serializable {
     public void onrate(RateEvent rateEvent) {
 
         if (flagRate) {
+
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Rate Event", "You rated:" + rateEvent.getRating());
             FacesContext.getCurrentInstance().addMessage(null, message);
             int ratings = recipe.getTotalRating();
@@ -179,6 +184,19 @@ public class ViewRecipeControler implements Serializable {
             recipe.setPeopleRating(peopleRated);
             recipeEJB.edit(recipe);
             flagRate = false;
+            
+            
+            
+            /**
+             * Conjunto de subir de nivel
+             */
+            User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
+            int xpadd2 = user.getLv()<5 ? 10 - user.getLv() : 5;
+            user.setXp(user.getXp() + xpadd2);
+            user.setLv((int) (user.getXp() / 100));
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
+            userEJB.edit(user);
+            
         } else {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "ALERTA", "Ya has votado esta receta");
             FacesContext.getCurrentInstance().addMessage(null, message);

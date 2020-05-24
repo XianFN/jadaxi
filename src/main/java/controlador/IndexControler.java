@@ -5,13 +5,18 @@
  */
 package controlador;
 
+import EJB.CategoryFacadeLocal;
 import EJB.UserFacadeLocal;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import modelo.Category;
+import modelo.Recipe;
 import modelo.User;
 
 /**
@@ -33,8 +38,11 @@ public class IndexControler implements Serializable {
     @EJB
     private UserFacadeLocal userEJB;
 
+
+
     @PostConstruct
     public void inicio() {
+
         System.out.println("FUERA");
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();//Nos borra la sesion poara que al iniciar o al hacer logout se limpie
 
@@ -116,5 +124,6 @@ public class IndexControler implements Serializable {
         }
 
     }
+
 
 }

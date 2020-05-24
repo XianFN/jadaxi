@@ -7,12 +7,7 @@ package controlador;
 
 import EJB.CategoryFacadeLocal;
 import EJB.RecipeFacadeLocal;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
 import java.io.InputStream;
 
 import java.io.Serializable;
@@ -26,12 +21,12 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.imageio.ImageIO;
+
 import javax.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
 import modelo.Category;
 import modelo.Recipe;
-import org.primefaces.component.contentflow.ContentFlow;
+
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -51,6 +46,8 @@ public class MainPageControler implements Serializable {
     private List<Recipe> recipes;
 
     private List<StreamedContent> images;
+
+    private List<Category> categories;
 
     @PostConstruct
     public void init() {
@@ -80,8 +77,9 @@ public class MainPageControler implements Serializable {
     public List<StreamedContent> getImages() {
         return images;
     }
-
+//TODO actualizar a top 15/10
     //TODO PREGUNTAR si se pueden crear botones desde la vista de java
+
     public String goToviewRecipesInCategories(String category) {
 
         Object ob = category;
@@ -114,6 +112,16 @@ public class MainPageControler implements Serializable {
         StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg", "nombre.jpeg");
 
         return dbImage;
+    }
+
+    public List<Category> getCategories() {
+
+        categories = new ArrayList<>();
+
+        categories = categoryEJB.findAll();
+        
+        return categories;
+
     }
 
 }

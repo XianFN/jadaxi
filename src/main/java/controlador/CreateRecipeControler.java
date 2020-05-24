@@ -230,11 +230,12 @@ public class CreateRecipeControler implements Serializable{
        }
         
        try {
-           User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-           user.setXp(user.getXp()+20/(user.getLv()+1));
-           user.setRecipes(user.getRecipes()+1);
-           userEJB.edit(user);
-           subirNivel(user);
+           User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
+           
+            user.setXp(user.getXp() + 80);
+            user.setLv((int) (user.getXp() / 100));
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
+             userEJB.edit(user);
         } catch (Exception e) {
             System.out.println("Error al añadir EXP: " + e.getMessage());
         }
@@ -337,13 +338,7 @@ public class CreateRecipeControler implements Serializable{
             }
     }
     
-    
-    public void subirNivel(User user){
-        if(user.getLv()!=((int)user.getXp()/100)){
-            user.setLv(user.getLv()+1);
-            userEJB.edit(user);
-        }
-    }
+   
     
      public void checkLevel() throws IOException{
 
