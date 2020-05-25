@@ -63,7 +63,7 @@ public class MainTemplateControler implements Serializable {
             return "";
 
         } else {
-            return "createRecipe.xhtml";
+            return "createRecipe.xhtml?faces-redirect=true";
         }
 
     }
@@ -81,7 +81,7 @@ public class MainTemplateControler implements Serializable {
             return "";
 
         } else {
-            return "admin.xhtml";
+            return "admin.xhtml?faces-redirect=true";
         }
 
     }
