@@ -6,10 +6,9 @@
 package controlador;
 
 import EJB.UserFacadeLocal;
-import java.io.IOException;
+
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -19,83 +18,101 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.User;
-import org.primefaces.model.chart.Axis;
-import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.chart.ChartSeries;
-import org.primefaces.model.chart.HorizontalBarChartModel;
-
 
 /**
  *
  * @author David Rosales
  */
-
 @Named
 @ViewScoped
 public class ProfileControler implements Serializable {
-    
-    private User user;
-    
+
+    private User us;
     private int progreso;
     
-    private String myDate;
+    private String name;
     
-    private String pass;
     
     
     @EJB
     private UserFacadeLocal userEJB;
-    
-    @PostConstruct
-    public void inicio() {
 
-        user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-        
-        int level = user.getLv();
-        int exp = (int) user.getXp();
-        progreso=exp%100;
-        
-        myDate = new SimpleDateFormat("dd-MM-yyyy").format(user.getBirthDate());
-                
+    @PostConstruct
+    public void init() {
+
+        us = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+
+        System.out.println("us:" + us.toString());
+
+        int level = us.getLv();
+        int exp = (int) us.getXp();
+        progreso = exp % 100;
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
-    public void setUser(User user){
-        this.user=user;
-    }
     
-    public User getUser(){
-        return user;
+
+    public User getUs() {
+        return us;
     }
-    
-    public int getProgreso(){
+
+    public void setUs(User us) {
+        this.us = us;
+    }
+
+    public int getProgreso() {
         return progreso;
     }
-    
-    public String getMyDate(){
-        return myDate;
-    }
-    
-     public void setPass(String pass){
-        this.pass=pass;
-    }
-    
-    public String getPass(){
-        return pass;
-    }
-    
-    public void checkPassword() throws IOException{
 
-        if (!((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getPassword().equals(pass)) {
+    public void setProgreso(int progreso) {
+        this.progreso = progreso;
+    }
+    
+    private boolean checkUserName(String user) {
 
-            System.out.println("Fallo al introducir la contraseña");
-            FacesContext.getCurrentInstance().getExternalContext().redirect("notAcess.xhtml");
+        List<User> users = null;
+        try {
+            users = userEJB.findAll();
+        } catch (Exception e) {
+            System.out.println("Fallo al traer los nombres de usuario: " + e.getMessage());
         }
 
+        for (int i = 0; i < users.size(); i++) {
+
+            if (users.get(i).getUserName().equals(user)) {
+                System.out.println("Se repiten " + user + " y " + users.get(i).getUserName());
+                return false;
+            }
+
+        }
+
+        return true;
+
     }
     
-    public void guardar(){
-        userEJB.edit(user);
+    
+    public String modifyUserName(){
+        
+        
+        if(checkUserName(us.getUserName())){
+            
+        }else{
+            
+        }
+        
+        
+        return "";
     }
     
+    
+    
+
 }

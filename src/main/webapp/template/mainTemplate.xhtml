@@ -23,31 +23,57 @@
 
     <h:body style="background-image: url(../resources/images/fondo2.jpg)">
         <style>
-             @font-face
-                    {
-                        font-family: 'Typo Round Bold Demo';
-                        font-weight: normal;
-                        font-style: normal;
-                        src: url('../resources/fonts/Typo_Round_Bold_Demo.otf')format('truetype');
-                    }
-                    @font-face
-                    {
-                        font-family: 'Garlic Sans';
-                        font-weight: normal;
-                        font-style: normal;
-                        src: url('../resources/fonts/Garlic-Sans-Regular.ttf')format('truetype');
-                    }
-                    .ui-menu .ui-menu-list .ui-menuitem {
-   font-family: Garlic Sans;
-font-size: 18px;
-                    }
-.ui-button .ui-button-text {
-    display: block;
-    line-height: normal;
-       font-family: Garlic Sans;
-       font-size: 20px;
-}
-          
+            @font-face
+            {
+                font-family: 'Typo Round Bold Demo';
+                font-weight: normal;
+                font-style: normal;
+                src: url('../resources/fonts/Typo_Round_Bold_Demo.otf')format('truetype');
+            }
+            @font-face
+            {
+                font-family: 'Garlic Sans';
+                font-weight: normal;
+                font-style: normal;
+                src: url('../resources/fonts/Garlic-Sans-Regular.ttf')format('truetype');
+            }
+            .ui-menu .ui-menu-list .ui-menuitem {
+                font-family: Garlic Sans;
+                font-size: 18px;
+            }
+            .ui-button .ui-button-text {
+                display: block;
+                line-height: normal;
+                font-family: Garlic Sans;
+                font-size: 20px;
+            }
+            .primeraColumna {
+                width: 5%;
+            }
+
+            .SegundaColumna {
+                width: 15%;
+            }
+            .TerceraColumna {
+                width: 5%;
+                text-align: right;
+            }
+            .CuartaColumna {
+                width: 55%;
+            }
+            .QuintaColumna {
+                width: 15%;
+                text-align: left;
+            }
+            .SextaColumna {
+                width: 10%;
+            }
+            .ui-progressbar {
+                height: 1.2em;
+                text-align: left;
+                position: relative;
+            }
+
         </style>
 
 
@@ -55,24 +81,35 @@ font-size: 18px;
             <ui:insert name="top">
                 <p:growl id="messages" showDetail="true" severity="info,warn"/>
                 <h:form>
-                    <div class ="topMenu" style="font-family: Garlic Sans;">
+                    <div class ="topMenu" style="  font-family: Garlic Sans;">
 
-                        <p:linkButton  outcome="mainPage" id="iconOnly" icon="pi pi-home" title="Icon Only" />
+                        <h:panelGrid columns="6" columnClasses="primeraColumna,SegundaColumna,TerceraColumna,CuartaColumna,QuintaColumna,SextaColumna" style="width: 100%;">     
+
+                            <p:linkButton  outcome="mainPage" id="iconOnly" icon="pi pi-home" title="Icon Only" />
+
+                            <p:outputLabel style="font-family: Garlic Sans;" value="User: #{mainTemplateControler.us.userName}"/>
+
+
+                            <h:outputText style="font-family: Garlic Sans;" value="Nivel #{mainTemplateControler.us.lv}"/>     
+                            <p:progressBar style="font-family: Garlic Sans;"   value="#{mainTemplateControler.progreso}" labelTemplate="{value}%" displayOnly="true"/>
+                            <h:outputText  style="font-family: Garlic Sans;" value=" Nivel #{mainTemplateControler.us.lv+1}"/> 
 
 
 
 
-                        <p:menuButton class="menuButtonn" value="Menú" style=" margin: 3px 0px 0px 0px;" >
-                            <p:menuitem value="Perfil" style="font-family: Garlic Sans;" url="profile.xhtml" update="messages" icon="pi pi-pencil"/>
-                            <p:menuitem value="Crear Receta" action="#{mainTemplateControler.goToCreateRecipe()}" update="messages" icon="pi pi-plus"/>
-                            <p:menuitem value="Mis recetas" url="sawRecipesUser.xhtml" icon="pi pi-list"/>
-                            <p:menuitem value="Informacion"  ajax="false" icon="pi pi-info"/>
-                            <p:menuitem value="Administracion"  action="#{mainTemplateControler.goToAdmin()}" update="messages" icon="pi pi-cog"/>
-                            <p:menuitem value="Cerrar sesion" url="../index.xhtml" icon="pi pi-power-off" immediate="true"/>
+                            <p:menuButton class="menuButtonn" value="Menú" style=" margin: 2px 0px 0px 0px;" >
+                                <p:menuitem value="Perfil" style="font-family: Garlic Sans;" url="profile.xhtml" update="messages" icon="pi pi-pencil"/>
+                                <p:menuitem value="Crear Receta" action="#{mainTemplateControler.goToCreateRecipe()}" update="messages" icon="pi pi-plus"/>
+                                <p:menuitem value="Mis recetas" url="sawRecipesUser.xhtml" icon="pi pi-list"/>
+                                <p:menuitem value="Informacion"  ajax="false" icon="pi pi-info"/>
+                                <p:menuitem value="Administracion"  action="#{mainTemplateControler.goToAdmin()}" update="messages" icon="pi pi-cog"/>
+                                <p:menuitem value="Cerrar sesion" url="../index.xhtml" icon="pi pi-power-off" immediate="true"/>
 
-                            <p:separator />
+                                <p:separator />
 
-                        </p:menuButton>
+                            </p:menuButton>
+                        </h:panelGrid>
+
 
 
                     </div>
@@ -84,10 +121,10 @@ font-size: 18px;
         <div id="content" class="center_content">
             <ui:insert name="content"></ui:insert>
         </div>
-       
+
         <div id="bottom" style=" font-family: Garlic Sans; font-style: oblique; background-color: #999897; padding: 5px; margin: 5% 0px 0px 0px;">
-            
-           
+
+
 
             Todos los derechos a Jadaxi y CocinaloTodo ©2020  
             <br/>

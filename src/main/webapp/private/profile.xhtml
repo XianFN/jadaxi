@@ -7,7 +7,7 @@
 
 
 
-    <body>
+    <h:body>
 
         <ui:composition template="./../template/mainTemplate.xhtml">
 
@@ -54,7 +54,7 @@
                         background-color: lightgray;
                         color:black;
                         font-size: 50px;
-                       
+
                         font-family: Garlic Sans;
 
 
@@ -150,9 +150,9 @@
 
                             </div>
                             <h:panelGrid columns="3" >
-                                <h:outputText class="sig" value="Nivel #{profileControler.user.lv}"/>     
+                                <h:outputText class="sig" value="Nivel #{profileControler.us.lv}"/>     
                                 <p:progressBar class="prg" value="#{profileControler.progreso}" labelTemplate="{value}%" displayOnly="true"/>
-                                <h:outputText class="sig" value=" Nivel #{profileControler.user.lv+1}"/>  
+                                <h:outputText class="sig" value=" Nivel #{profileControler.us.lv+1}"/>  
 
                             </h:panelGrid>
 
@@ -164,24 +164,24 @@
 
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
                             <h:outputText class="outN" value=" Nombre: "/>
-                            <h:inputText class="out" value="#{profileControler.user.name}"/>
+                            <p:inputText class="out" value="#{profileControler.us.name}"/>
 
                             <br></br>
 
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
                             <h:outputText class="outN" value=" Apellido1: "/>
-                            <h:inputText class="out" value="#{profileControler.user.surname}"/>
+                            <p:inputText class="out"   value="#{profileControler.us.surname}"/>
 
                             <br></br>
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
                             <h:outputText class="outN" value=" Apellido2: "/>
-                            <h:inputText class="out" value="#{profileControler.user.surname2}"/>
+                            <p:inputText class="out"  value="#{profileControler.us.surname2}"/>
 
                             <br></br>
 
                             <span class="ui-inputgroup-addon"><i class="pi pi-calendar"></i></span>
                             <h:outputText class="outN" value=" Fecha de Nacimiento: "/>
-                            <p:calendar   id="mask" value="#{profileControler.user.birthDate}" required="true" pattern="dd-MM-yyyy" mask="true" />    
+                            <p:calendar   id="mask"  value="#{profileControler.us.birthDate}" required="true" pattern="dd-MM-yyyy" mask="true" />    
 
 
                             <br></br>
@@ -190,7 +190,7 @@
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
                             <h:outputText class="outN" value="Sobre ti: "/>
                             <br></br>
-                            <p:inputTextarea rows="10" cols="55" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" value="#{profileControler.user.abaut}" />
+                            <p:inputTextarea rows="10" cols="55" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" value="#{profileControler.us.abaut}" />
                             <br />
                             <h:outputText id="display" />
 
@@ -207,26 +207,40 @@
 
                             <div class="titulo">
 
-                                EDITAR USUARIO Y CONTRASEÑA 
+                                EDITAR USUARIO
 
                             </div>
 
+                            <br/>
 
-                            <br></br>
+                            <h:form>
+                                <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
+                                <h:outputText class="outN" value=" Nombre de usuario: "/>
+                                <p:inputText id="fr"  class="out"  value="#{profileControler.us.userName}" />    
+                                #{profileControler.us.userName}
+                                <br/>
+                                <br/>
+                                <br/>
 
-                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
-                            <h:outputText class="outN" value=" Nombre de usuario: "/>
-                            <h:inputText  class="out" value="#{profileControler.user.userName}" />    
 
 
-                            <br></br>
+                                <p:commandButton class="alkdsnhoñ" value="Modificar g datos"   style=" margin-left: 10%; font-family:Typo Round Bold Demo;" action="#{profileControler.modifyUserName()}" process="@this"/>
+                            </h:form>
+                            <br/>
+                            <br/>
+                            <div class="titulo">
 
+                                EDITAR CONTRASEÑA
+
+                            </div>
+                            <br/>
+                            <br/>
 
                             <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>              
                             <h:outputText class="outN" value="Contraseña: "/>
 
 
-                            <p:password  id="pass1"  value="#{registerConroler.user.password}" feedback="true" match="pass2" promptLabel="Introduzca la contraseña" weakLabel="Debil"
+                            <p:password  id="pass1"  value="#{profileControler.us.password}" feedback="true" match="pass2" promptLabel="Introduzca la contraseña" weakLabel="Debil"
                                          goodLabel="Segura" strongLabel="Muy segura" required="true"/>      
                             <p:message for="pass1" display="icon"/>
 
@@ -246,7 +260,7 @@
 
 
                             <h:form>
-                                <p:commandButton  style=" margin-left: 10%; font-family:Typo Round Bold Demo; " value="Modificar datos"/>
+                                <p:commandButton update="messages" style=" margin-left: 10%; font-family:Typo Round Bold Demo;" actionListener="#{profileControler.modifyPassword}" value="Modificar datos"/>
                             </h:form>
 
                             <br/>
@@ -261,10 +275,10 @@
                             <br/>
                             <h:panelGrid columns="2" style="margin-left: 20%;width: 300px;margin-bottom: 5px;text-align: center;color: white;">
 
-                                <p:inputText class="input" value="#{activateControler.us.email}" style="width: 300px;color: white" />  
+                                <p:inputText class="input"  style="width: 300px;color: white" />  
 
 
-                                <p:commandButton value="Reenviar Email"  action="#{activateControler.resentEmail()}" style=" margin-left: 5px;width: 150px; font-family:Typo Round Bold Demo;" />
+                                <p:commandButton value="Reenviar Email"  action="#{profileControler}" style=" margin-left: 5px;width: 150px; font-family:Typo Round Bold Demo;" />
 
                             </h:panelGrid>
 
@@ -290,5 +304,5 @@
 
         </ui:composition>
 
-    </body>
+    </h:body>
 </html>

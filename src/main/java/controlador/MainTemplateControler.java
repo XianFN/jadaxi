@@ -26,9 +26,16 @@ import modelo.User;
 @ViewScoped
 public class MainTemplateControler implements Serializable {
 
+    private User us;
+    private int progreso;
+
     @PostConstruct
     public void inicio() {
+        us = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 
+        int level = us.getLv();
+        int exp = (int) us.getXp();
+        progreso = exp % 100;
     }
 
     public void checkAndShow() throws IOException {
@@ -40,6 +47,24 @@ public class MainTemplateControler implements Serializable {
         }
 
     }
+
+    public User getUs() {
+        return us;
+    }
+
+    public void setUs(User us) {
+        this.us = us;
+    }
+
+    public int getProgreso() {
+        return progreso;
+    }
+
+    public void setProgreso(int progreso) {
+        this.progreso = progreso;
+    }
+    
+    
 
     public String out() {
         System.out.println("logOut");
@@ -67,6 +92,7 @@ public class MainTemplateControler implements Serializable {
         }
 
     }
+
     public String goToAdmin() {
 
         System.out.println("ENTRA Isdcfvbnm,");

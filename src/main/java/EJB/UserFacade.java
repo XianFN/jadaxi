@@ -46,6 +46,7 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
     public User getUserURL(User user) {
         System.out.println("EJB: " + user.toString());
         List<User> results = null;
+        User ret= null;
         try {
             String hql = "FROM User u WHERE u.userName=:param1 and u.password=:param2";
             Query query = em.createQuery(hql);
@@ -53,11 +54,17 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
             query.setParameter("param2", user.getPassword());
             results = query.getResultList();
 
-            System.out.println(results.get(0).toString());
+        
+            if (results.isEmpty()) {
+                    ret = null;
+             
+            }else{
+                ret= results.get(0);
+            }
         } catch (Exception e) {
             System.out.println("Algo ha salido mal al loguearse: " + e.getMessage());
         }
-        return results.get(0);
+        return ret;
 
     }
     

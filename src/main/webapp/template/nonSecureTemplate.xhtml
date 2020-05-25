@@ -8,42 +8,43 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      
-          <link rel="icon" type="image/png" sizes="192x192" href="resources/images/icon.png"/>
-         <link rel="stylesheet" href="../resources/css/styleRegister.css"/>
-         
-         <!-- <link rel="stylesheet" href="../resources/css/default.css"/>
-          <link rel="stylesheet" href="../resources/css/cssLayout.css"/> -->
-         
+
+        <link rel="icon" type="image/png" sizes="192x192" href="resources/images/icon.png"/>
+        <link rel="stylesheet" href="../resources/css/styleRegister.css"/>
+
+        <!-- <link rel="stylesheet" href="../resources/css/default.css"/>
+         <link rel="stylesheet" href="../resources/css/cssLayout.css"/> -->
+
         <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
-       
-                <title>Cocínalo Todo</title>
-     
+
+        <title>Cocínalo Todo</title>
+
     </h:head>
 
     <h:body style="background-image: url(resources/images/fondo2.jpg)">
+        <p:growl id="growl" showDetail="true" sticky="true" /> 
         <style>
-          
-             @font-face
-                    {
-                        font-family: 'Typo Round Bold Demo';
-                        font-weight: normal;
-                        font-style: normal;
-                        src: url('../resources/fonts/Typo_Round_Bold_Demo.otf')format('truetype');
-                    }
-                    @font-face
-                    {
-                        font-family: 'Garlic Sans';
-                        font-weight: normal;
-                        font-style: normal;
-                        src: url('../resources/fonts/Garlic-Sans-Regular.ttf')format('truetype');
-                    }
+
+            @font-face
+            {
+                font-family: 'Typo Round Bold Demo';
+                font-weight: normal;
+                font-style: normal;
+                src: url('../resources/fonts/Typo_Round_Bold_Demo.otf')format('truetype');
+            }
+            @font-face
+            {
+                font-family: 'Garlic Sans';
+                font-weight: normal;
+                font-style: normal;
+                src: url('../resources/fonts/Garlic-Sans-Regular.ttf')format('truetype');
+            }
             .div{
                 font-family: 'Typo Round Bold Demo';
             }
-      
 
-            
+
+
             .top{
 
                 background: url('resources/images/logo2.png') no-repeat;
@@ -56,37 +57,37 @@
                 width: 300px;
                 height: 210px;
                 margin-left: 10px;
-            
+
             }
-            
-             
+
+
         </style>
 
         <div id="top" class="top">
-           
+
         </div>
 
         <div id="content" class="center_content">
             <ui:insert name="content">Content</ui:insert>
         </div>
-        
-        
+
+
         <div id="bottom" style=" 
              font-family: Garlic Sans;
              font-style: oblique;
-  background-color: #999897;
-    padding: 5px;
-    margin: 1% 10px 0px 0px;" >
-            
-           
+             background-color: #999897;
+             padding: 5px;
+             margin: 1% 10px 0px 0px;" >
+
+
             Todos los derechos a Jadaxi y CocinaloTodo ©2020  
-           <br/>
-           Cualquier bug o sugerencia enviar a cocinalotodoemail@gmail.com
-             <br/>
-             Versión: 0.5
-             <br/>
-                
-            </div>
+            <br/>
+            Cualquier bug o sugerencia enviar a cocinalotodoemail@gmail.com
+            <br/>
+            Versión: 0.5
+            <br/>
+
+        </div>
 
     </h:body>
 

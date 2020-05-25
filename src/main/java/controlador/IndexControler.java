@@ -5,18 +5,14 @@
  */
 package controlador;
 
-import EJB.CategoryFacadeLocal;
 import EJB.UserFacadeLocal;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import modelo.Category;
-import modelo.Recipe;
 import modelo.User;
 
 /**
@@ -37,8 +33,6 @@ public class IndexControler implements Serializable {
 
     @EJB
     private UserFacadeLocal userEJB;
-
-
 
     @PostConstruct
     public void inicio() {
@@ -105,25 +99,32 @@ public class IndexControler implements Serializable {
                 user.setPassword(prePass);
 
                 us = userEJB.getUserURL(user);
+                if (us == null) {
+                    FacesContext context = FacesContext.getCurrentInstance();
+                    System.out.println("CON:" + context);
+                    context.addMessage(null, new FacesMessage("ERROR", "Usuario o contraseña incorrectos "));
+                    return "";
+                } else {
+                    if (us.isActivated()) {
+                        System.out.println("Usuario activado");
+                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
+                        return navegacion;
+                    } else {
+                        System.out.println("Usuario no activado");
+                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("code", us);
+                        return "activate.xhtml";
+                    }
+                }
 
                 //Ponemos el usuari como variable global para toda la aplicaion
             } catch (Exception e) {
+
                 System.out.println("FAllo al tarer el usuario: " + e.getMessage());
+
             }
+            
 
         }
-
-        if (us.isActivated()) {
-            System.out.println("Usuario activado");
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
-            return navegacion;
-        } else {
-            System.out.println("Usuario no activado");
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("code", us);
-            return "activate.xhtml";
-        }
-
+        return "";
     }
-
-
 }
