@@ -101,8 +101,8 @@ public class IndexControler implements Serializable {
                 us = userEJB.getUserURL(user);
                 if (us == null) {
                     FacesContext context = FacesContext.getCurrentInstance();
-                    System.out.println("CON:" + context);
-                    context.addMessage(null, new FacesMessage("ERROR", "Usuario o contraseña incorrectos "));
+                   
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR", "Usuario o contraseña incorrectos "));
                     return "";
                 } else {
                     if (us.isActivated()) {
