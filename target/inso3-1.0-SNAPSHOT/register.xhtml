@@ -24,21 +24,21 @@ and open the template in the editor.
                 <style>
                     .wiz{
 
-                        width:600px;
+                        width:40%;
                         height:60%;
 
                         background-color:rgb(61, 110, 56); 
                         margin: 0;
 
                         margin-left: 30%;
-                        margin-top: 5%;
+                        margin-top: 10px;
                         border-style: inset;
                         border-width: 10px;
                         border-color: 	rgb(86, 87, 56) rgb(162, 204, 161);
 
                     }
                     .letra{
-                        font-family: Typo Round Bold Demo;
+                        font-family: Garlic Sans;
                     }
                     .ui-button .ui-button-text {
                          font-family:  Garlic Sans;
@@ -46,7 +46,7 @@ and open the template in the editor.
     line-height: normal;
 }
 .ui-widget-content .ui-inputfield {
-    font-family: Typo Round Bold Demo;
+    font-family: Garlic Sans;
     font-weight: normal;
 }
                 </style>
@@ -115,7 +115,7 @@ and open the template in the editor.
 
                                     <div class="ui-inputgroup">
                                         <span class="ui-inputgroup-addon"><i class="pi pi-envelope"></i></span>
-                                        <p:inputText id="ema" style=" width: 321px; height: 31px;font-family: sans-serif;" placeholder="Email" value="#{registerConroler.user.email}"  required="true"/>   
+                                        <p:inputText id="ema" style="font-family: Garlic Sans;" placeholder="Email" value="#{registerConroler.user.email}"  required="true"/>   
                                         <p:message for="ema" display="icon"/>
                                     </div>
 
@@ -129,7 +129,7 @@ and open the template in the editor.
                                 <h:panelGrid columns="2" columnClasses="label, value">
 
 
-                                    <p:inputTextarea style="width: 530px; font-family: Typo Round Bold Demo;" rows="10" cols="55" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="true" value="#{registerConroler.user.abaut}" />
+                                    <p:inputTextarea style="width: 530px; font-family: Garlic Sans;" rows="10" cols="55" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="true" value="#{registerConroler.user.abaut}" />
                                     <br />
                                     <h:outputText id="display" />
 
