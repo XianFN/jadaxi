@@ -6,6 +6,8 @@
 package controlador;
 
 import EJB.UserFacadeLocal;
+import jadaxi.Email;
+import java.io.IOException;
 
 import java.io.Serializable;
 
@@ -29,11 +31,16 @@ public class ProfileControler implements Serializable {
 
     private User us;
     private int progreso;
-    
+
     private String name;
-    
-    
-    
+    private String surname1;
+    private String surname2;
+    private Date date;
+    private String about;
+    private String userName;
+    private String password;
+    private String email;
+
     @EJB
     private UserFacadeLocal userEJB;
 
@@ -48,6 +55,15 @@ public class ProfileControler implements Serializable {
         int exp = (int) us.getXp();
         progreso = exp % 100;
 
+        userName = us.getUserName();
+        email = us.getEmail();
+
+        name = us.getName();
+        surname1 = us.getSurname();
+        surname2 = us.getSurname2();
+        date = us.getBirthDate();
+        about = us.getAbaut();
+
     }
 
     public String getName() {
@@ -57,8 +73,6 @@ public class ProfileControler implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
 
     public User getUs() {
         return us;
@@ -75,9 +89,81 @@ public class ProfileControler implements Serializable {
     public void setProgreso(int progreso) {
         this.progreso = progreso;
     }
-    
-    private boolean checkUserName(String user) {
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSurname1() {
+        return surname1;
+    }
+
+    public void setSurname1(String surname1) {
+        this.surname1 = surname1;
+    }
+
+    public String getSurname2() {
+        return surname2;
+    }
+
+    public void setSurname2(String surname2) {
+        this.surname2 = surname2;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public void modifyData() {
+
+        System.out.println("MODIFY");
+
+        System.out.println(this.name + " " + this.surname1 + " " + this.surname2 + " " + this.date.toString() + " " + this.about);
+
+        us.setName(this.name);
+        us.setSurname(this.surname1);
+        us.setSurname2(this.surname2);
+        us.setBirthDate(this.date);
+        us.setAbaut(this.about);
+
+        userEJB.edit(us);
+
+    }
+
+    private boolean checkUserName(String user) {
+        System.out.println("aspoidjpaisdu'paosudjp`:" + user);
         List<User> users = null;
         try {
             users = userEJB.findAll();
@@ -97,22 +183,77 @@ public class ProfileControler implements Serializable {
         return true;
 
     }
-    
-    
-    public String modifyUserName(){
-        
-        
-        if(checkUserName(us.getUserName())){
-            
-        }else{
-            
+
+    public void modifyUserName() {
+
+        if (checkUserName(this.userName)) {
+
+            us.setUserName(this.userName);
+
+            userEJB.edit(us);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", userEJB.find(us));
+
+        } else {
+            System.out.println("NO");
         }
-        
-        
-        return "";
+
     }
-    
-    
-    
+
+    public void modifyPassword() {
+        //TODO arreglar mensaje de contraseña no coincide
+        System.out.println("password:" + this.password);
+        us.setPassword(this.password);
+
+        userEJB.edit(us);
+        // FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", userEJB.find(us));
+
+    }
+
+    private String genCode() {
+
+        String alphabet = "1234567890";
+        StringBuilder sb = new StringBuilder();
+
+        int i = 0;
+        while (i < 6) {
+            int rand = (int) ((Math.random() * ((10 - 0))));// Con el random generamos la contraseña sacando los
+            // careacteres del array alphabet
+            char char2 = (char) rand;
+            System.out.println("cahr: " + char2);
+            sb.append(alphabet.charAt(char2));
+
+            i++;
+        }
+
+        return sb.toString();
+    }
+
+    public String modifyEmail() {
+
+        System.out.println("email: " + this.email);
+
+        if (!(this.email.equals(us.getEmail()))) {
+            System.out.println("NO IGUAL");
+            us.setEmail(email);
+            us.setAcCode(genCode());
+            us.setActivated(false);
+            userEJB.edit(us);
+
+            try {
+                Email email = new Email(us.getEmail(), "Confirmación de cuenta", "Para conformar tu cuenta, introduce el siguiente codigo en la pagina http://cocinalotodo.servebeer.com/cocinalotodo/  : \n Codigo:  \n " + us.getAcCode());
+
+                email.send();
+            } catch (IOException ex) {
+                System.out.println("Error al enviar el email al usuario: " + ex.getMessage());
+            }
+
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("code", us);
+            return "/activate.xhtml";
+        } else {
+            System.out.println("IGUAL");
+            return "";
+        }
+
+    }
 
 }

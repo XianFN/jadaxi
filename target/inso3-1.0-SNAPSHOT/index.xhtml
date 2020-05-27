@@ -11,11 +11,18 @@
 
             <ui:define name="content">
 
-               
+
 
 
                 <!-- rgb(61, 110, 56)-->
                 <style>
+
+                    @font-face{
+                        font-family: 'Garlic Sans';
+                        font-weight: normal;
+                        font-style: normal;
+                        src: url('Garlic-Sans-Regular.ttf')format('truetype');
+                    }
 
                     .loginBox{
 
@@ -45,7 +52,8 @@
                     .ui-inputgroup{
                         margin-left: 120px;  
                         margin-top: 20px;
-                        color: white
+                        color: white;
+                        font-family: Garlic Sans;
                     }
 
                     .register{
@@ -84,7 +92,7 @@
                                 <p:password class="input"  placeholder="Contraseña" style="color: white;" value="#{indexControler.prePass}"/>      
                             </div>
 
-                            <p:commandButton update="growl" style="color: black; text-shadow: 0px 0 rgba(0,0,0,1); font-family: Typo Round Bold Demo;" class = "input" value="Iniciar sesion" action="#{indexControler.login()}" />
+                            <p:commandButton update="growl" style="color: black; text-shadow: 0px 0 rgba(0,0,0,1); font-family:  Garlic Sans;" class = "input" value="Iniciar sesion" action="#{indexControler.login()}" />
 
 
 
@@ -94,7 +102,7 @@
                         </h:panelGrid>
 
 
-                        <div class="register" style="font-family: Typo Round Bold Demo;">
+                        <div class="register" style="font-family: Garlic Sans;">
                             ¿Aun no tienes una cuenta?
                             <!-- TODO ?faces-redirect=true  -->
                             <h:link class="titleRegister" outcome="register?faces-redirect=true" value="Registrate"/>

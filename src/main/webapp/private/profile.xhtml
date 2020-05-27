@@ -11,6 +11,7 @@
 
         <ui:composition template="./../template/mainTemplate.xhtml">
 
+
             <ui:define name="content">
 
                 <style>
@@ -39,8 +40,6 @@
 
 
                     }
-
-
 
 
                     .contenidos{
@@ -135,53 +134,48 @@
                 <p:growl id="message" showDetail="true" />
 
 
-                <h:form>             
+                <div class="general">
 
 
+                    <div class="contenidos">
+                        <div class="titulo">
 
-                    <div class="general">
+                            NIVEL: 
 
+                        </div>
+                        <h:panelGrid columns="3" >
+                            <h:outputText class="sig" value="Nivel #{profileControler.us.lv}"/>     
+                            <p:progressBar class="prg" value="#{profileControler.progreso}" labelTemplate="{value}%" displayOnly="true"/>
+                            <h:outputText class="sig" value=" Nivel #{profileControler.us.lv+1}"/>  
 
+                        </h:panelGrid>
 
-                        <div class="contenidos">
-                            <div class="titulo">
+                        <div class="titulo">
 
-                                NIVEL: 
+                            EDITAR DATOS PERSONALES:  
 
-                            </div>
-                            <h:panelGrid columns="3" >
-                                <h:outputText class="sig" value="Nivel #{profileControler.us.lv}"/>     
-                                <p:progressBar class="prg" value="#{profileControler.progreso}" labelTemplate="{value}%" displayOnly="true"/>
-                                <h:outputText class="sig" value=" Nivel #{profileControler.us.lv+1}"/>  
-
-                            </h:panelGrid>
-
-                            <div class="titulo">
-
-                                EDITAR DATOS PERSONALES:  
-
-                            </div>
-
+                        </div>
+                        <h:form>
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
                             <h:outputText class="outN" value=" Nombre: "/>
-                            <p:inputText class="out" value="#{profileControler.us.name}"/>
+                            <p:inputText class="out" value="#{profileControler.name}"/>
 
                             <br></br>
 
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
                             <h:outputText class="outN" value=" Apellido1: "/>
-                            <p:inputText class="out"   value="#{profileControler.us.surname}"/>
+                            <p:inputText class="out"   value="#{profileControler.surname1}"/>
 
                             <br></br>
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
                             <h:outputText class="outN" value=" Apellido2: "/>
-                            <p:inputText class="out"  value="#{profileControler.us.surname2}"/>
+                            <p:inputText class="out"  value="#{profileControler.surname2}"/>
 
                             <br></br>
 
                             <span class="ui-inputgroup-addon"><i class="pi pi-calendar"></i></span>
                             <h:outputText class="outN" value=" Fecha de Nacimiento: "/>
-                            <p:calendar   id="mask"  value="#{profileControler.us.birthDate}" required="true" pattern="dd-MM-yyyy" mask="true" />    
+                            <p:calendar   id="mask"  value="#{profileControler.date}" required="true" pattern="dd-MM-yyyy" mask="true" />    
 
 
                             <br></br>
@@ -190,57 +184,57 @@
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
                             <h:outputText class="outN" value="Sobre ti: "/>
                             <br></br>
-                            <p:inputTextarea rows="10" cols="55" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" value="#{profileControler.us.abaut}" />
+                            <p:inputTextarea rows="10" cols="55" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" value="#{profileControler.about}" />
                             <br />
                             <h:outputText id="display" />
 
                             <br/>
                             <br/>
 
-                            <h:form>
-                                <p:commandButton  style="margin-left: 10%; font-family:Typo Round Bold Demo; " value="Modificar datos"  />
-                            </h:form>
 
-                            <br/>
-                            <br/>
-                            <br/>
+                            <p:commandButton  style="margin-left: 10%; font-family:Typo Round Bold Demo; " value="Modificar datos" actionListener="#{profileControler.modifyData()}"  />
+                        </h:form>
 
-                            <div class="titulo">
+                        <br/>
+                        <br/>
+                        <br/>
 
-                                EDITAR USUARIO
+                        <div class="titulo">
 
-                            </div>
+                            EDITAR USUARIO
 
-                            <br/>
+                        </div>
 
-                            <h:form>
-                                <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
-                                <h:outputText class="outN" value=" Nombre de usuario: "/>
-                                <p:inputText id="fr"  class="out"  value="#{profileControler.us.userName}" />    
-                                #{profileControler.us.userName}
-                                <br/>
-                                <br/>
-                                <br/>
+                        <br/>
+
+                        <h:form>
 
 
+                            <p:inputText  value="#{profileControler.userName}"/>
 
-                                <p:commandButton class="alkdsnhoñ" value="Modificar g datos"   style=" margin-left: 10%; font-family:Typo Round Bold Demo;" action="#{profileControler.modifyUserName()}" process="@this"/>
-                            </h:form>
-                            <br/>
-                            <br/>
-                            <div class="titulo">
+                            <p:commandButton value="asdasd" actionListener="#{profileControler.modifyUserName()}" styleClass="ui-priority-primary"/>
+                        </h:form>
 
-                                EDITAR CONTRASEÑA
+                        <br/>
+                        <br/>
+                        <br/>
 
-                            </div>
-                            <br/>
-                            <br/>
 
+                        <br/>
+                        <br/>
+                        <div class="titulo">
+
+                            EDITAR CONTRASEÑA
+
+                        </div>
+                        <br/>
+                        <br/>
+                        <h:form>
                             <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>              
                             <h:outputText class="outN" value="Contraseña: "/>
 
 
-                            <p:password  id="pass1"  value="#{profileControler.us.password}" feedback="true" match="pass2" promptLabel="Introduzca la contraseña" weakLabel="Debil"
+                            <p:password  id="pass1"  value="#{profileControler.password}" feedback="true" match="pass2" promptLabel="Introduzca la contraseña" weakLabel="Debil"
                                          goodLabel="Segura" strongLabel="Muy segura" required="true"/>      
                             <p:message for="pass1" display="icon"/>
 
@@ -259,46 +253,32 @@
                             <br/>
 
 
-                            <h:form>
-                                <p:commandButton update="messages" style=" margin-left: 10%; font-family:Typo Round Bold Demo;" actionListener="#{profileControler.modifyPassword}" value="Modificar datos"/>
-                            </h:form>
 
-                            <br/>
-                            <br/>
+                            <p:commandButton update="messages" style=" margin-left: 10%; font-family:Typo Round Bold Demo;" actionListener="#{profileControler.modifyPassword()}" value="Modificar datos"/>
+                        </h:form>
 
-                            <div class="titulo">
+                        <br/>
+                        <br/>
 
-                                EDITAR CORREO:
+                        <div class="titulo">
 
-                            </div>
-                            <br/>
-                            <br/>
-                            <h:panelGrid columns="2" style="margin-left: 20%;width: 300px;margin-bottom: 5px;text-align: center;color: white;">
-
-                                <p:inputText class="input"  style="width: 300px;color: white" />  
-
-
-                                <p:commandButton value="Reenviar Email"  action="#{profileControler}" style=" margin-left: 5px;width: 150px; font-family:Typo Round Bold Demo;" />
-
-                            </h:panelGrid>
-
-
-
-
-
+                            EDITAR CORREO:
 
                         </div>
+                        <br/>
+                        <br/>
+                        <h:form>
+                            <h:panelGrid columns="2" style="margin-left: 20%;width: 300px;margin-bottom: 5px;text-align: center;color: white;">
+
+                                <p:inputText class="input" value="#{profileControler.email}"  style="width: 300px" />  
 
 
-
-
-
-
-
+                                <p:commandButton value="Reenviar Email"  action="#{profileControler.modifyEmail()}" style=" margin-left: 5px;width: 150px; font-family:Typo Round Bold Demo;" />
+                                <h:link value="../activate.xhtml" outcome="/activate.xhtml"/>
+                            </h:panelGrid>
+                        </h:form>
                     </div>
-
-
-                </h:form>    
+                </div>
 
             </ui:define>
 

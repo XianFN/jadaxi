@@ -104,7 +104,7 @@ public class RegisterConroler implements Serializable {
         if (checkUserName(user.getUserName())) {
 
             user.setAcCode(genCode());
-            //user.setAcCode("000112");
+            
             System.out.println("asdasd: " + user.getAcCode());
             try {
 
