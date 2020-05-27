@@ -192,7 +192,7 @@
                             <br/>
 
 
-                            <p:commandButton  style="margin-left: 10%; font-family:Typo Round Bold Demo; " value="Modificar datos" actionListener="#{profileControler.modifyData()}"  />
+                            <p:commandButton update="message"  style="margin-left: 10%; font-family:Typo Round Bold Demo; " value="Modificar datos" actionListener="#{profileControler.modifyData()}"  />
                         </h:form>
 
                         <br/>
@@ -212,7 +212,7 @@
 
                             <p:inputText  value="#{profileControler.userName}"/>
 
-                            <p:commandButton value="asdasd" actionListener="#{profileControler.modifyUserName()}" styleClass="ui-priority-primary"/>
+                            <p:commandButton update="message" value="Modificar nombre de usuario" actionListener="#{profileControler.modifyUserName()}" styleClass="ui-priority-primary"/>
                         </h:form>
 
                         <br/>
@@ -254,7 +254,7 @@
 
 
 
-                            <p:commandButton update="messages" style=" margin-left: 10%; font-family:Typo Round Bold Demo;" actionListener="#{profileControler.modifyPassword()}" value="Modificar datos"/>
+                            <p:commandButton update="message" style=" margin-left: 10%; font-family:Typo Round Bold Demo;" actionListener="#{profileControler.modifyPassword()}" value="Modificar contraseña"/>
                         </h:form>
 
                         <br/>
@@ -273,7 +273,7 @@
                                 <p:inputText class="input" value="#{profileControler.email}"  style="width: 300px" />  
 
 
-                                <p:commandButton value="Reenviar Email"  action="#{profileControler.modifyEmail()}" style=" margin-left: 5px;width: 150px; font-family:Typo Round Bold Demo;" />
+                                <p:commandButton value="Reenviar Email" update="message"  action="#{profileControler.modifyEmail()}" style=" margin-left: 5px;width: 150px; font-family:Typo Round Bold Demo;" />
                                 <h:link value="../activate.xhtml" outcome="/activate.xhtml"/>
                             </h:panelGrid>
                         </h:form>

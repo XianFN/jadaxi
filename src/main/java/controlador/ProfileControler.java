@@ -148,8 +148,6 @@ public class ProfileControler implements Serializable {
 
     public void modifyData() {
 
-        System.out.println("MODIFY");
-
         System.out.println(this.name + " " + this.surname1 + " " + this.surname2 + " " + this.date.toString() + " " + this.about);
 
         us.setName(this.name);
@@ -159,6 +157,9 @@ public class ProfileControler implements Serializable {
         us.setAbaut(this.about);
 
         userEJB.edit(us);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Datos personales cambiados correctamente"));
 
     }
 
@@ -191,10 +192,13 @@ public class ProfileControler implements Serializable {
             us.setUserName(this.userName);
 
             userEJB.edit(us);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nombre de usuario cambiado correctamente"));
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", userEJB.find(us));
 
         } else {
-            System.out.println("NO");
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Nombre de usuario ya existe"));
         }
 
     }
@@ -206,6 +210,8 @@ public class ProfileControler implements Serializable {
 
         userEJB.edit(us);
         // FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", userEJB.find(us));
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Contraseña cambiada"));
 
     }
 
@@ -250,6 +256,9 @@ public class ProfileControler implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("code", us);
             return "/activate.xhtml";
         } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "No has actualizado tu correo"));
+
             System.out.println("IGUAL");
             return "";
         }
