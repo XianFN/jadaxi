@@ -45,10 +45,12 @@ public class EditRecipeControler implements Serializable {
     private Recipe recipe;
 
     private int idRecipe;
-    
+
     private otherIngredient2 ingredient;
 
     private List<otherIngredient2> ingredientsList;
+
+    private List<Ingredients> selectedIngredients;
 
     @PostConstruct
     public void inicio() {
@@ -73,24 +75,6 @@ public class EditRecipeControler implements Serializable {
             System.out.println("La gente es 0 asique atora: " + e.getMessage());
         }
 
-    }
-
-    public List<otherIngredient2> getIngredientsList() {
-        ingredientsList = new ArrayList<>();
-        List<Recipes_ingredients> listIds = rec_ingEJB.findAll();
-
-        for (Recipes_ingredients ingre : listIds) {
-
-            if (ingre.getRecipe() == recipe.getId()) {
-
-                Ingredients ing = ingredientsEJB.find(ingre.getIngredients());
-
-                ingredientsList.add(new otherIngredient2(ing.getName(), ing.getCalories(), ingre.getAmmount()));
-
-            }
-
-        }
-        return ingredientsList;
     }
 
     public Recipes_ingredientsFacadeLocal getRec_ingEJB() {
@@ -124,19 +108,59 @@ public class EditRecipeControler implements Serializable {
     public void setIngredient(otherIngredient2 ingredient) {
         this.ingredient = ingredient;
     }
-    
-    
 
+    public List<Ingredients> getSelectedIngredients() {
+        return selectedIngredients;
+    }
+
+    public void setSelectedIngredients(List<Ingredients> selectedIngredients) {
+        this.selectedIngredients = selectedIngredients;
+    }
+
+    public void deleteIngredient(otherIngredient2 ing) {
+
+        System.out.println("asd: " + ing.getId());
+
+        try {
+            rec_ingEJB.remove(rec_ingEJB.find(ing.getId()));
+        } catch (Exception e) {
+            System.out.println("2");
+        }
+    }
+
+    public List<otherIngredient2> getIngredientsList() {
+        ingredientsList = new ArrayList<>();
+        List<Recipes_ingredients> listIds = rec_ingEJB.findAll();
+
+        for (Recipes_ingredients ingre : listIds) {
+
+            if (ingre.getRecipe() == recipe.getId()) {
+
+                Ingredients ing = ingredientsEJB.find(ingre.getIngredients());
+
+                ingredientsList.add(new otherIngredient2(ing.getName(), ing.getCalories(), ingre.getAmmount(), ingre.getId()));
+
+            }
+
+        }
+        return ingredientsList;
+    }
+
+    /**
+     *
+     */
     public class otherIngredient2 {
 
         private String name;
         private int calories;
         private int quantity;
+        private int id;
 
-        public otherIngredient2(String name, int calories, int quantity) {
+        public otherIngredient2(String name, int calories, int quantity, int id) {
             this.name = name;
             this.calories = calories;
             this.quantity = quantity;
+            this.id = id;
         }
 
         public String getName() {
@@ -161,6 +185,14 @@ public class EditRecipeControler implements Serializable {
 
         public void setQuantity(int quantity) {
             this.quantity = quantity;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
         }
 
     }
