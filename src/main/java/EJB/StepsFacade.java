@@ -35,11 +35,12 @@ public class StepsFacade extends AbstractFacade<Steps> implements StepsFacadeLoc
     public List<Steps> findByRecipeId(int id){
         List<Steps> results = null;
         try {
-            String hql = "FROM Steps r WHERE r.recipeId=:param1";
+            String hql = "FROM Steps r WHERE r.recipeId=:param1 ORDER BY r.order ASC";
             Query query = em.createQuery(hql);
             query.setParameter("param1", id);
             
             results = query.getResultList();
+            System.out.println("EJB: " + results);
 
             //System.out.println(results.get(0).toString());
         } catch (Exception e) {

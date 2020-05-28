@@ -158,18 +158,9 @@ public class ViewRecipeControler implements Serializable {
     }
 
     public List<Steps> getStepsList() {
-        stepsList = new ArrayList<>();
-        List<Steps> allSteps = stepsEJB.findAll();
 
-        for (Steps step : allSteps) {
+        stepsList = stepsEJB.findByRecipeId(recipe.getId());
 
-            if (step.getRecipeId() == recipe.getId()) {
-
-                stepsList.add(step);
-
-            }
-
-        }
         return stepsList;
     }
 

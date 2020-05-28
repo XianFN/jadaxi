@@ -9,21 +9,26 @@ import EJB.IngredientsFacadeLocal;
 import EJB.RecipeFacadeLocal;
 import EJB.Recipes_ingredientsFacadeLocal;
 import EJB.StepsFacadeLocal;
-import EJB.UserFacadeLocal;
-import EJB.User_recipesFacadeLocal;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.sql.rowset.serial.SerialBlob;
 import modelo.Ingredients;
 import modelo.Recipe;
 import modelo.Recipes_ingredients;
 import modelo.Steps;
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
@@ -43,6 +48,9 @@ public class EditRecipeControler implements Serializable {
     @EJB
     private RecipeFacadeLocal recipeEJB;
 
+    @EJB
+    private StepsFacadeLocal stepsEJB;
+
     private Recipe recipe;
 
     private int idRecipe;
@@ -59,6 +67,17 @@ public class EditRecipeControler implements Serializable {
 
     private Recipes_ingredients recipeIngredients;
 
+    private List<Steps> stepsList;
+    private List<Steps> stepsList2;
+
+    private Steps step;
+
+    private Steps steptoCreate;
+
+    private List<Steps> stepsToAdd;
+
+    private StreamedContent image;
+
     @PostConstruct
     public void inicio() {
 
@@ -73,9 +92,13 @@ public class EditRecipeControler implements Serializable {
 
         System.out.println("RECIPE: " + recipe.toString());
 
+        stepsList = stepsEJB.findByRecipeId(recipe.getId());
         ingredients = ingredientsEJB.findAll();
         listRI = new ArrayList<>();
         recipeIngredients = new Recipes_ingredients();
+        stepsList2 = stepsList;
+
+        steptoCreate = new Steps();
 
     }
 
@@ -135,6 +158,74 @@ public class EditRecipeControler implements Serializable {
         this.listRI = listRI;
     }
 
+    public List<Steps> getStepsList() {
+
+        return stepsList;
+    }
+
+    public void setStepsList(List<Steps> stepsList) {
+
+        this.stepsList = stepsList;
+    }
+
+    public Steps getStep() {
+        return step;
+    }
+
+    public void setStep(Steps step) {
+        this.step = step;
+    }
+
+    public List<Steps> getStepsList2() {
+        return stepsList2;
+    }
+
+    public void setStepsList2(List<Steps> stepsList2) {
+        this.stepsList2 = stepsList2;
+    }
+
+    public Steps getSteptoCreate() {
+        return steptoCreate;
+    }
+
+    public void setSteptoCreate(Steps steptoCreate) {
+        this.steptoCreate = steptoCreate;
+    }
+
+    public List<Steps> getStepsToAdd() {
+        return stepsToAdd;
+    }
+
+    public void setStepsToAdd(List<Steps> stepsToAdd) {
+        this.stepsToAdd = stepsToAdd;
+    }
+
+    public StreamedContent getImage() {
+
+        Blob bl = null;
+
+        try {
+            bl = new SerialBlob(recipe.getImage());
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewRecipesListControler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        InputStream dbStream = null;
+        try {
+            dbStream = bl.getBinaryStream();
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewRecipesListControler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg", "nombre.jpeg");
+
+        return dbImage;
+    }
+
+    public void setImage(StreamedContent image) {
+        this.image = image;
+    }
+
     public void deleteIngredient(otherIngredient2 ing) {
 
         System.out.println("asd: " + ing.getId());
@@ -151,6 +242,9 @@ public class EditRecipeControler implements Serializable {
         recipe.setCountCaloroies(recipe.getCountCaloroies() - caloriasRstar);
 
         recipeEJB.edit(recipe);
+
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Ingrediente borrado correctamente");
+        FacesContext.getCurrentInstance().addMessage(null, message);
 
     }
 
@@ -202,6 +296,70 @@ public class EditRecipeControler implements Serializable {
         recipe.setCountCaloroies(recipe.getCountCaloroies() + calorias);
 
         recipeEJB.edit(recipe);
+
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nuevo ingrediente añadido correctamente");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+
+    }
+
+    public void setNewOrder() {
+
+        for (int i = 0; i < this.stepsList.size(); i++) {
+
+            String a2 = "" + this.stepsList.get(i);
+            int a = Integer.parseInt(a2);
+            Steps stp = stepsEJB.find(a);
+            stp.setOrder(i + 1);
+
+            stepsEJB.edit(stp);
+
+        }
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Pasos reordenados");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        stepsList = stepsEJB.findByRecipeId(recipe.getId());
+
+    }
+
+    public void deleteStep(Steps step) {
+
+        System.out.println("estep: " + step);
+        try {
+
+            stepsEJB.remove(step);
+        } catch (Exception e) {
+            System.out.println("Fallo al borrar el paso: " + e.getMessage());
+        }
+        orderList();
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Paso borrado correctamente");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        stepsList = stepsEJB.findByRecipeId(recipe.getId());
+    }
+
+    public void orderList() {
+        stepsList2 = stepsEJB.findByRecipeId(recipe.getId());
+        for (int i = 0; i < stepsList2.size(); i++) {
+
+            Steps stp = stepsList2.get(i);
+            stp.setOrder(i + 1);
+
+            stepsEJB.edit(stp);
+
+        }
+    }
+
+    public String insertSteps() {
+        stepsList2 = stepsEJB.findByRecipeId(recipe.getId());
+        steptoCreate.setOrder(stepsList2.size() + 1);
+        steptoCreate.setRecipeId(idRecipe);
+
+        System.out.println(stepsList.toString());
+        stepsEJB.create(steptoCreate);
+        steptoCreate = new Steps();
+
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Añadido paso correctamente");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+
+        return "editRecipe.xhtml";
 
     }
 

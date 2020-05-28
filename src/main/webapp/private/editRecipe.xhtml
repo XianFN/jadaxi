@@ -80,7 +80,7 @@
                     }
 
                     .out{
-                        font-family: Typo Round Bold Demo;
+                        font-family: Garlic Sans;
                         font-size: 20px;
                         width: 300px;
                         height: 20%;
@@ -100,7 +100,7 @@
 
                     .outN{
 
-                        font-family: Typo Round Bold Demo;
+                        font-family: Garlic Sans;
                         font-size: 20px;
                     }
 
@@ -128,6 +128,11 @@
                         font-family: Garlic Sans;
 
                     }
+                    .menuI{
+                        width: 40%;
+                        margin-left: 30%;
+
+                    }
                     .cat{
                         margin-top: 20px;
                     }
@@ -147,7 +152,58 @@
                         color: #4f4f4f;
                         font-size: 20px;
                     }
+                    .ui-orderlist .ui-orderlist-item {
+                        cursor: pointer;
 
+                        font-weight: inherit;
+                    }
+                    .ui-orderlist-list, .ui-orderlist.ui-grid-responsive .ui-orderlist-caption {
+                        font-family: Garlic Sans;
+                        background-color: rgba(152,210,128,1); 
+                        font-size: 24px;
+                    }
+                    .ui-orderlist.ui-grid-responsive .ui-orderlist-controls .ui-button {
+                        display: inline;
+                        width: 20%;
+                        font-family: Garlic Sans;
+                        background-color: rgba(152,210,128,0.8); 
+
+                    }
+                    .ui-button-icon-only .ui-icon {
+                        left: 50%;
+                        width: 30%;
+                        height: 30%;
+
+                    }
+
+                    .ui-button-icon-only .ui-icon, .ui-button-text-icon-left .ui-icon, .ui-button-text-icon-right .ui-icon {
+                        position: absolute;
+
+                    }
+
+
+                    .ui-orderlist .ui-orderlist-list li {
+                        margin: 1px;
+                        padding: 2px;
+                        border: 0.5px solid darkgreen;
+                    }
+
+                    .td {
+                        display: table-cell;
+                        vertical-align: inherit;
+                        font-family: Garlic Sans;
+                    }
+
+                    .btt {
+                        margin-bottom: 5px;
+                    }
+
+                    .text {
+                        color: #ffffff;
+                        background-color: rgb(61, 110, 56);   
+                        height: 270px;
+                        font-family: Garlic Sans;
+                    }
 
                 </style>
 
@@ -168,7 +224,7 @@
 
                         </p:dataTable>
 
-                        <p:commandButton  class="bttBAR" value="Confirmar cantidades" actionListener="#{editRecipeControler.insertNewIngredients()}" oncomplete="PF('sidebar5').hide()"/>
+                        <p:commandButton  class="bttBAR" value="Confirmar cantidades" actionListener="#{editRecipeControler.insertNewIngredients()}" oncomplete="PF('sidebar5').hide()" update="message" ajax="false"/>
 
                     </h:form>
                 </p:sidebar>
@@ -193,7 +249,8 @@
                         </div>
                         <h:form>
 
-
+                            <p:graphicImage value="#{editRecipeControler.image}" styleClass="content" stream="false" style="margin-left: 25%; width: 50%; height: 50%"/>
+                            <p:fileUpload  class="bi" value="#{createRecipeControler.file}" mode="simple"  skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
 
 
                         </h:form>
@@ -214,6 +271,7 @@
 
                             <p:dataTable class="cat" var="ingredient" value="#{editRecipeControler.ingredientsList}" selection="#{editRecipeControler.ingredient}" selectionMode="single" rowKey="#{ingredient.name}">
 
+
                                 <f:facet name="header">
                                     Ingredientes
                                 </f:facet>
@@ -232,21 +290,24 @@
 
                                 <p:column class="cabeceras" headerText="">  
 
-                                    <p:commandButton value="Eliminar" action="#{editRecipeControler.deleteIngredient(ingredient)}"  />
+                                    <p:commandButton value="Eliminar" action="#{editRecipeControler.deleteIngredient(ingredient)}" update="message" ajax="false"/>
                                 </p:column>
 
 
 
 
                             </p:dataTable>
-
+                        </h:form>
+                        <h:form>
                             <div class="ingredients">
 
 
 
                                 <p:growl id="message" showDetail="true" />
-
-                                <h:outputText class="out" value="Ingredientes:"/>
+                                <br/>
+                                <h:outputText class="out" style="margin-left: 35%" value="Añadir nuevos ingredientes:"/>
+                                <br/>
+                                <br/>
 
                                 <p:selectManyMenu class="menuI" value="#{editRecipeControler.selectedIngredients}"
                                                   var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
@@ -255,16 +316,11 @@
                                         <h:outputText value="#{t.name}" />
                                     </p:column>
                                 </p:selectManyMenu>
+                                <br/>
+                                <br/>
+                                <p:commandButton style="margin-left: 45%" value="Agregar" actionListener="#{editRecipeControler.prepararTabla()}" update="bb" oncomplete="PF('sidebar5').show()"/>
 
-                                <p:commandButton  value="Agregar" actionListener="#{editRecipeControler.prepararTabla()}" update="bb" oncomplete="PF('sidebar5').show()" />
 
-
-
-                                <h:form>
-
-                                    <!--    <p:commandButton  style="height: 40px;" value="Crear un ingrediente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/> -->
-
-                                </h:form>
 
                             </div>
 
@@ -287,11 +343,90 @@
                         <h:form>
 
 
+                            <p:orderList value="#{editRecipeControler.stepsList}" var="step" itemValue="#{step.id}"  controlsLocation="null" responsive="true" >
+
+
+                                <f:facet name="caption">Mueve los pasos para cambiar de orden</f:facet>
+
+                                <p:column style="width:30%">
+                                    <h:outputText value="#{step.title}" />
+                                </p:column>
+
+
+                            </p:orderList>
+                            <p:commandButton value="Reordenar" actionListener="#{editRecipeControler.setNewOrder()}" style="margin-top:5px" update="message"  />
 
                         </h:form>
 
+
+                        <h:form>
+
+
+                            <p:dataTable class="cat" var="stepp" value="#{editRecipeControler.stepsList2}" selection="#{editRecipeControler.step}" selectionMode="single" rowKey="#{stepp.title}">
+
+
+
+
+                                <f:facet name="header">
+                                    Borrar pasos
+                                </f:facet>
+
+                                <p:column class ="cabeceras" headerText="Nombre de la receta">
+                                    <h:outputText value="#{stepp.title}" />
+                                </p:column>
+
+                                <p:column class="cabeceras" headerText="Cantidad">  
+                                    <h:outputText value="#{stepp.description}" >
+                                        <f:convertNumber pattern="#0" />
+                                    </h:outputText>
+                                </p:column>
+
+
+
+                                <p:column class="cabeceras" headerText="">  
+
+                                    <p:commandButton value="Eliminar" action="#{editRecipeControler.deleteStep(stepp)}" update="message" ajax="false" />
+                                </p:column>
+
+
+
+
+                            </p:dataTable>
+
+                        </h:form>
+
+
                         <br/>
                         <br/>
+
+
+
+
+
+
+                        <div class="steps">
+
+                            <h:form>
+
+                                <p:growl id="message" showDetail="true" />
+
+                                <h:outputText class="out" value="Nombre del paso:"/>
+                                <p:inputText id ="titulo" class="in" value="#{editRecipeControler.steptoCreate.title}" required="true" label="Titulo" widgetVar="editor2"/>
+
+
+                                <p:textEditor id="tx" class="text" style="font-family: Garlic Sans;" widgetVar="editor2" value="#{editRecipeControler.steptoCreate.description}" placeholder="Describa el procedimiento a realizar en este paso.">
+                                    <f:facet name="toolbar"><span class="ql-formats"/></f:facet>
+                                </p:textEditor>
+
+                                <p:commandButton class="btt" value="Añadir paso" action="#{editRecipeControler.insertSteps()}" update="message" ajax="false" />
+
+
+
+                            </h:form>  
+
+                        </div>
+
+
 
 
                     </div>
