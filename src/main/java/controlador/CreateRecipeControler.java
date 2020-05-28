@@ -106,6 +106,7 @@ public class CreateRecipeControler implements Serializable{
     
     @PostConstruct
     public void inicio() {
+        System.out.println("CONST");
         try {
             sleep(500);
             recipe = new Recipe();

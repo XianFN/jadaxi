@@ -123,33 +123,55 @@
                         background-color:rgb(61, 110, 56); 
                         margin-bottom: 10px;
                     }
+                    .ui-datatable {
+                        border-bottom: 0 none;
+                        font-family: Garlic Sans;
 
+                    }
+                    .cat{
+                        margin-top: 20px;
+                    }
+                    .ui-datatable-header {
+                        border-bottom: 0 none;
+                        background-color: darkgreen;
+                        font-size: 26px;
+                    }
+                    .ui-datatable thead th, .ui-datatable tfoot td {
+                        text-align: center;
+                        background-color: rgba(152,250,128,0.9); 
+                        font-size: 22px;
+                    }
+                    .ui-widget-content {
+                        border: 1px solid #a8a8a8;
+                        background-color: rgba(152,210,128,0.8); 
+                        color: #4f4f4f;
+                        font-size: 20px;
+                    }
 
 
                 </style>
-                <p:sidebar class="bar2" id="bb" widgetVar="sidebar5" fullScreen="true" baseZIndex="10000">
+
+
+                <p:sidebar class="bar2" id="bb" widgetVar="sidebar5" fullScreen="true" baseZIndex="10000"  >
 
                     <h:form>
 
-                        <p:dataTable var="recipes_ingredients" value="#{createRecipeControler.listRI}">
+                        <p:dataTable var="recipes_ingredients" value="#{editRecipeControler.listRI}">
 
                             <p:column class ="cabeceras" headerText="Ingrediente">
-                                <h:outputText value="#{createRecipeControler.selectedIngredients.get(recipes_ingredients.ingredients).name}" />
+                                <h:outputText value="#{editRecipeControler.selectedIngredients.get(recipes_ingredients.ingredients).name}" />
                             </p:column>
 
                             <p:column class="cabeceras" headerText="Cantidad (en gramos)">  
-                                <p:inputNumber id="input1" value="#{recipes_ingredients.ammount}"> </p:inputNumber>  
+                                <p:inputNumber decimalPlaces="0"  id="input1"  value="#{recipes_ingredients.ammount}" symbol=" g" symbolPosition="s" />
                             </p:column>
 
                         </p:dataTable>
 
-                        <p:commandButton class="bttBAR" value="Confirmar cantidades" oncomplete="PF('sidebar5').hide()"/>
+                        <p:commandButton  class="bttBAR" value="Confirmar cantidades" actionListener="#{editRecipeControler.insertNewIngredients()}" oncomplete="PF('sidebar5').hide()"/>
 
                     </h:form>
-
                 </p:sidebar>
-
-
 
 
 
@@ -160,6 +182,7 @@
 
 
                     <div class="contenidos">
+
 
 
 
@@ -192,15 +215,15 @@
                             <p:dataTable class="cat" var="ingredient" value="#{editRecipeControler.ingredientsList}" selection="#{editRecipeControler.ingredient}" selectionMode="single" rowKey="#{ingredient.name}">
 
                                 <f:facet name="header">
-                                    Recetas
+                                    Ingredientes
                                 </f:facet>
 
                                 <p:column class ="cabeceras" headerText="Nombre de la receta">
                                     <h:outputText value="#{ingredient.name}" />
                                 </p:column>
 
-                                <p:column class="cabeceras" headerText="Kcal">  
-                                    <h:outputText value="#{ingredient.calories}" >
+                                <p:column class="cabeceras" headerText="Cantidad">  
+                                    <h:outputText value="#{ingredient.quantity}" >
                                         <f:convertNumber pattern="#0" />
                                     </h:outputText>
                                 </p:column>
@@ -219,27 +242,27 @@
 
                             <div class="ingredients">
 
+
+
+                                <p:growl id="message" showDetail="true" />
+
+                                <h:outputText class="out" value="Ingredientes:"/>
+
+                                <p:selectManyMenu class="menuI" value="#{editRecipeControler.selectedIngredients}"
+                                                  var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                                    <f:selectItems value="#{editRecipeControler.ingredients}" var="theme" itemLabel="#{ingredients.name}" itemValue="#{ingredients}" />
+                                    <p:column>
+                                        <h:outputText value="#{t.name}" />
+                                    </p:column>
+                                </p:selectManyMenu>
+
+                                <p:commandButton  value="Agregar" actionListener="#{editRecipeControler.prepararTabla()}" update="bb" oncomplete="PF('sidebar5').show()" />
+
+
+
                                 <h:form>
 
-                                    <p:growl id="message" showDetail="true" />
-
-                                    <h:outputText class="out" value="Ingredientes:"/>
-
-                                    <p:selectManyMenu class="menuI" value="#{createRecipeControler.selectedIngredients}"
-                                                      var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
-                                        <f:selectItems value="#{createRecipeControler.ingredients}" var="theme" itemLabel="#{ingredients.name}" itemValue="#{ingredients}" />
-                                        <p:column>
-                                            <h:outputText value="#{t.name}" />
-                                        </p:column>
-                                    </p:selectManyMenu>
-
-                                    <p:commandButton value="Agregar" action="#{createRecipeControler.prepararTabla()}" update="bb" oncomplete="PF('sidebar5').show()" />
-
-                                </h:form>
-
-                                <h:form>
-
-                                    <p:commandButton  style="height: 40px;" value="Crear un ingrediente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/>
+                                    <!--    <p:commandButton  style="height: 40px;" value="Crear un ingrediente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/> -->
 
                                 </h:form>
 

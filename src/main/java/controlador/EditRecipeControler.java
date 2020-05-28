@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Ingredients;
 import modelo.Recipe;
@@ -30,7 +31,7 @@ import org.primefaces.model.StreamedContent;
  * @author Javier
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class EditRecipeControler implements Serializable {
 
     @EJB
@@ -52,6 +53,12 @@ public class EditRecipeControler implements Serializable {
 
     private List<Ingredients> selectedIngredients;
 
+    private List<Ingredients> ingredients;
+
+    private List<Recipes_ingredients> listRI;
+
+    private Recipes_ingredients recipeIngredients;
+
     @PostConstruct
     public void inicio() {
 
@@ -66,14 +73,9 @@ public class EditRecipeControler implements Serializable {
 
         System.out.println("RECIPE: " + recipe.toString());
 
-        try {
-            int ratings = recipe.getTotalRating();
-            int peopleRated = recipe.getPeopleRating();
-
-        } catch (Exception e) {
-
-            System.out.println("La gente es 0 asique atora: " + e.getMessage());
-        }
+        ingredients = ingredientsEJB.findAll();
+        listRI = new ArrayList<>();
+        recipeIngredients = new Recipes_ingredients();
 
     }
 
@@ -117,6 +119,22 @@ public class EditRecipeControler implements Serializable {
         this.selectedIngredients = selectedIngredients;
     }
 
+    public List<Ingredients> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredients> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<Recipes_ingredients> getListRI() {
+        return listRI;
+    }
+
+    public void setListRI(List<Recipes_ingredients> listRI) {
+        this.listRI = listRI;
+    }
+
     public void deleteIngredient(otherIngredient2 ing) {
 
         System.out.println("asd: " + ing.getId());
@@ -126,6 +144,14 @@ public class EditRecipeControler implements Serializable {
         } catch (Exception e) {
             System.out.println("2");
         }
+
+        //TODO restar calorias
+        double caloriasRstar = ing.calories * ing.quantity / 100;
+
+        recipe.setCountCaloroies(recipe.getCountCaloroies() - caloriasRstar);
+
+        recipeEJB.edit(recipe);
+
     }
 
     public List<otherIngredient2> getIngredientsList() {
@@ -144,6 +170,39 @@ public class EditRecipeControler implements Serializable {
 
         }
         return ingredientsList;
+    }
+
+    public void prepararTabla() {
+        System.out.println("Preparamos la tabla");
+        for (int i = 0; i < selectedIngredients.size(); i++) {
+            listRI.add(new Recipes_ingredients());
+            listRI.get(i).setIngredients(i);
+            System.out.println("i: " + i);
+        }
+    }
+
+    public void insertNewIngredients() {
+
+        double calorias = 0;
+        System.out.println("1");
+        System.out.println("S:" + selectedIngredients);
+        System.out.println("S2: " + listRI);
+        recipeIngredients.setRecipe(recipe.getId());
+        System.out.println("1");
+        for (int i = 0; i < selectedIngredients.size(); i++) {
+            System.out.println("I: " + i);
+            calorias = calorias + selectedIngredients.get(i).getCalories() * listRI.get(i).getAmmount() / 100;
+            recipeIngredients.setIngredients(selectedIngredients.get(i).getId());
+            recipeIngredients.setAmmount(listRI.get(i).getAmmount());
+            System.out.println("POPOPO: " + listRI.get(i).getAmmount());
+            System.out.println("ING: " + i + " " + recipeIngredients);
+            rec_ingEJB.create(recipeIngredients);
+        }
+
+        recipe.setCountCaloroies(recipe.getCountCaloroies() + calorias);
+
+        recipeEJB.edit(recipe);
+
     }
 
     /**
