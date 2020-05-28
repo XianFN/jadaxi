@@ -79,7 +79,7 @@
                     }
 
                     .out{
-                        font-family: Typo Round Bold Demo;
+                        font-family: Garlic Sans;
                         font-size: 20px;
                         width: 300px;
                         height: 20%;
@@ -99,7 +99,7 @@
 
                     .outN{
 
-                        font-family: Typo Round Bold Demo;
+                        font-family: Garlic Sans;
                         font-size: 20px;
                     }
 
@@ -121,6 +121,31 @@
                     .edit{
                         background-color:rgb(61, 110, 56); 
                         margin-bottom: 10px;
+                    }
+                    .col1{
+                        width: 10%;
+                    }
+                    .col2{
+                        width: 25%
+                    }
+                    .col3{
+                        width: 40%
+                    }
+                    .col4{
+                        width: 35%;
+                    }
+                     
+                    .col21{
+                        width: 7%;
+                    }
+                    .col22{
+                        width: 25%
+                    }
+                    .col23{
+                        width: 40%
+                    }
+                    .col2chiquita{
+                        width: 15%;
                     }
 
 
@@ -156,47 +181,50 @@
 
                         </div>
                         <h:form>
+                            <h:panelGrid columns="3" columnClasses="col21,col2chiquita,col23" style="width: 100%;">   
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
                             <h:outputText class="outN" value=" Nombre: "/>
                             <p:inputText class="out" value="#{profileControler.name}"/>
 
-                            <br></br>
+                          
 
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
                             <h:outputText class="outN" value=" Apellido1: "/>
                             <p:inputText class="out"   value="#{profileControler.surname1}"/>
 
-                            <br></br>
+                           
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
                             <h:outputText class="outN" value=" Apellido2: "/>
                             <p:inputText class="out"  value="#{profileControler.surname2}"/>
 
-                            <br></br>
+                           
 
                             <span class="ui-inputgroup-addon"><i class="pi pi-calendar"></i></span>
                             <h:outputText class="outN" value=" Fecha de Nacimiento: "/>
                             <p:calendar   id="mask"  value="#{profileControler.date}" required="true" pattern="dd-MM-yyyy" mask="true" />    
 
-
-                            <br></br>
+                         
+                      
 
 
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
                             <h:outputText class="outN" value="Sobre ti: "/>
+                               </h:panelGrid>
                             <br></br>
-                            <p:inputTextarea rows="10" cols="55" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" value="#{profileControler.about}" />
+                            <p:inputTextarea style="margin-left: 10%;" rows="10" cols="55" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" value="#{profileControler.about}" />
                             <br />
-                            <h:outputText id="display" />
+                            <h:outputText style="margin-left: 10%;"  id="display" />
 
                             <br/>
                             <br/>
+                             <br/>
+                       
 
-
-                            <p:commandButton update="message"  style="margin-left: 10%; font-family:Typo Round Bold Demo; " value="Modificar datos" actionListener="#{profileControler.modifyData()}"  />
+                            <p:commandButton update="message"  style="margin-left: 35%; font-family:Garlic Sans; " value="Modificar datos" actionListener="#{profileControler.modifyData()}"  />
                         </h:form>
 
                         <br/>
-                        <br/>
+
                         <br/>
 
                         <div class="titulo">
@@ -208,17 +236,18 @@
                         <br/>
 
                         <h:form>
-
-
+                            <h:panelGrid columns="3" columnClasses="col21,col22,col23" style="width: 100%;">   
+    <span class="ui-inputgroup-addon"><i class="pi pi-user"></i> </span>
+    <h:outputText class="outN" value="Nuevo nonmbre de usuario: " />
                             <p:inputText  value="#{profileControler.userName}"/>
-
-                            <p:commandButton update="message" value="Modificar nombre de usuario" actionListener="#{profileControler.modifyUserName()}" styleClass="ui-priority-primary"/>
+                            </h:panelGrid>
+                               <br/>
+                                <br/>
+                        <br/>
+                            <p:commandButton style="margin-left:  32%" update="message" value="Modificar nombre de usuario" actionListener="#{profileControler.modifyUserName()}" styleClass="ui-priority-primary"/>
                         </h:form>
 
-                        <br/>
-                        <br/>
-                        <br/>
-
+                    
 
                         <br/>
                         <br/>
@@ -230,6 +259,8 @@
                         <br/>
                         <br/>
                         <h:form>
+                           <h:panelGrid columns="4" columnClasses="col1,col2,col3,col4" style="width: 100%;">     
+
                             <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>              
                             <h:outputText class="outN" value="Contraseña: "/>
 
@@ -238,7 +269,7 @@
                                          goodLabel="Segura" strongLabel="Muy segura" required="true"/>      
                             <p:message for="pass1" display="icon"/>
 
-                            <br/>
+                            
 
                             <span style="width: 10%;" class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
                             <h:outputText class="outN" value="Repita contraseña: "/>
@@ -246,7 +277,7 @@
                             <p:password id="pass2" value="asd" required="true" />   
                             <p:message for="pass2" display="icon" />
 
-
+                           </h:panelGrid>
 
                             <br/>
                             <br/>
@@ -254,7 +285,7 @@
 
 
 
-                            <p:commandButton update="message" style=" margin-left: 10%; font-family:Typo Round Bold Demo;" actionListener="#{profileControler.modifyPassword()}" value="Modificar contraseña"/>
+                            <p:commandButton update="message" style=" margin-left: 35%; font-family:Garlic Sans;" actionListener="#{profileControler.modifyPassword()}" value="Modificar contraseña"/>
                         </h:form>
 
                         <br/>
@@ -274,7 +305,6 @@
 
 
                                 <p:commandButton value="Reenviar Email" update="message"  action="#{profileControler.modifyEmail()}" style=" margin-left: 5px;width: 150px; font-family:Typo Round Bold Demo;" />
-                                <h:link value="../activate.xhtml" outcome="/activate.xhtml"/>
                             </h:panelGrid>
                         </h:form>
                     </div>

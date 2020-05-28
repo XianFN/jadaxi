@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 /**
  *
@@ -119,11 +120,16 @@ public class User implements Serializable {
     }
 
     public String getPassword() {
+       
         return password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+        encryptor.setPassword("T>tk:#pa)6Y-R");
+        String encrypted = encryptor.encrypt(password);
+      
+        this.password = encrypted;
     }
 
     public String getEmail() {

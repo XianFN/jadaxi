@@ -35,5 +35,9 @@ public interface User_recipesFacadeLocal {
     boolean isJustStored(int idUSer, int idRecipe);
 
     List<User_recipes> findByRecipeId(int id);
+    
+    boolean isCreated(int idUSer, int idRecipe);
+    
+    int getRecipeOwnerID(int recipeId);
 
 }

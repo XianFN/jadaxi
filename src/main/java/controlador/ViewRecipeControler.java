@@ -38,7 +38,6 @@ import org.primefaces.model.StreamedContent;
  *
  */
 @Named
-
 @RequestScoped
 public class ViewRecipeControler implements Serializable {
 
@@ -249,6 +248,40 @@ public class ViewRecipeControler implements Serializable {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "No tienes nivel para guardar la receta, el nicel necesario es: 1 , y tu nivel es: " + user.getLv());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+    }
+
+    public boolean viewEditButton() {
+
+        User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
+        boolean ret = false;
+        try {
+            ret = us_reEJB.isCreated(user.getId(), recipe.getId());
+        } catch (Exception e) {
+            System.out.println("Fallo al intentar invocar el boton de editar receta");
+        }
+
+        return ret;
+    }
+
+    public boolean viewUserLabel() {
+
+        User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
+        boolean ret = false;
+        try {
+            ret = !(us_reEJB.isCreated(user.getId(), recipe.getId()));
+            return false;
+        } catch (Exception e) {
+            System.out.println("Fallo al intentar invocar el label de usuario");
+            return true;
+
+        }
+
+    }
+
+    public String gerUserName() {
+
+        return userEJB.find(us_reEJB.getRecipeOwnerID(recipe.getId())).getUserName();
+
     }
 
     public class otherIngredient {

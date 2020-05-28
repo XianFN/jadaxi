@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.jsoup.Jsoup;
 
 /**
  *
@@ -63,7 +64,7 @@ public class Steps implements Serializable {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = Jsoup.parse(description).text();
     }
 
     public int getRecipeId() {
