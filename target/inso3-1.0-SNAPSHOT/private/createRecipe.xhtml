@@ -42,6 +42,9 @@
                         font-weight: normal;
                         font-family: Garlic Sans;
                     }
+                    .ql-toolbar.ql-snow {
+    display:none;
+}
 
                     .bar{
                         background-color: rgb(148, 25, 25);
@@ -63,8 +66,7 @@
                     }
 
                     .center{
-                        display: flex;
-                        justify-content: center;
+                      
 
                     }
 
@@ -72,7 +74,13 @@
                         color: #ffffff;
                         background-color: rgb(61, 110, 56);   
                         height: 270px;
+                        width: 100%;
                         font-family: Garlic Sans;
+                        font-size: 30px;
+                    }
+                    .ql-container {
+   font-family: Garlic Sans;
+                        font-size: 22px;
                     }
 
                     .out{
@@ -103,15 +111,51 @@
                     }
 
                     .menuI{
-                        margin-left: 38px;
+                        width: 40%;
+                        
+                        font-family: Garlic Sans;
+                        margin-left: 30%;
                         margin-top: 10px;
+                        margin-right: 30%;
                         margin-bottom: 10px;
+                     
+                        justify-content: center;
                     }
+                 
+                    .ui-selectonelistbox .ui-selectlistbox-item, .ui-selectmanymenu .ui-selectlistbox-item, .ui-multiselectlistbox .ui-multiselectlistbox-item {
+    cursor: pointer;
+    font-weight: normal;
+    font-family: Garlic Sans;
+     background-color: rgba(152,210,128,0.8); 
+}
+.ui-tabs.ui-tabs-top > .ui-tabs-nav {
+  background-color:rgb(61, 110, 56); 
+}
+.ui-tabs.ui-tabs-top > .ui-tabs-nav li {
+    border-bottom: 0;
+    background-color: rgba(152,210,128,0.9); 
+    top: 1px;
+}
+.ui-tabs.ui-tabs-top .ui-tabs-nav li.ui-tabs-selected {
+    border-bottom: 0;
+      background-color: white;
+}
+.ui-inputfield {
+
+    padding: 0px;
+    font-weight: normal;
+}
 
                     .menuC{
-                        margin-left: 12px;
+                          width: 40%;
+                        
+                        font-family: Garlic Sans;
+                        margin-left: 30%;
                         margin-top: 10px;
+                        margin-right: 30%;
                         margin-bottom: 10px;
+                     
+                        justify-content: center;
                     }
 
                     .bi{
@@ -180,7 +224,7 @@
 
                     <p:tab class="titulos" title="Ingredientes">
 
-                        <h:panelGrid class="center" columns="1" cellpadding="10">
+                    
 
                             <div class="ingredients">
 
@@ -188,7 +232,7 @@
 
                                     <p:growl id="message" showDetail="true" />
 
-                                    <h:outputText class="out" value="Ingredientes:"/>
+                                  
 
                                     <p:selectManyMenu class="menuI" value="#{createRecipeControler.selectedIngredients}"
                                                       var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
@@ -197,20 +241,25 @@
                                             <h:outputText value="#{t.name}" />
                                         </p:column>
                                     </p:selectManyMenu>
-
-                                    <p:commandButton value="Agregar" action="#{createRecipeControler.prepararTabla()}" update="bb" oncomplete="PF('sidebar5').show()" />
+                                 
+                                    
+                                    <p:commandButton value="Agregar a la receta" action="#{createRecipeControler.prepararTabla()}" update="bb" oncomplete="PF('sidebar5').show()" />
 
                                 </h:form>
 
                                 <h:form>
-
-                                    <p:commandButton  style="height: 40px;" value="Crear un ingrediente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/>
+                                       <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <p:commandButton  style="height: 40px;" value="Crear otro ingrediente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/>
 
                                 </h:form>
 
                             </div>
 
-                        </h:panelGrid>
+                    
 
                     </p:tab>
 
@@ -223,20 +272,19 @@
 
                     <p:tab class="titulos" title="Pasos">
 
-                        <h:panelGrid class="center" columns="2" cellpadding="10">
-
+                       
                             <div class="steps">
 
                                 <h:form>
 
                                     <p:growl id="message" showDetail="true" />
 
-                                    <h:outputText class="out" value="Nombre del paso:"/>
+                                    <h:outputText class="out" value="Breve resumen del paso: "/>
                                     <p:inputText id ="titulo" class="in" value="#{createRecipeControler.steps.title}" required="true" label="Titulo"/>
 
 
-                                    <p:textEditor id="tx" class="text" style="font-family: Typo Round Bold Demo;" widgetVar="editor2" value="#{createRecipeControler.steps.description}" placeholder="Describa el procedimiento a realizar en este paso.">
-                                        <f:facet name="toolbar"><span class="ql-formats"/></f:facet>
+                                    <p:textEditor id="tx" class="text"  widgetVar="editor2" value="#{createRecipeControler.steps.description}" placeholder="Describa el procedimiento a realizar en este paso.">
+                                        
                                     </p:textEditor>
 
                                     <p:commandButton class="btt" value="Añadir paso" action="#{createRecipeControler.insertSteps()}" update="message"/>
@@ -247,7 +295,7 @@
 
                             </div>
 
-                        </h:panelGrid>
+                   
 
                     </p:tab>
 
@@ -260,7 +308,7 @@
 
                     <p:tab class="titulos" title="Categoría">
 
-                        <h:panelGrid class="center" columns="1" cellpadding="10">
+                        
 
                             <div class="cat">
 
@@ -282,7 +330,7 @@
 
                             </div>
 
-                        </h:panelGrid>
+                        
 
                     </p:tab>
 
@@ -295,8 +343,6 @@
 
                     <p:tab class="titulos" title="Receta">
 
-                        <h:panelGrid class="center" columns="1" cellpadding="10">
-
                             <div class="recipe">
 
                                 <h:outputText class="out" value="Nombre de la receta:" />
@@ -305,17 +351,24 @@
 
                                     <p:inputText class="in1" value="#{createRecipeControler.recipe.name}" required="true" label="Nombre"/>
                                     <br></br>
+                                    <br></br>
+                                    <br></br>
                                     <h:outputText class="out" value="Añadir una imagen:" />
                                     <br></br>
-                                    <p:fileUpload  class="bi" value="#{createRecipeControler.file}" mode="simple"  skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                    <p:fileUpload  class="bi" value="#{createRecipeControler.file}" label="Selecionar Imagen" mode="simple"  skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                                     <br></br>
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
+                                    
                                     <p:commandButton value="Crear y Terminar" actionListener="#{createRecipeControler.insertRecipe()}" ajax="false"/>
 
                                 </h:form>
 
                             </div>
 
-                        </h:panelGrid>
+                  
 
                     </p:tab>
 
