@@ -41,14 +41,14 @@ and open the template in the editor.
                         font-family: Garlic Sans;
                     }
                     .ui-button .ui-button-text {
-                         font-family:  Garlic Sans;
-    display: block;
-    line-height: normal;
-}
-.ui-widget-content .ui-inputfield {
-    font-family: Garlic Sans;
-    font-weight: normal;
-}
+                        font-family:  Garlic Sans;
+                        display: block;
+                        line-height: normal;
+                    }
+                    .ui-widget-content .ui-inputfield {
+                        font-family: Garlic Sans;
+                        font-weight: normal;
+                    }
                 </style>
 
 
@@ -148,11 +148,13 @@ and open the template in the editor.
                                             <br/>
                                             Nombre: #{registerConroler.user.name}
                                             <br/>
-                                            Apellido: #{registerConroler.user.surname}
+                                            Primer Apellido: #{registerConroler.user.surname}
                                             <br/>
-                                            2º Apellido: #{registerConroler.user.surname2}
+                                            Segundo Apellido: #{registerConroler.user.surname2}
                                             <br/>
-                                            Fecha naciemiento: #{registerConroler.user.birthDate.toString()}
+                                            Fecha nacimiento:  #{registerConroler.birthdateFormat()}
+                                            <br/>
+
                                             <br/>
                                             Usuario: #{registerConroler.user.userName}
                                             <br/>

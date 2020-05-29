@@ -8,31 +8,19 @@ package controlador;
 import EJB.CategoryFacadeLocal;
 import EJB.IngredientsFacadeLocal;
 import EJB.RecipeFacadeLocal;
-
-import java.io.InputStream;
-
 import java.io.Serializable;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-
 import javax.inject.Named;
-import javax.sql.rowset.serial.SerialBlob;
 import modelo.Category;
 import modelo.Ingredients;
 import modelo.Recipe;
 import modelo.User;
-
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -51,17 +39,23 @@ public class MainPageControler implements Serializable {
     private IngredientsFacadeLocal ingredientsEJB;
 
     private List<Recipe> recipes;
-    private List<StreamedContent> images;
+
     private List<Category> categories;
     private List<Ingredients> ingredients;
+
+    private List<Recipe> recipesTop10;
+
+    private boolean link;
 
     @PostConstruct
     public void init() {
 
-        images = new ArrayList<StreamedContent>();
+        recipesTop10 = new ArrayList<>();
+        link = false;
 
         try {
             recipes = recipeEJB.orderBymedia();
+            System.out.println(recipes);
 
         } catch (Exception e) {
 
@@ -69,22 +63,26 @@ public class MainPageControler implements Serializable {
         }
 
         try {
-            for (int i = 0; i < 10; i++) {
-
-                images.add(getImage(i));
+            //TODO cambiar a 10 recetas
+            for (int i = 0; i < 5; i++) {
+                System.out.println(i);
+                recipesTop10.add(recipes.get(i));
 
             }
 
         } catch (Exception e) {
-            System.out.println("Para variar algo ha fallado con las p**** imagenes");
+            System.out.println("Para variar algo ha fallado con las p**** imagenes" + e.getMessage());
         }
 
     }
 
-    public List<StreamedContent> getImages() {
-        return images;
+    public List<Recipe> getRecipesTop10() {
+        return recipesTop10;
     }
-//TODO actualizar a top 15/10
+
+    public void setRecipesTop10(List<Recipe> recipesTop10) {
+        this.recipesTop10 = recipesTop10;
+    }
 
     public String goToviewRecipesInCategories(String category) {
 
@@ -105,8 +103,8 @@ public class MainPageControler implements Serializable {
         if (usLv < 5) {
             FacesContext context = FacesContext.getCurrentInstance();
 
-            context.addMessage(null, new FacesMessage("ERROR", "No tienes nivel para buscar por ingrediente, necesitas nivel 5. Tu nivel actual: " + ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv()));
-            System.out.println("Nivel menor que 5");
+            context.addMessage(null, new FacesMessage("ERROR", "No tienes nivel para acceder a esta parte, necesitas nivel 5. Tu nivel actual: " + ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv()));
+            System.out.println("NIvel menor que 5");
             return "";
         } else {
             Object ob = ingredient;
@@ -118,28 +116,6 @@ public class MainPageControler implements Serializable {
             return "viewRecipeListIngredients.xhtml?faces-redirect=true";
         }
 
-    }
-
-    public StreamedContent getImage(int i) {
-
-        Blob bl = null;
-
-        try {
-            bl = new SerialBlob(recipes.get(i).getImage());
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewRecipesListControler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        InputStream dbStream = null;
-        try {
-            dbStream = bl.getBinaryStream();
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewRecipesListControler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        StreamedContent dbImage = new DefaultStreamedContent(dbStream, "image/jpeg", "nombre.jpeg");
-
-        return dbImage;
     }
 
     public List<Category> getCategories() {
@@ -159,6 +135,20 @@ public class MainPageControler implements Serializable {
         ingredients = ingredientsEJB.findAll();
 
         return ingredients;
+
+    }
+
+    public String click() {
+
+        System.out.println("CLICK");
+        FacesContext context = FacesContext.getCurrentInstance();
+        String reciepId = context.getExternalContext().getRequestParameterMap().get("recipeId2");
+        System.out.println(reciepId);
+        Recipe rec = recipeEJB.find(Integer.valueOf(reciepId));
+
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("recipe", rec.getId());
+
+        return "/private/viewRecipe.xhtml";
 
     }
 

@@ -9,6 +9,8 @@ import EJB.UserFacadeLocal;
 import jadaxi.Email;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -46,6 +48,7 @@ public class RegisterConroler implements Serializable {
         }
 
     }
+
     public void info() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "PrimeFaces Rocks."));
     }
@@ -104,12 +107,11 @@ public class RegisterConroler implements Serializable {
         if (checkUserName(user.getUserName())) {
 
             user.setAcCode(genCode());
-            
+
             System.out.println("asdasd: " + user.getAcCode());
             try {
 
-               userEJB.create(user); 
-                      
+                userEJB.create(user);
 
             } catch (Exception e) {
                 System.out.println("Error al insertar el usuario: " + e.getMessage());
@@ -143,5 +145,12 @@ public class RegisterConroler implements Serializable {
         } else {
             return event.getNewStep();
         }
+    }
+
+    public String birthdateFormat() {
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        return dateFormat.format(user.getBirthDate());
     }
 }

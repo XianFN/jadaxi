@@ -76,7 +76,7 @@ public class IndexControler implements Serializable {
         for (int i = 0; i < preUser.length(); i++) {
 
             char character = preUser.charAt(i);
-            if (character == '=' || character == '?' || character == '*' || character == ' ' || character == '"' || character == '/') {
+            if (character == '=' || character == '?' || character == '*' || character == '"' || character == '/') {
                 System.out.println("MAL CARACTER US");
                 createrUser++;
             }
@@ -86,7 +86,7 @@ public class IndexControler implements Serializable {
         for (int i = 0; i < prePass.length(); i++) {
 
             char character = prePass.charAt(i);
-            if (character == '=' || character == '?' || character == '*' || character == ' ' || character == '"' || character == '/') {
+            if (character == '=' || character == '?' || character == '*' || character == '"' || character == '/') {
                 System.out.println("MAL CARACTER PASS");
                 createPass++;
             }
