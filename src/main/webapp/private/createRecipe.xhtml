@@ -43,8 +43,8 @@
                         font-family: Garlic Sans;
                     }
                     .ql-toolbar.ql-snow {
-    display:none;
-}
+                        display:none;
+                    }
 
                     .bar{
                         background-color: rgb(148, 25, 25);
@@ -66,7 +66,7 @@
                     }
 
                     .center{
-                      
+
 
                     }
 
@@ -79,7 +79,7 @@
                         font-size: 30px;
                     }
                     .ql-container {
-   font-family: Garlic Sans;
+                        font-family: Garlic Sans;
                         font-size: 22px;
                     }
 
@@ -112,49 +112,49 @@
 
                     .menuI{
                         width: 40%;
-                        
+
                         font-family: Garlic Sans;
                         margin-left: 30%;
                         margin-top: 10px;
                         margin-right: 30%;
                         margin-bottom: 10px;
-                     
+
                         justify-content: center;
                     }
-                 
-                    .ui-selectonelistbox .ui-selectlistbox-item, .ui-selectmanymenu .ui-selectlistbox-item, .ui-multiselectlistbox .ui-multiselectlistbox-item {
-    cursor: pointer;
-    font-weight: normal;
-    font-family: Garlic Sans;
-     background-color: rgba(152,210,128,0.8); 
-}
-.ui-tabs.ui-tabs-top > .ui-tabs-nav {
-  background-color:rgb(61, 110, 56); 
-}
-.ui-tabs.ui-tabs-top > .ui-tabs-nav li {
-    border-bottom: 0;
-    background-color: rgba(152,210,128,0.9); 
-    top: 1px;
-}
-.ui-tabs.ui-tabs-top .ui-tabs-nav li.ui-tabs-selected {
-    border-bottom: 0;
-      background-color: white;
-}
-.ui-inputfield {
 
-    padding: 0px;
-    font-weight: normal;
-}
+                    .ui-selectonelistbox .ui-selectlistbox-item, .ui-selectmanymenu .ui-selectlistbox-item, .ui-multiselectlistbox .ui-multiselectlistbox-item {
+                        cursor: pointer;
+                        font-weight: normal;
+                        font-family: Garlic Sans;
+                        background-color: rgba(152,210,128,0.8); 
+                    }
+                    .ui-tabs.ui-tabs-top > .ui-tabs-nav {
+                        background-color:rgb(61, 110, 56); 
+                    }
+                    .ui-tabs.ui-tabs-top > .ui-tabs-nav li {
+                        border-bottom: 0;
+                        background-color: rgba(152,210,128,0.9); 
+                        top: 1px;
+                    }
+                    .ui-tabs.ui-tabs-top .ui-tabs-nav li.ui-tabs-selected {
+                        border-bottom: 0;
+                        background-color: white;
+                    }
+                    .ui-inputfield {
+
+                        padding: 0px;
+                        font-weight: normal;
+                    }
 
                     .menuC{
-                          width: 40%;
-                        
+                        width: 40%;
+
                         font-family: Garlic Sans;
                         margin-left: 30%;
                         margin-top: 10px;
                         margin-right: 30%;
                         margin-bottom: 10px;
-                     
+
                         justify-content: center;
                     }
 
@@ -224,42 +224,42 @@
 
                     <p:tab class="titulos" title="Ingredientes">
 
-                    
 
-                            <div class="ingredients">
 
-                                <h:form>
+                        <div class="ingredients">
 
-                                    <p:growl id="message" showDetail="true" />
+                            <h:form>
 
-                                  
+                                <p:growl id="message" showDetail="true" />
 
-                                    <p:selectManyMenu class="menuI" value="#{createRecipeControler.selectedIngredients}"
-                                                      var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
-                                        <f:selectItems value="#{createRecipeControler.ingredients}" var="theme" itemLabel="#{ingredients.name}" itemValue="#{ingredients}" />
-                                        <p:column>
-                                            <h:outputText value="#{t.name}" />
-                                        </p:column>
-                                    </p:selectManyMenu>
-                                 
-                                    
-                                    <p:commandButton value="Agregar a la receta" action="#{createRecipeControler.prepararTabla()}" update="bb" oncomplete="PF('sidebar5').show()" />
 
-                                </h:form>
 
-                                <h:form>
-                                       <br/>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                    <p:commandButton  style="height: 40px;" value="Crear otro ingrediente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/>
+                                <p:selectManyMenu class="menuI" value="#{createRecipeControler.selectedIngredients}"
+                                                  var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                                    <f:selectItems value="#{createRecipeControler.ingredients}" var="theme" itemLabel="#{ingredients.name}" itemValue="#{ingredients}" />
+                                    <p:column>
+                                        <h:outputText value="#{t.name}" />
+                                    </p:column>
+                                </p:selectManyMenu>
 
-                                </h:form>
 
-                            </div>
+                                <p:commandButton value="Agregar a la receta" action="#{createRecipeControler.prepararTabla()}" update="bb" oncomplete="PF('sidebar5').show()" />
 
-                    
+                            </h:form>
+
+                            <h:form>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <p:commandButton  style="height: 40px;" value="Crear otro ingrediente" icon="pi pi-external-link" oncomplete="PF('sidebar').show()"/>
+
+                            </h:form>
+
+                        </div>
+
+
 
                     </p:tab>
 
@@ -272,30 +272,30 @@
 
                     <p:tab class="titulos" title="Pasos">
 
-                       
-                            <div class="steps">
 
-                                <h:form>
+                        <div class="steps">
 
-                                    <p:growl id="message" showDetail="true" />
+                            <h:form>
 
-                                    <h:outputText class="out" value="Breve resumen del paso: "/>
-                                    <p:inputText id ="titulo" class="in" value="#{createRecipeControler.steps.title}" required="true" label="Titulo"/>
+                                <p:growl id="message" showDetail="true" />
+
+                                <h:outputText class="out" value="Breve resumen del paso: "/>
+                                <p:inputText id ="titulo" class="in" value="#{createRecipeControler.steps.title}" required="true" label="Titulo"/>
 
 
-                                    <p:textEditor id="tx" class="text"  widgetVar="editor2" value="#{createRecipeControler.steps.description}" placeholder="Describa el procedimiento a realizar en este paso.">
-                                        
-                                    </p:textEditor>
+                                <p:textEditor id="tx" class="text"  widgetVar="editor2" value="#{createRecipeControler.steps.description}" placeholder="Describa el procedimiento a realizar en este paso.">
 
-                                    <p:commandButton class="btt" value="Añadir paso" action="#{createRecipeControler.insertSteps()}" update="message"/>
+                                </p:textEditor>
 
-                                    <p:commandButton class="btt" value="Nuevo paso" type="reset" onclick="PF('editor2').clear();"/>
+                                <p:commandButton class="btt" value="Añadir paso" action="#{createRecipeControler.insertSteps()}" update="message"/>
 
-                                </h:form>  
+                                <p:commandButton class="btt" value="Nuevo paso" type="reset" onclick="PF('editor2').clear();"/>
 
-                            </div>
+                            </h:form>  
 
-                   
+                        </div>
+
+
 
                     </p:tab>
 
@@ -308,29 +308,29 @@
 
                     <p:tab class="titulos" title="Categoría">
 
-                        
 
-                            <div class="cat">
 
-                                <h:form>  
+                        <div class="cat">
 
-                                    <p:growl id="message" showDetail="true" />
+                            <h:form>  
 
-                                    <h:outputText class="out" value="Categoria:" />
+                                <p:growl id="message" showDetail="true" />
 
-                                    <p:selectManyMenu class="menuC" value="#{createRecipeControler.category}"
-                                                      var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
-                                        <f:selectItems value="#{createRecipeControler.categorys}" var="theme" itemLabel="#{categorys.name}" itemValue="#{categorys}" />
-                                        <p:column>
-                                            <h:outputText value="#{t.name}" />
-                                        </p:column>
-                                    </p:selectManyMenu>
-                                    <p:commandButton value="Añadir Categoría" action="#{createRecipeControler.destroyWorld()}" update="message"/>
-                                </h:form>  
+                                <h:outputText class="out" value="Categoria:" />
 
-                            </div>
+                                <p:selectManyMenu class="menuC" value="#{createRecipeControler.category}"
+                                                  var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                                    <f:selectItems value="#{createRecipeControler.categorys}" var="theme" itemLabel="#{categorys.name}" itemValue="#{categorys}" />
+                                    <p:column>
+                                        <h:outputText value="#{t.name}" />
+                                    </p:column>
+                                </p:selectManyMenu>
+                                <p:commandButton value="Añadir Categoría" action="#{createRecipeControler.callMessage()}" update="message"/>
+                            </h:form>  
 
-                        
+                        </div>
+
+
 
                     </p:tab>
 
@@ -343,32 +343,32 @@
 
                     <p:tab class="titulos" title="Receta">
 
-                            <div class="recipe">
+                        <div class="recipe">
 
-                                <h:outputText class="out" value="Nombre de la receta:" />
+                            <h:outputText class="out" value="Nombre de la receta:" />
 
-                                <h:form id="welcomeForm" enctype="multipart/form-data">
+                            <h:form id="welcomeForm" enctype="multipart/form-data">
 
-                                    <p:inputText class="in1" value="#{createRecipeControler.recipe.name}" required="true" label="Nombre"/>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <h:outputText class="out" value="Añadir una imagen:" />
-                                    <br></br>
-                                    <p:fileUpload  class="bi" value="#{createRecipeControler.file}" label="Selecionar Imagen" mode="simple"  skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    
-                                    <p:commandButton value="Crear y Terminar" actionListener="#{createRecipeControler.insertRecipe()}" ajax="false"/>
+                                <p:inputText class="in1" value="#{createRecipeControler.recipe.name}" required="true" label="Nombre"/>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <h:outputText class="out" value="Añadir una imagen:" />
+                                <br></br>
+                                <p:fileUpload  class="bi" value="#{createRecipeControler.file}" label="Selecionar Imagen" mode="simple"  skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
 
-                                </h:form>
+                                <p:commandButton value="Crear y Terminar" actionListener="#{createRecipeControler.insertRecipe()}" ajax="false"/>
 
-                            </div>
+                            </h:form>
 
-                  
+                        </div>
+
+
 
                     </p:tab>
 

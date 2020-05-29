@@ -300,7 +300,8 @@ public class CreateRecipeControler implements Serializable{
             System.out.println("Error al introducir los pasos: " + e.getMessage());
         }
         
-        destroyWorld();
+      FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Receta añadida");
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
     
      public void insertSteps() {
@@ -311,7 +312,9 @@ public class CreateRecipeControler implements Serializable{
         stepsList.add(s);
         steps.setTitle("");
         System.out.println(stepsList.toString());
-        destroyWorld();
+        
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Paso añadido");
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
      
       public void insertIngredient() {
@@ -325,10 +328,13 @@ public class CreateRecipeControler implements Serializable{
     public void insertImage(){
         pixel=file.getContents();
     }
-      
-    public void destroyWorld() {
-        addMessage("Añadido con éxito", "Su receta se ha actualizado correctamente.");
+    
+    public void callMessage(){
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Categoria añadida");
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
+      
+   
     
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
