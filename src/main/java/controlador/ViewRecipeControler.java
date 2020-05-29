@@ -195,7 +195,7 @@ public class ViewRecipeControler implements Serializable {
 
         if (flagRate) {
 
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Rate Event", "You rated:" + rateEvent.getRating());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Votacion correcta", "Tu valoracion fue: " + rateEvent.getRating());
             FacesContext.getCurrentInstance().addMessage(null, message);
             int ratings = recipe.getTotalRating();
             int peopleRated = recipe.getPeopleRating();
@@ -226,7 +226,7 @@ public class ViewRecipeControler implements Serializable {
 
     public void oncancel() {
 
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cancel Event", "Rate Reset");
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cancelada la votacion", "Votacion reseteada");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
@@ -259,7 +259,7 @@ public class ViewRecipeControler implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
         } else {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "No tienes nivel para guardar la receta, el nicel necesario es: 1 , y tu nivel es: " + user.getLv());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "No tienes nivel para guardar la receta, el nivel necesario es: 1 , y tu nivel es: " + user.getLv());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }

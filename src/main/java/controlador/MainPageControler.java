@@ -105,8 +105,8 @@ public class MainPageControler implements Serializable {
         if (usLv < 5) {
             FacesContext context = FacesContext.getCurrentInstance();
 
-            context.addMessage(null, new FacesMessage("ERROR", "No tienes nivel para acceder a esta parte, necesitas nivel 5. Tu nivel actual: " + ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv()));
-            System.out.println("NIvel menor que 5");
+            context.addMessage(null, new FacesMessage("ERROR", "No tienes nivel para buscar por ingrediente, necesitas nivel 5. Tu nivel actual: " + ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv()));
+            System.out.println("Nivel menor que 5");
             return "";
         } else {
             Object ob = ingredient;

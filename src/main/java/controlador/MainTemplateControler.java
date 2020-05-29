@@ -83,7 +83,7 @@ public class MainTemplateControler implements Serializable {
 
             FacesContext context = FacesContext.getCurrentInstance();
 
-            context.addMessage(null, new FacesMessage("ERROR", "No tienes nivel para acceder a esta parte, necesitas nivel 2. Tu nivel actual: " + ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv()));
+            context.addMessage(null, new FacesMessage("ERROR", "No tienes nivel para crear recetas, necesitas nivel 2. Tu nivel actual: " + ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv()));
 
             return "";
 
@@ -102,7 +102,7 @@ public class MainTemplateControler implements Serializable {
 
             FacesContext context = FacesContext.getCurrentInstance();
 
-            context.addMessage(null, new FacesMessage("ERROR", "No tienes nivel para acceder a esta parte, necesitas nivel 100. Tu nivel actual: " + ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv()));
+            context.addMessage(null, new FacesMessage("ERROR", "No puedes acceder si no eres administrador"));
 
             return "";
 
