@@ -247,11 +247,11 @@
                             EDITAR IMAGEN 
 
                         </div>
-                        <h:form>
+                         <h:form id="welcomeForm" enctype="multipart/form-data">
 
                             <p:graphicImage value="#{editRecipeControler.image}" styleClass="content" stream="false" style="margin-left: 25%; width: 50%; height: 50%"/>
-                            <p:fileUpload  class="bi" value="#{createRecipeControler.file}" mode="simple"  skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
-
+                            <p:fileUpload  class="bi" value="#{editRecipeControler.file}" mode="simple"  skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                            <p:commandButton value="CAmbiar imagen" action="#{editRecipeControler.editImage()}" update="message" ajax="false"/>
 
                         </h:form>
 
