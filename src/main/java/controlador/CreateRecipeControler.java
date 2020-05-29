@@ -232,8 +232,8 @@ public class CreateRecipeControler implements Serializable{
         
        try {
            User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
-           
-            user.setXp(user.getXp() + 80);
+           int xpadd2 =user.getLv() == 99 ? 0 : 80;
+            user.setXp(user.getXp() + xpadd2);
             user.setLv((int) (user.getXp() / 100));
             user.setRecipes(user.getRecipes()+1);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);

@@ -8,11 +8,15 @@ import EJB.UserFacadeLocal;
 import EJB.User_recipesFacadeLocal;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.color.Color;
+import com.itextpdf.kernel.color.DeviceRgb;
 import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
 
@@ -107,16 +111,11 @@ public class ViewRecipeControler implements Serializable {
 
         System.out.println("RECIPE: " + recipe.toString());
 
-        try {
-            int ratings = recipe.getTotalRating();
-            int peopleRated = recipe.getPeopleRating();
+     
 
-            rating = ratings / peopleRated;
+            rating = 0;
+       
 
-        } catch (Exception e) {
-
-            System.out.println("La gente es 0 asique atora: " + e.getMessage());
-        }
 
     }
 
@@ -213,6 +212,7 @@ public class ViewRecipeControler implements Serializable {
              */
             User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
             int xpadd2 = user.getLv() < 5 ? 10 - user.getLv() : 5;
+            xpadd2 =user.getLv() == 99 ? 0 : xpadd2;
             user.setXp(user.getXp() + xpadd2);
             user.setLv((int) (user.getXp() / 100));
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
@@ -302,22 +302,26 @@ public class ViewRecipeControler implements Serializable {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PdfWriter writer = new PdfWriter(baos);
-
+        
         PdfDocument pdf = new PdfDocument(writer);
 
         Document document = new Document(pdf, PageSize.LETTER);
+        Color verde = new DeviceRgb(152,210,128);
+        document.setBackgroundColor(verde);
+  
+        
 
         Paragraph inicio = new Paragraph();
         inicio.add(recipe.getName());
         inicio.setTextAlignment(TextAlignment.CENTER);
         inicio.setFontSize(22);
-
+      
         document.add(inicio);
 
         ImageData data2;
         data2 = ImageDataFactory.create(recipe.getImage());
         Image image = new Image(data2);
-        image.setBorder(Border.NO_BORDER);
+        image.setBorder(new SolidBorder(verde,1));
         image.scaleToFit(400, 250);
         image.setMarginLeft(50);
 
@@ -325,35 +329,52 @@ public class ViewRecipeControler implements Serializable {
 
         document.add(new Paragraph("Ingredientes"));
 
-        com.itextpdf.layout.element.Table tabla = new com.itextpdf.layout.element.Table(2);
-        tabla.setWidth(500);
-        tabla.setHeight(300);
+       
 
         for (int i = 0; i < ingredientsList.size(); i++) {
+             com.itextpdf.layout.element.Table tabla = new com.itextpdf.layout.element.Table(2);
+        tabla.setWidth(500);
+        tabla.setBorder(Border.NO_BORDER);
+        tabla.setPadding(0);
+        tabla.setMargin(0);
+   
 
             Cell cell1 = new Cell();
+            cell1.setBorder(Border.NO_BORDER);
+            cell1.setPadding(0);
             cell1.add(ingredientsList.get(i).getName());
             tabla.addCell(cell1);
             Cell cell2 = new Cell();
+             cell2.setBorder(Border.NO_BORDER);
+             cell2.setPadding(0);
             cell2.add("" + ingredientsList.get(i).getQuantity());
             tabla.addCell(cell2);
+            
+            document.add(tabla);
 
         }
 
-        document.add(tabla);
+        
 
-         document.add(new Paragraph("Pasos"));
+         document.add(new Paragraph("Pasos :"));
 
         com.itextpdf.layout.element.Table tabla2 = new com.itextpdf.layout.element.Table(2);
         tabla2.setWidth(500);
+         tabla2.setBorder(Border.NO_BORDER);
+        tabla2.setPadding(0);
         tabla2.setHeight(300);
 
         for (int i = 0; i < stepsList.size(); i++) {
 
             Cell cell1 = new Cell();
+            cell1.setMargin(0);
+             cell1.setBorder(Border.NO_BORDER);
+            cell1.setPadding(0);
             cell1.add(stepsList.get(i).getTitle());
             tabla2.addCell(cell1);
             Cell cell2 = new Cell();
+             cell2.setBorder(Border.NO_BORDER);
+            cell2.setPadding(0);
             cell2.add("" + stepsList.get(i).getDescription());
             tabla2.addCell(cell2);
 

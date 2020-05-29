@@ -109,6 +109,13 @@
                         .ui-button-text-only .ui-button-text {
                             padding: .7em 1em;
                         }
+                        .ui-button-icon-only .ui-icon, .ui-button-text-icon-left .ui-icon, .ui-button-text-icon-right .ui-icon {
+                            position: absolute;
+                            top: 50%;
+                            margin-left: 5%;
+                            margin-top: -8px;
+                            height: 140%;
+                        }
 
                     </style>
 
@@ -137,26 +144,28 @@
                     <div>
                         <p:panel id="basic" header="VALORACION Y VER RECETA" style="margin-left: 25%; width: 49.8%; height: 50%">
                             <h:panelGrid style="width: 100%;" class="fondoverde" columnClasses="col111,col112" columns="2" cellpadding="10">
-
+                                <h:panelGrid style="width: 100%;color:black;font-size: 18px; font-family: Garlic Sans;" columns="1">
+                                    <div style="">Valora la receta con cuantos tenedores se merece:</div>
                                 <p:rating value="#{viewRecipeControler.rating}" style=" width: 260px">
                                     <p:ajax event="rate" listener="#{viewRecipeControler.onrate}" update="messages" />
                                     <p:ajax event="cancel" listener="#{viewRecipeControler.oncancel}" update="messages" />
                                 </p:rating>
 
+                                </h:panelGrid>
                                 <!--TODO comprobar nivel-->
                                 <p:commandButton value="Guardar Receta" actionListener="#{viewRecipeControler.addToMyRecipes()}"  update="messages" style="height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen; width: 50%; margin-left: 25%"  />
-                                <p:linkButton  rendered="#{viewRecipeControler.viewEditButton()}" value="Editar receta"   outcome="editRecipe"   style="  height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen;width: 50%; margin-left: 25% ; "  />
+                                <p:linkButton  rendered="#{viewRecipeControler.viewEditButton()}" value="Editar receta"   outcome="editRecipe"   style="  height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen;width: 50%; "  />
                                 <p:outputLabel rendered="#{viewRecipeControler.viewUserLabel()}" value="CREADA POR: #{viewRecipeControler.gerUserName()}" style="font-family: Garlic Sans; font-size: 32px;"/>
-                                <h:panelGrid columns="1">
+
 
 
 <!--   <p:commandButton value="Exportar pdf" actionListener="#{viewRecipeControler.addToMyRecipes()}"  update="messages" style="  height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen; width: 50%; margin-left: 25%;"  />-->
 
-                                    <p:commandButton value="Descargar pdf" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
-                                        <p:fileDownload value="#{viewRecipeControler.file}" />
-                                    </p:commandButton> 
+                                <p:commandButton style="height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen; width: 50%; margin-left: 25%" value="Descargar pdf" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
+                                    <p:fileDownload value="#{viewRecipeControler.file}" />
+                                </p:commandButton> 
 
-                                </h:panelGrid>
+
                             </h:panelGrid>
                         </p:panel>
                     </div>
