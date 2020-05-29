@@ -32,4 +32,6 @@ public interface CommentaryFacadeLocal {
     
     List<Commentary> findByRecipe(int id);
     
+    Commentary findRelation(int idRecipe, int idUser);
+    
 }

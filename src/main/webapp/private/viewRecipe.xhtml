@@ -109,13 +109,12 @@
                         .ui-button-text-only .ui-button-text {
                             padding: .7em 1em;
                         }
-                        .ui-button-icon-only .ui-icon, .ui-button-text-icon-left .ui-icon, .ui-button-text-icon-right .ui-icon {
-                            position: absolute;
-                            top: 50%;
-                            margin-left: 5%;
-                            margin-top: -8px;
-                            height: 140%;
+                        .ui-widget {
+                            font-family: Garlic Sans;
+                            font-size: 1.1em;
                         }
+
+
 
                     </style>
 
@@ -135,7 +134,7 @@
                         <p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
                     </p:dialog>
 
-                    <!--TODO arreglar color verde claro en el desplegable -->
+                  
                     <div class="titulo" >
                         #{viewRecipeControler.recipe.name}
                     </div>
@@ -146,22 +145,21 @@
                             <h:panelGrid style="width: 100%;" class="fondoverde" columnClasses="col111,col112" columns="2" cellpadding="10">
                                 <h:panelGrid style="width: 100%;color:black;font-size: 18px; font-family: Garlic Sans;" columns="1">
                                     <div style="">Valora la receta con cuantos tenedores se merece:</div>
-                                <p:rating value="#{viewRecipeControler.rating}" style=" width: 260px">
-                                    <p:ajax event="rate" listener="#{viewRecipeControler.onrate}" update="messages" />
-                                    <p:ajax event="cancel" listener="#{viewRecipeControler.oncancel}" update="messages" />
-                                </p:rating>
+                                    <p:rating value="#{viewRecipeControler.rating}" style=" width: 260px">
+                                        <p:ajax event="rate" listener="#{viewRecipeControler.onrate}" update="messages" />
+                                        <p:ajax event="cancel" listener="#{viewRecipeControler.oncancel}" update="messages" />
+                                    </p:rating>
 
                                 </h:panelGrid>
-                                <!--TODO comprobar nivel-->
+                               
                                 <p:commandButton value="Guardar Receta" actionListener="#{viewRecipeControler.addToMyRecipes()}"  update="messages" style="height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen; width: 50%; margin-left: 25%"  />
                                 <p:linkButton  rendered="#{viewRecipeControler.viewEditButton()}" value="Editar receta"   outcome="editRecipe"   style="  height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen;width: 50%; "  />
                                 <p:outputLabel rendered="#{viewRecipeControler.viewUserLabel()}" value="CREADA POR: #{viewRecipeControler.gerUserName()}" style="font-family: Garlic Sans; font-size: 32px;"/>
 
 
 
-<!--   <p:commandButton value="Exportar pdf" actionListener="#{viewRecipeControler.addToMyRecipes()}"  update="messages" style="  height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen; width: 50%; margin-left: 25%;"  />-->
 
-                                <p:commandButton style="height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen; width: 50%; margin-left: 25%" value="Descargar pdf" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
+                                <p:commandButton style="height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen; width: 50%; margin-left: 25%" value="Descargar pdf" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" >
                                     <p:fileDownload value="#{viewRecipeControler.file}" />
                                 </p:commandButton> 
 
@@ -195,6 +193,36 @@
 
                 </h:form>
 
+
+                <h:form style=" font-family: Garlic Sans; font-size: 22px; width: 50%; margin-left: 25%;">
+                    <p:inputTextarea value="#{viewRecipeControler.comment}" rows="5" cols="30" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" />
+                    <br />
+                    <h:outputText id="display" />
+                    <p:commandButton value="Comentar" actionListener="#{viewRecipeControler.comentRecipe()}" update="messages" ajax="false"/>
+                    <p:dataScroller value="#{viewRecipeControler.commentaries}" var="com" >
+                        <f:facet name="header">
+                            Comentarios
+                        </f:facet>
+
+
+
+
+                        <p:outputPanel >
+                            <h:panelGrid columns="2" cellpadding="5">
+
+
+
+
+                                <h:outputText value="#{viewRecipeControler.getComentaryUser(com.userId)} [Ha votado: #{com.rate}] comentó:" style="font-weight: bold"/>
+                                <br/>
+                                <h:outputText value="#{com.commentary}" />
+
+                            </h:panelGrid>
+                            <p:separator />
+                        </p:outputPanel>
+
+                    </p:dataScroller>
+                </h:form>
 
 
 

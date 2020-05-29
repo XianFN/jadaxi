@@ -6,6 +6,7 @@
 package EJB;
 
 import java.util.List;
+import java.util.concurrent.RecursiveTask;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -55,6 +56,34 @@ public class CommentaryFacade extends AbstractFacade<Commentary> implements Comm
         return results;
         
         
+        
+    }
+
+    @Override
+    public Commentary findRelation(int idRecipe, int idUser) {
+       
+         List<Commentary> results = null;
+        
+        try {
+            String hql = "FROM Commentary c WHERE c.recipeId=:param1 AND c.userId=:param2 ";
+            Query query = em.createQuery(hql);
+            query.setParameter("param1", idRecipe);
+            query.setParameter("param2", idUser);
+           
+
+            results = query.getResultList();
+
+            
+            
+        } catch (Exception e) {
+            System.out.println("Algo ha salido mal al taer la relacion usuario receta: ->  " + e.getMessage());
+        }
+        
+        if(results.isEmpty()){
+            return null;
+        }else{
+            return results.get(0);
+        }
         
     }
     
