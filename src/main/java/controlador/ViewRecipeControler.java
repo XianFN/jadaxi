@@ -6,6 +6,25 @@ import EJB.Recipes_ingredientsFacadeLocal;
 import EJB.StepsFacadeLocal;
 import EJB.UserFacadeLocal;
 import EJB.User_recipesFacadeLocal;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Image;
+
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.TextAlignment;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Blob;
@@ -19,7 +38,9 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
 import javax.inject.Named;
+import javax.persistence.Table;
 import javax.sql.rowset.serial.SerialBlob;
 import modelo.Ingredients;
 import modelo.Recipe;
@@ -69,6 +90,8 @@ public class ViewRecipeControler implements Serializable {
     private List<Steps> stepsList;
     private Integer rating;
     private boolean flagRate = true;
+
+    private StreamedContent file;
 
     @PostConstruct
     public void inicio() {
@@ -273,6 +296,81 @@ public class ViewRecipeControler implements Serializable {
 
         return userEJB.find(us_reEJB.getRecipeOwnerID(recipe.getId())).getUserName();
 
+    }
+
+    public StreamedContent getFile() throws FileNotFoundException, IOException {
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PdfWriter writer = new PdfWriter(baos);
+
+        PdfDocument pdf = new PdfDocument(writer);
+
+        Document document = new Document(pdf, PageSize.LETTER);
+
+        Paragraph inicio = new Paragraph();
+        inicio.add(recipe.getName());
+        inicio.setTextAlignment(TextAlignment.CENTER);
+        inicio.setFontSize(22);
+
+        document.add(inicio);
+
+        ImageData data2;
+        data2 = ImageDataFactory.create(recipe.getImage());
+        Image image = new Image(data2);
+        image.setBorder(Border.NO_BORDER);
+        image.scaleToFit(400, 250);
+        image.setMarginLeft(50);
+
+        document.add(image);
+
+        document.add(new Paragraph("Ingredientes"));
+
+        com.itextpdf.layout.element.Table tabla = new com.itextpdf.layout.element.Table(2);
+        tabla.setWidth(500);
+        tabla.setHeight(300);
+
+        for (int i = 0; i < ingredientsList.size(); i++) {
+
+            Cell cell1 = new Cell();
+            cell1.add(ingredientsList.get(i).getName());
+            tabla.addCell(cell1);
+            Cell cell2 = new Cell();
+            cell2.add("" + ingredientsList.get(i).getQuantity());
+            tabla.addCell(cell2);
+
+        }
+
+        document.add(tabla);
+
+         document.add(new Paragraph("Pasos"));
+
+        com.itextpdf.layout.element.Table tabla2 = new com.itextpdf.layout.element.Table(2);
+        tabla2.setWidth(500);
+        tabla2.setHeight(300);
+
+        for (int i = 0; i < stepsList.size(); i++) {
+
+            Cell cell1 = new Cell();
+            cell1.add(stepsList.get(i).getTitle());
+            tabla2.addCell(cell1);
+            Cell cell2 = new Cell();
+            cell2.add("" + stepsList.get(i).getDescription());
+            tabla2.addCell(cell2);
+
+        }
+
+        document.add(tabla2);
+        
+        
+        
+        
+        
+        document.close();
+        String fileName = recipe.getName() + ".pdf";
+        InputStream stream = new ByteArrayInputStream(baos.toByteArray());
+        file = new DefaultStreamedContent(stream, "application/pdf", fileName);
+
+        return file;
     }
 
     public class otherIngredient {

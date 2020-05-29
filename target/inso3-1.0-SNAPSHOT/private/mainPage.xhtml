@@ -91,26 +91,36 @@
 
                 </style>
 
+                <script>
 
+                    $(document).on('click', '.flow .item', function () {
+                        var imageIndex = $(this).index();// the image index
+                        $(this).find('canvas').attr('src');// the image src
+                        // then you could call a remoteCommand from here passing the index
+                    })
+                    function clickFlow(item, e, image2) {
+                        //prevents image opening...                                                                     
+                        if ($(item).parent().hasClass('active')) {
+                            e.stopImmediatePropagation();
+                            console.log(Object.values(image2));
+                            var imageIndex = $(this).index();
+                            console.log(imageIndex);
+                        }
+                    }
+                </script>
 
                 <div class="titulo" >
                     TOP 10 RECETAS: 
                 </div>
 
-                <h:form>
+                <p:contentFlow style="background-color: rgba(152,210,128,0.6);" class="flow" var="image" value="#{mainPageControler.images}">
 
-                    <p:contentFlow style="background-color: rgba(152,210,128,0.6);" class="flow" var="recipe" value="#{mainPageControler.recipesTop10}">
-
-                        
-
-                        <p:graphicImage value="#{mainPageControler.image}">
-                            <f:param name="recipeId" value="#{recipe.id}"/>
-                        </p:graphicImage>
+                    <p:graphicImage value="#{image}" styleClass="content" stream="false" onclick="clickFlow(this, event, '#{image}')"/>
 
 
 
-                    </p:contentFlow>
-                </h:form>
+                </p:contentFlow>
+
                 <h:form>
 
 
@@ -146,7 +156,7 @@
                     </div>
 
                     <p:dataView   class="noHeader" var="buttonsIng" value="#{mainPageControler.ingredients}"
-                                  gridIcon="pi pi-th-large" listIcon="pi pi-bars" layout="grid" widgetVar="asdasd" >
+                                 gridIcon="pi pi-th-large" listIcon="pi pi-bars" layout="grid" widgetVar="asdasd" >
 
                         <p:dataViewGridItem  columns="6"  >
                             <p:panel header="#{buttonsIng.name} " style="text-align:center;">
