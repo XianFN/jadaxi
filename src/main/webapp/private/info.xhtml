@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <body>
+
+        <ui:composition template="./../template/mainTemplate.xhtml">
+
+            <ui:define name="content">
+                <style>
+                    .general{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 70%;
+                        margin-top: 50px;
+                        background-color: wheat;
+                        margin-left: 15%;
+
+
+                    }
+                    .titulo{
+
+                        text-align: center;
+                        background-color: lightgray;
+                        color:black;
+                        font-size: 50px;
+
+                        font-family: Garlic Sans;
+
+
+                    }
+
+
+                </style>
+                <div class="general" >
+
+
+
+                    <div style="margin-top: 40px; margin-left: 20px; margin-bottom: 20px; font-family:Garlic Sans ">
+
+                        Al crear la cuenta empiezas en nivel 0.
+                        <br/>
+                        Puedes conseguir niveles votando las recetas y posteriormente en el nivel 1 añadiendo nuevas recetas
+                        <br/>
+                        <br/>
+                        Beneficios del nivel:
+                        <br/>
+                        -NIVEL 1: Se permite añadir recetas.
+                        <br/>
+                        -NIVEL 2: Se permite guardar las recetas creadas por otros usuarios.
+                        <br/>
+                        -NIVEL 5: Buscar recetas por ingredientes.
+                        <br/>
+                        -NIVEL 100: Te conviertes en administrador.
+
+
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        Para añadir ingredientes hay que selecionar cuantas calorias tiene ese ingrediente cada 100g con el fin de conseguir el sistema de calorias por receta.
+                        <br/>
+                        Muchas gracias por tu ayuda. Cualquier sugerencia enviar al correo: cocinalotodoemail@gmail.com 
+
+
+                    </div>
+
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

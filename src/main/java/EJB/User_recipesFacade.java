@@ -93,7 +93,7 @@ public class User_recipesFacade extends AbstractFacade<User_recipes> implements 
     }
 
     @Override
-    public boolean isCreated(int idUSer, int idRecipe) {
+    public User_recipes isCreated(int idUSer, int idRecipe) {
         List<User_recipes> results = null;
         try {
             String hql = "FROM User_recipes c WHERE c.user_id=:param1 and c.recipe_id=:param2";
@@ -108,7 +108,7 @@ public class User_recipesFacade extends AbstractFacade<User_recipes> implements 
             System.out.println("Algo ha salido mal al obtener las id de las recetas desde las categorias: " + e.getMessage());
         }
 
-        return results.get(0).isCreated();
+        return results.get(0);
     }
 
     public int getRecipeOwnerID(int recipeId) {

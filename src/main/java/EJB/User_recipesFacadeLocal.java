@@ -36,7 +36,7 @@ public interface User_recipesFacadeLocal {
 
     List<User_recipes> findByRecipeId(int id);
     
-    boolean isCreated(int idUSer, int idRecipe);
+    User_recipes isCreated(int idUSer, int idRecipe);
     
     int getRecipeOwnerID(int recipeId);
 

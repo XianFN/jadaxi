@@ -27,10 +27,11 @@ public class MainTemplateControler implements Serializable {
     @PostConstruct
     public void inicio() {
         us = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-
+        System.out.println("Usr: " + us);
         int level = us.getLv();
         int exp = (int) us.getXp();
         progreso = exp % 100;
+        System.out.println("PROGRESO: " + progreso + " " + level);
     }
 
     /**ç

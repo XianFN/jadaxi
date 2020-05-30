@@ -134,9 +134,7 @@ public class ViewRecipeControler implements Serializable {
         }
         User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
         Commentary comm = commenEJB.findRelation(recipe.getId(), user.getId());
-        rating = comm==null? 0: comm.getRate();
-      
-       
+        rating = comm == null ? 0 : comm.getRate();
 
     }
 
@@ -186,9 +184,9 @@ public class ViewRecipeControler implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return
-     * 
+     *
      * Imprimimos la imagen
      */
     public StreamedContent getImage() {
@@ -214,9 +212,9 @@ public class ViewRecipeControler implements Serializable {
     }
 
     /**
-     * 
-     * @return 
-     * 
+     *
+     * @return
+     *
      * Obtenemos los ingredientes de la receta
      */
     public List<otherIngredient> getIngredientsList() {
@@ -318,13 +316,13 @@ public class ViewRecipeControler implements Serializable {
     }
 
     public void oncancel() {
-        
+
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cancelada la votacion", "Votacion reseteada");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     /**
-     * 
+     *
      * Añadimos la receta a la lista personal del usuario
      */
     public void addToMyRecipes() {
@@ -362,9 +360,9 @@ public class ViewRecipeControler implements Serializable {
     }
 
     /**
-     * 
-     * @return 
-     * 
+     *
+     * @return
+     *
      * Si la receta pertenecea al usuario imprimimos un boton para editarla
      */
     public boolean viewEditButton() {
@@ -372,7 +370,7 @@ public class ViewRecipeControler implements Serializable {
         User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
         boolean ret = false;
         try {
-            ret = us_reEJB.isCreated(user.getId(), recipe.getId());
+            ret = us_reEJB.isCreated(user.getId(), recipe.getId()).isCreated();
         } catch (Exception e) {
             System.out.println("Fallo al intentar invocar el boton de editar receta");
         }
@@ -383,14 +381,21 @@ public class ViewRecipeControler implements Serializable {
     public boolean viewUserLabel() {
 
         User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
-        boolean ret = false;
-        try {
-            ret = !(us_reEJB.isCreated(user.getId(), recipe.getId()));
-            return false;
-        } catch (Exception e) {
-            System.out.println("Fallo al intentar invocar el label de usuario");
+        User_recipes ur = null;
+        try{
+            ur = us_reEJB.isCreated(user.getId(), recipe.getId());
+        }catch(Exception e){
+            System.out.println("Fallo en ver receta al invocar el lavel: " + e.getMessage() );
+        }
+        
+        
+        if((ur == null) || (!ur.isCreated())){
+            
             return true;
-
+        }else{
+            
+            return false;
+            
         }
 
     }
@@ -407,7 +412,7 @@ public class ViewRecipeControler implements Serializable {
     }
 
     /**
-     * 
+     *
      * Comprobamos los parametros necesarios para poder comentar en la receta
      */
     public void comentRecipe() {
@@ -449,10 +454,9 @@ public class ViewRecipeControler implements Serializable {
     }
 
     /**
-     * 
-     * @return
-     * @throws FileNotFoundException 
-     * 
+     *
+     * @return @throws FileNotFoundException
+     *
      * Imprimos la receta en un pdf y se descarga
      */
     public StreamedContent getFile() throws FileNotFoundException {

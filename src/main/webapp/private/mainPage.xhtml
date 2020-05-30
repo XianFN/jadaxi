@@ -107,7 +107,7 @@
 
 
 
-                    <p:imageSwitch style="width: 40%; height: 30%; margin-left: 30%;margin-right:  30%; margin-top:2% ;" effect="shuffle" widgetVar="switcher" id="manuelSwitcher"
+                    <p:imageSwitch style="align-content: center; width: 40%; height: 30%; margin-left: 30%;margin-right: 30%; margin-top:2% ;" effect="shuffle" widgetVar="switcher" id="manuelSwitcher"
                                    slideshowAuto="true">
                         <ui:repeat value="#{mainPageControler.recipesTop10}" var="image" id="manuelSwitcherImages" >
                             <p:commandLink action="#{mainPageControler.click()}"  >
@@ -124,12 +124,12 @@
 
                     </p:imageSwitch>
                     
-
+                    <div style="margin-left: 30%">
                     <p:commandButton type="button" onclick="PF('switcher').previous();"
-                                     icon="pi pi-caret-left" id="prev" style=" margin-left: 48%;margin-top:2% ; margin-bottom: 5%"/>
+                                     icon="pi pi-caret-left" id="prev" style=" margin-left: 250px;margin-top: 1%; margin-bottom: 5%; height: 40px; width: 100px; background-color: rgba(152,210,128,0.8); border: solid 2px black "/>
                     <p:commandButton type="button" onclick="PF('switcher').next();"
-                                     icon="pi pi-caret-right" id="next" style="margin-bottom: 5%; margin-top:2% ;"/>
-
+                                     icon="pi pi-caret-right" id="next" style="margin-bottom: 5% ;margin-top: 1%; height: 40px; width: 100px; background-color: rgba(152,210,128,0.8); border: solid 2px black"/>
+                    </div>
                 </h:form>
                 <h:form>
 
