@@ -121,7 +121,7 @@ public class ViewRecipesListControler implements Serializable {
 
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("recipe", id);
 
-        //TODO ?faces-redirect=true
+        
         return "viewRecipe.xhtml?faces-redirect=true";
 
     }

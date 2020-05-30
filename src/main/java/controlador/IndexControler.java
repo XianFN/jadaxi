@@ -72,7 +72,7 @@ public class IndexControler implements Serializable {
         User us = null;
         int createrUser = 0;
         int createPass = 0;
-        //TODO ?faces-redirect=true
+   
         String navegacion = "private/mainPage.xhtml?faces-redirect=true"; //?faces-redirect=true se encarga de mostrarnos en el navegador a que pagina vamos, es ideal para desarrollos pero es conveniente quitarlo cuando salga al publico
 
         for (int i = 0; i < preUser.length(); i++) {

@@ -69,7 +69,7 @@
                         display: block;
                         line-height: normal;
                     }
-                   
+
 
                     ::placeholder {
                         color: white;
@@ -85,20 +85,23 @@
                     <div class="loginBox">
 
 
-
-
-
-                        <div style="float: left; color: white">
-
-                            <p:inputText class="input" placeholder="Codigo" value="#{activateControler.introducedCode}" style="color: white; margin-top: 50px;margin-left: 50%;width: 120px;" />  
-
-                        </div>
-                        <div align="right" style="float: left">
-                            <p:commandButton value="Activar cuenta"  action="#{activateControler.check()}" style="margin-top: 50px; margin-left: 80px" />
+                        <div style="width:100%;text-align: center; color: white;margin-top: 30px" >
+                             Introduce el codigo que se te ha enviado a tu email.
                         </div>
 
+                       
+                        <h:panelGrid columns="2" style="width:100%;float: left; color: white">
+                         
 
-                        <!--TODO mas visual que el codigo esta en el correo -->
+                                <p:inputText class="input" placeholder="Codigo" value="#{activateControler.introducedCode}" style="color: white; margin-top: 20px;margin-left: 50%;width: 120px;" />  
+
+                            
+                         
+                                <p:commandButton value="Activar cuenta"  action="#{activateControler.check()}" style="margin-top: 20px; margin-left: 80px" />
+                           
+                        </h:panelGrid>
+
+                      
                         <div style="margin-top:190px;margin-left: 20%;width: 300px;margin-bottom: 5px;text-align: center;color: white">
                             Reenviar codigo al email:
                             <p:inputText class="input" value="#{activateControler.us.email}" style="width: 300px;margin-top: 5px;text-align: center;color: white" />  

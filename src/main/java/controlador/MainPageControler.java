@@ -94,7 +94,7 @@ public class MainPageControler implements Serializable {
         Category cat = categoryEJB.findByName(category);
 
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categoryToShow", cat.getId());//guardamos el id en el contexto
-        //TODO ?faces-redirect=true
+    
         return "viewRecipesList.xhtml?faces-redirect=true";
 
     }
@@ -122,7 +122,7 @@ public class MainPageControler implements Serializable {
             Ingredients ing = ingredientsEJB.findByName(ingredient);
 
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ingredientToShow", ing.getId());//guardamos el id en el contexto
-            //TODO ?faces-redirect=true
+           
             return "viewRecipeListIngredients.xhtml?faces-redirect=true";
         }
 
