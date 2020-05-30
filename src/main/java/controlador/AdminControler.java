@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import EJB.CategoryFacadeLocal;
@@ -23,17 +18,15 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Category;
 import modelo.Category_recipe;
-import modelo.Ingredients;
 import modelo.Recipe;
 import modelo.Recipes_ingredients;
 import modelo.Steps;
 import modelo.User;
 import modelo.User_recipes;
-import org.jsoup.Jsoup;
 
 /**
  *
- * @author Javier
+ * @author jadaxi
  */
 @Named
 @ViewScoped
@@ -82,9 +75,6 @@ public class AdminControler implements Serializable {
         listCategory = categoryEJB.findAll();
         recipe = new Recipe();
         category = new Category();
-        
-        
-        
 
     }
 
@@ -124,6 +114,10 @@ public class AdminControler implements Serializable {
 
     }
 
+    /**
+     *
+     * Creamos una categoria
+     */
     public void crearCategoria() {
 
         try {
@@ -134,6 +128,12 @@ public class AdminControler implements Serializable {
         destroyWorld();
     }
 
+    /**
+     *
+     * @param r
+     *
+     * Eliminamos la receta que pasasmos por parametro
+     */
     public void eliminarReceta(Recipe r) {
 
         try {

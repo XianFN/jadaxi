@@ -26,16 +26,15 @@ public class User_recipes implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    //TODO PREGUNTAR
-    //@ManyToMany
+   
     @Column(name = "recipe_Id")
     private int recipe_id;
 
-    //TODO PREGUNTAR
-    //@ManyToMany
+    
     @Column(name = "user_Id")
     private int user_id;
 
+ 
     @Column(name = "created")
     private boolean created;
 

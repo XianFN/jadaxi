@@ -12,7 +12,6 @@ import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.color.Color;
 import com.itextpdf.kernel.color.DeviceRgb;
 import com.itextpdf.kernel.geom.PageSize;
-import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -20,16 +19,11 @@ import com.itextpdf.layout.border.Border;
 import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
-
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
-
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Blob;
@@ -43,9 +37,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.imageio.ImageIO;
 import javax.inject.Named;
-import javax.persistence.Table;
 import javax.sql.rowset.serial.SerialBlob;
 import modelo.Commentary;
 import modelo.Ingredients;
@@ -55,13 +47,12 @@ import modelo.Steps;
 import modelo.User;
 import modelo.User_recipes;
 import org.primefaces.event.RateEvent;
-
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
  *
- * @author Javier
+ * @author jadaxi
  *
  */
 @Named
@@ -194,6 +185,12 @@ public class ViewRecipeControler implements Serializable {
         this.comment = comment;
     }
 
+    /**
+     * 
+     * @return
+     * 
+     * Imprimimos la imagen
+     */
     public StreamedContent getImage() {
 
         Blob bl = null;
@@ -216,6 +213,12 @@ public class ViewRecipeControler implements Serializable {
         return dbImage;
     }
 
+    /**
+     * 
+     * @return 
+     * 
+     * Obtenemos los ingredientes de la receta
+     */
     public List<otherIngredient> getIngredientsList() {
         ingredientsList = new ArrayList<>();
         List<Recipes_ingredients> listIds = rec_ingEJB.findAll();
@@ -316,15 +319,14 @@ public class ViewRecipeControler implements Serializable {
 
     public void oncancel() {
         
- 
-        
-        
-        
-
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cancelada la votacion", "Votacion reseteada");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    /**
+     * 
+     * Añadimos la receta a la lista personal del usuario
+     */
     public void addToMyRecipes() {
 
         User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
@@ -359,6 +361,12 @@ public class ViewRecipeControler implements Serializable {
         }
     }
 
+    /**
+     * 
+     * @return 
+     * 
+     * Si la receta pertenecea al usuario imprimimos un boton para editarla
+     */
     public boolean viewEditButton() {
 
         User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
@@ -398,6 +406,10 @@ public class ViewRecipeControler implements Serializable {
         return userEJB.find(id).getUserName();
     }
 
+    /**
+     * 
+     * Comprobamos los parametros necesarios para poder comentar en la receta
+     */
     public void comentRecipe() {
 
         User user = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
@@ -436,6 +448,13 @@ public class ViewRecipeControler implements Serializable {
 
     }
 
+    /**
+     * 
+     * @return
+     * @throws FileNotFoundException 
+     * 
+     * Imprimos la receta en un pdf y se descarga
+     */
     public StreamedContent getFile() throws FileNotFoundException {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

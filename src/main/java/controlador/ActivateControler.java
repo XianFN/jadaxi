@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import EJB.UserFacadeLocal;
 import jadaxi.Email;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
@@ -20,7 +13,7 @@ import modelo.User;
 
 /**
  *
- * @author Javier
+ * @author jadaxi
  */
 @Named
 @ViewScoped
@@ -54,6 +47,12 @@ public class ActivateControler implements Serializable {
         this.introducedCode = introducedCode;
     }
 
+    /**
+     * 
+     * @return 
+     * 
+     * Comprobamos que el codigo de activacion es correcto
+     */
     public String check() {
         System.out.println("codigo que tiene que ser: " + us.getAcCode() + " VS " + "codigo introducido: " + introducedCode);
 
@@ -75,6 +74,12 @@ public class ActivateControler implements Serializable {
         return "activate.xhtml";
     }
 
+    /**
+     * 
+     * @return
+     * 
+     * Generamos un codigo aleatorio
+     */
     private String genCode() {
 
         String alphabet = "1234567890";
@@ -94,6 +99,10 @@ public class ActivateControler implements Serializable {
         return password.toString();
     }
 
+    /**
+     * 
+     * Reenviamos el email al usuario
+     */
     public void resentEmail() {
 
         us.setAcCode(genCode());

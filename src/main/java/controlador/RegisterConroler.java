@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import EJB.UserFacadeLocal;
@@ -11,10 +6,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -61,6 +53,13 @@ public class RegisterConroler implements Serializable {
         this.user = user;
     }
 
+    /**
+     * 
+     * @param user
+     * @return 
+     * 
+     * Comprovamos que el nombre de suaurio no esta repetido
+     */
     private boolean checkUserName(String user) {
 
         List<User> users = null;
@@ -83,6 +82,12 @@ public class RegisterConroler implements Serializable {
 
     }
 
+    /**
+     * 
+     * @return 
+     * 
+     * Generamos un codigo aleatorio
+     */
     private String genCode() {
 
         String alphabet = "1234567890";
@@ -102,6 +107,12 @@ public class RegisterConroler implements Serializable {
         return password.toString();
     }
 
+    /**
+     * 
+     * @return 
+     * 
+     * Insertamos el usuario en la bbdd
+     */
     public String insertUser() {
 
         if (checkUserName(user.getUserName())) {
@@ -147,6 +158,12 @@ public class RegisterConroler implements Serializable {
         }
     }
 
+    /**
+     * 
+     * @return 
+     * 
+     * Formatemamos la forma de ver la fecha
+     */
     public String birthdateFormat() {
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

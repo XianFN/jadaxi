@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import EJB.Category_recipeFacadeLocal;
@@ -78,21 +73,13 @@ public class ViewRecipesListControler implements Serializable {
         this.selectedRecipe = selectedRecipe;
     }
 
-    /*
-     public void clearMultiViewState() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        String viewId = context.getViewRoot().getViewId();
-        PrimeFaces.current().multiViewState().clearAll(viewId, true, (clientId) -> {
-            showMessage(clientId);
-        });
-    }
+    /**
+     * 
+     * @param id
+     * @return 
+     * 
+     * Imprimimos las imagenes
      */
-    private void showMessage(String clientId) {
-        FacesContext.getCurrentInstance()
-                .addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, clientId + " multiview state has been cleared out", null));
-    }
-
     public StreamedContent getImage(int id) {
         System.out.println("id: " + id);
 

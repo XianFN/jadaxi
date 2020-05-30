@@ -26,7 +26,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "recipes")
 public class Recipe implements Serializable {
-    //TODO quitar default 0 a countcalories
+   
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -40,9 +40,6 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
      * Obtenemos el usuario a partir de un nombre de usuario y una contraseña
      */
     @Override
-
-    //TODO decir cuando las credenciales no son correctas
-    //TODO eliminar esto y usar el find
     public User getUserURL(User user) {
         System.out.println("EJB: " + user.toString());
         List<User> results = null;

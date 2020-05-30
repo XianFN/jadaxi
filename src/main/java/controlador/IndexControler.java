@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import EJB.UserFacadeLocal;
@@ -65,6 +60,13 @@ public class IndexControler implements Serializable {
         this.prePass = prePass;
     }
 
+    /**
+     *
+     * @return
+     *
+     * Login de la aplicaion, conn filtracion de caracteres para evitar las
+     * inyeciones de sql
+     */
     public String login() {
 
         User us = null;
@@ -101,8 +103,8 @@ public class IndexControler implements Serializable {
                 us = userEJB.getUserURL(user);
                 if (us == null) {
                     FacesContext context = FacesContext.getCurrentInstance();
-                   
-                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR", "Usuario o contraseña incorrectos "));
+
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Usuario o contraseña incorrectos "));
                     return "";
                 } else {
                     if (us.isActivated()) {
@@ -122,7 +124,6 @@ public class IndexControler implements Serializable {
                 System.out.println("FAllo al tarer el usuario: " + e.getMessage());
 
             }
-            
 
         }
         return "";

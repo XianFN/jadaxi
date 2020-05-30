@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import EJB.CategoryFacadeLocal;
@@ -24,6 +19,7 @@ import modelo.User;
 
 /**
  *
+ * @author jadaxi
  */
 @Named
 @ViewScoped
@@ -63,8 +59,8 @@ public class MainPageControler implements Serializable {
         }
 
         try {
-            //TODO cambiar a 10 recetas
-            for (int i = 0; i < 5; i++) {
+
+            for (int i = 0; i < 10; i++) {
                 System.out.println(i);
                 recipesTop10.add(recipes.get(i));
 
@@ -84,6 +80,13 @@ public class MainPageControler implements Serializable {
         this.recipesTop10 = recipesTop10;
     }
 
+    /**
+     *
+     * @param category
+     * @return
+     *
+     * Redirecionamos a ver las recetas por la categoria seleccionada
+     */
     public String goToviewRecipesInCategories(String category) {
 
         Object ob = category;
@@ -96,6 +99,13 @@ public class MainPageControler implements Serializable {
 
     }
 
+    /**
+     *
+     * @param ingredient
+     * @return
+     *
+     * Redirecionamos a ver las recetas por el ingrediente seleccionada
+     */
     public String goToviewRecipesIngredients(String ingredient) {
 
         int usLv = ((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv();
@@ -138,6 +148,12 @@ public class MainPageControler implements Serializable {
 
     }
 
+    /**
+     *
+     * @return
+     *
+     * Recojemos el clik de la imagen de la pagina principal
+     */
     public String click() {
 
         System.out.println("CLICK");

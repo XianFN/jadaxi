@@ -134,7 +134,7 @@
                         <p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
                     </p:dialog>
 
-                  
+
                     <div class="titulo" >
                         #{viewRecipeControler.recipe.name}
                     </div>
@@ -151,7 +151,7 @@
                                     </p:rating>
 
                                 </h:panelGrid>
-                               
+
                                 <p:commandButton value="Guardar Receta" actionListener="#{viewRecipeControler.addToMyRecipes()}"  update="messages" style="height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen; width: 50%; margin-left: 25%"  />
                                 <p:linkButton  rendered="#{viewRecipeControler.viewEditButton()}" value="Editar receta"   outcome="editRecipe"   style="  height: 50px;color: black; text-shadow: 0px 0 rgba(0,0,0,1); background-color: darkgreen;width: 50%; "  />
                                 <p:outputLabel rendered="#{viewRecipeControler.viewUserLabel()}" value="CREADA POR: #{viewRecipeControler.gerUserName()}" style="font-family: Garlic Sans; font-size: 32px;"/>
@@ -192,13 +192,26 @@
 
 
                 </h:form>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
 
 
+                <h:form style=" font-family: Garlic Sans; font-size: 22px; margin-left: 25%; ">
+
+                    <div style="border: 1px black; width: 66.5%;margin-right: 25%; background-color: lightblue ">
+
+                        <p:inputTextarea style="width: 99.1%" value="#{viewRecipeControler.comment}" rows="5"  counter="display" maxlength="500" counterTemplate="{0} Carácteres restantes."  />
+                        <br />
+                        <h:outputText style="margin-left: 5px;" id="display" />
+                        <p:commandButton  style="float: right;;" value="Publicar comentario" actionListener="#{viewRecipeControler.comentRecipe()}" update="messages" ajax="false"/>
+                        <br /><br /><br />
+                    </div>
+
+                </h:form>  
+                
                 <h:form style=" font-family: Garlic Sans; font-size: 22px; width: 50%; margin-left: 25%;">
-                    <p:inputTextarea value="#{viewRecipeControler.comment}" rows="5" cols="30" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" />
-                    <br />
-                    <h:outputText id="display" />
-                    <p:commandButton value="Comentar" actionListener="#{viewRecipeControler.comentRecipe()}" update="messages" ajax="false"/>
                     <p:dataScroller value="#{viewRecipeControler.commentaries}" var="com" >
                         <f:facet name="header">
                             Comentarios
@@ -208,7 +221,7 @@
 
 
                         <p:outputPanel >
-                            <h:panelGrid columns="2" cellpadding="5">
+                            <h:panelGrid columns="2" cellpadding="5" >
 
 
 

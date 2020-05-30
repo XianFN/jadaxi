@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import EJB.UserFacadeLocal;
@@ -23,7 +18,7 @@ import modelo.User;
 
 /**
  *
- * @author David Rosales
+ * @author jadaxi
  */
 @Named
 @ViewScoped
@@ -146,6 +141,10 @@ public class ProfileControler implements Serializable {
         this.about = about;
     }
 
+    /**
+     * 
+     * Modificamos los datos baiscos del usuario sin ninguna comprobacion
+     */
     public void modifyData() {
 
         System.out.println(this.name + " " + this.surname1 + " " + this.surname2 + " " + this.date.toString() + " " + this.about);
@@ -163,6 +162,13 @@ public class ProfileControler implements Serializable {
 
     }
 
+    /**
+     * 
+     * @param user
+     * @return 
+     * 
+     * Comprobamos si el usuario existe
+     */
     private boolean checkUserName(String user) {
         System.out.println("aspoidjpaisdu'paosudjp`:" + user);
         List<User> users = null;
@@ -185,6 +191,11 @@ public class ProfileControler implements Serializable {
 
     }
 
+    
+    /**
+     * 
+     * Modificamos el nombre de usuario despues de comprobar que no esta repetido
+     */
     public void modifyUserName() {
 
         if (checkUserName(this.userName)) {
@@ -203,8 +214,12 @@ public class ProfileControler implements Serializable {
 
     }
 
+    /**
+     * 
+     * Modificamos la contraseña
+     */
     public void modifyPassword() {
-        //TODO arreglar mensaje de contraseña no coincide
+        
         System.out.println("password:" + this.password);
         us.setPassword(this.password);
 
@@ -214,7 +229,13 @@ public class ProfileControler implements Serializable {
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Contraseña cambiada"));
 
     }
-
+    
+    /**
+     * 
+     * @return 
+     * 
+     * Generamos un codigo aleatorio
+     */
     private String genCode() {
 
         String alphabet = "1234567890";
@@ -234,6 +255,12 @@ public class ProfileControler implements Serializable {
         return sb.toString();
     }
 
+    /**
+     * 
+     * @return 
+     * 
+     * Modificamos el email, desactivamos la cuenta y mandamos otro codigo de confirmacion
+     */
     public String modifyEmail() {
 
         System.out.println("email: " + this.email);

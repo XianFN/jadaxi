@@ -38,8 +38,7 @@ public class Steps implements Serializable {
     @Column(name = "ordernum")
     private int order;
     
-    //TODO PREGUNTAR
-  //  @OneToMany
+
     @Column(name = "recipeId")
     private int recipeId;
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import java.io.IOException;
@@ -38,6 +33,12 @@ public class MainTemplateControler implements Serializable {
         progreso = exp % 100;
     }
 
+    /**ç
+     * 
+     * @throws IOException 
+     * 
+     * Comprovamos que el usuario de lña sesion es correcto
+     */
     public void checkAndShow() throws IOException {
 
         if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario") == null) {
@@ -63,9 +64,13 @@ public class MainTemplateControler implements Serializable {
     public void setProgreso(int progreso) {
         this.progreso = progreso;
     }
-    
-    
 
+    /**
+     *
+     * @return
+     *
+     * borramos todos los datos de la sesion
+     */
     public String out() {
         System.out.println("logOut");
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -74,9 +79,15 @@ public class MainTemplateControler implements Serializable {
 
     }
 
+    /**
+     * 
+     * @return
+     * 
+     * Comprovamos que el nivel para acceder a crear recetas es el correcto
+     */
     public String goToCreateRecipe() {
 
-        System.out.println("ENTRA IU");
+      
 
         if (((User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getLv() < 2) {
             System.out.println("NIVEL MENOR");
@@ -93,6 +104,12 @@ public class MainTemplateControler implements Serializable {
 
     }
 
+    /**
+     * 
+     * @return
+     * 
+     * Comprovamos que el nivel para acceder a administracion es el correcto
+     */
     public String goToAdmin() {
 
         System.out.println("ENTRA Isdcfvbnm,");

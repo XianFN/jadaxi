@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
-import EJB.Category_recipeFacadeLocal;
+
 import EJB.RecipeFacadeLocal;
 import EJB.User_recipesFacadeLocal;
 import java.io.InputStream;
@@ -23,7 +18,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.sql.rowset.serial.SerialBlob;
-import modelo.Category_recipe;
 import modelo.Recipe;
 import modelo.User;
 import modelo.User_recipes;
@@ -86,21 +80,14 @@ public class SawRecipesUserControler  implements Serializable{
         this.selectedRecipe = selectedRecipe;
     }
 
-    /*
-     public void clearMultiViewState() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        String viewId = context.getViewRoot().getViewId();
-        PrimeFaces.current().multiViewState().clearAll(viewId, true, (clientId) -> {
-            showMessage(clientId);
-        });
-    }
-     */
-    private void showMessage(String clientId) {
-        FacesContext.getCurrentInstance()
-                .addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, clientId + " multiview state has been cleared out", null));
-    }
 
+    /**
+     * 
+     * @param id
+     * @return 
+     * 
+     * Imprimimos las imagenes
+     */
     public StreamedContent getImage(int id) {
         System.out.println("id: " + id);
 
@@ -137,6 +124,13 @@ public class SawRecipesUserControler  implements Serializable{
         return "";
     }
 
+    /**
+     * 
+     * @param id
+     * @return
+     * 
+     * Mostramos la receta
+     */
     public String viewRecipe(int id) {
 
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("recipe", id);

@@ -120,7 +120,7 @@ public class User implements Serializable {
     }
 
     public String getPassword() {
-       
+
         return password;
     }
 
@@ -128,7 +128,7 @@ public class User implements Serializable {
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setPassword("T>tk:#pa)6Y-R");
         String encrypted = encryptor.encrypt(password);
-      
+
         this.password = encrypted;
     }
 

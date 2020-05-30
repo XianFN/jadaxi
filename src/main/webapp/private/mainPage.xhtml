@@ -8,7 +8,7 @@
 
 
     <h:head>
-        <title>TODO supply a title</title>
+        
 
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -107,20 +107,23 @@
 
 
 
-                    <p:imageSwitch style="width: 50%; height: 30%; margin-left: 25%; margin-top:2% ;" effect="shuffle" widgetVar="switcher" id="manuelSwitcher"
-                                   slideshowAuto="false">
-                        <ui:repeat value="#{mainPageControler.recipesTop10}" var="image" id="manuelSwitcherImages">
-                            <h:commandLink action="#{mainPageControler.click()}" >
+                    <p:imageSwitch style="width: 40%; height: 30%; margin-left: 30%;margin-right:  30%; margin-top:2% ;" effect="shuffle" widgetVar="switcher" id="manuelSwitcher"
+                                   slideshowAuto="true">
+                        <ui:repeat value="#{mainPageControler.recipesTop10}" var="image" id="manuelSwitcherImages" >
+                            <p:commandLink action="#{mainPageControler.click()}"  >
 
-                                <p:graphicImage style="width: 700px; height: 400px" value="#{images.image}">
+                                <p:graphicImage  style="width: 700px; height: 400px" value="#{images.image}">
                                     <f:param name="recipeId" value="#{image.id}" />
+
                                 </p:graphicImage>
+
                                 <f:param name="recipeId2" value="#{image.id}"/>
-                            </h:commandLink>
+                            </p:commandLink>
 
                         </ui:repeat>
-                    </p:imageSwitch>
 
+                    </p:imageSwitch>
+                    
 
                     <p:commandButton type="button" onclick="PF('switcher').previous();"
                                      icon="pi pi-caret-left" id="prev" style=" margin-left: 48%;margin-top:2% ; margin-bottom: 5%"/>

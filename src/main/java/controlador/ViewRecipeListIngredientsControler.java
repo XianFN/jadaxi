@@ -75,7 +75,13 @@ public class ViewRecipeListIngredientsControler implements Serializable {
     }
     
     
-    
+    /**
+     * 
+     * @param id
+     * @return 
+     * 
+     * Imprimimos las imagenes de las recetas
+     */
     public StreamedContent getImage(int id) {
         System.out.println("id: " + id);
 
@@ -107,6 +113,13 @@ public class ViewRecipeListIngredientsControler implements Serializable {
         return dbImage;
     }
     
+    /**
+     * 
+     * @param id
+     * @return 
+     * 
+     * Redireccionamos a ver la receta seleccionada
+     */
     public String viewRecipe(int id) {
 
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("recipe", id);

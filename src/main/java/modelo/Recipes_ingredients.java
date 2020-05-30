@@ -27,13 +27,11 @@ public class Recipes_ingredients implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    //TODO PREGUNTAR
-    //@ManyToMany
+    
     @Column(name = "recipe_id")
     private int recipe;
     
-    //TODO PREGUNTAR
-   // @ManyToMany
+   
     @Column(name = "ingredient_id")
     private int ingredients;
     
